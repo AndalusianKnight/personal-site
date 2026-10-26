@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-root="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Jesse Thé · jessethe.com</title>
+<meta name="description" content="Jesse Thé: founder, product builder, Harvard alum. Two startups, six products, one exit, thirteen homes and two rescue dogs.">
+<meta name="theme-color" content="#08070c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jesse Thé · jessethe.com">
+<meta property="og:description" content="Founder. Product builder. Harvard alum. Press any key to boot.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+  /* Boot on the first visit of a session (or with ?boot). Without JavaScript the boot never shows. */
+  (function () { var h = document.documentElement; try { if (/[?&]boot\b/.test(location.search) || !sessionStorage.getItem('jt-booted')) h.classList.add('boot-on'); } catch (e) { h.classList.add('boot-on'); } })();
+</script>
+<script src="assets/js/sfx.js" defer></script>
+<script src="assets/js/site.js" defer></script>
+<script src="assets/js/terminal.js" defer></script>
+<script src="assets/js/boot.js" defer></script>
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "Person", "name": "Jesse Thé", "alternateName": "Jesse David Thé", "url": "https://jessethe.com",
+  "jobTitle": "Founder and product builder", "alumniOf": [{ "@type": "CollegeOrUniversity", "name": "Harvard University" }, { "@type": "CollegeOrUniversity", "name": "UC Berkeley Haas School of Business" }],
+  "nationality": ["Canada", "Brazil", "Portugal"] }
+</script>
+</head>
+<body data-page="home">
+<a class="skiplink" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="duo-violet" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values=".3 .59 .11 0 0  .3 .59 .11 0 0  .3 .59 .11 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.07 0.55 1"/><feFuncG type="table" tableValues="0.03 0.36 0.84"/><feFuncB type="table" tableValues="0.16 0.92 0.58"/></feComponentTransfer>
+  </filter>
+</svg>
+
+<div class="boot" id="boot" role="dialog" aria-modal="true" aria-label="jessethe.com is booting">
+  <div class="welcome" id="welcome">
+    <button type="button" class="pw" id="pw" aria-label="Power on" data-nosfx>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffb340" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg>
+    </button>
+    <div class="logo">JESSETHE.COM</div>
+    <div class="any"><span class="kb">PRESS ANY KEY OR CLICK TO POWER ON</span><span class="touch">TAP TO POWER ON</span></div>
+    <div class="small"><span>Best with sound on</span><button type="button" id="skip">Skip intro</button><button type="button" class="cvlink" data-cv>Get my CV</button></div>
+  </div>
+  <div class="screen"><pre id="boot-text" aria-live="off"></pre></div>
+  <button type="button" class="bootctl" id="bootskip" hidden>Skip intro ⏭</button>
+  <button type="button" class="bootctl" id="bootctl" aria-pressed="false" hidden>❚❚ Pause</button>
+</div>
+
+<div class="raster" aria-hidden="true"></div>
+<header class="menubar">
+  <a class="logo" href="./">JESSETHE.COM</a>
+  <span class="hint">F1–F7 navigate · ~ terminal</span>
+  <span class="live">Online</span>
+</header>
+
+<main id="main">
+  <section class="hero" aria-label="Introduction">
+    <figure class="shot hud">
+      <div class="photo" id="headshot" role="img" aria-label="Jesse Thé, arms crossed, in front of a tiled wall" tabindex="0">
+        <picture><source srcset="assets/img/headshot.webp" type="image/webp"><img class="col" src="assets/img/headshot.jpg" alt="" width="640" height="839"></picture>
+        <picture><source srcset="assets/img/headshot.webp" type="image/webp"><img class="duo" src="assets/img/headshot.jpg" alt="" width="640" height="839"></picture>
+        <span class="tag">IMG_0001</span>
+      </div>
+      <figcaption class="label">Subject: <b>Jesse Thé</b></figcaption>
+    </figure>
+    <div class="hero-copy">
+      <span class="prompt">&gt; whoami</span>
+      <h1 class="name">Jesse Thé</h1>
+      <p class="tagline"><span>Founder.</span> <span>Product builder.</span> <span>Harvard alum.</span></p>
+      <p class="idline">Senior Product Manager · Founder of Tauria (acquired) · Harvard CS '25 · Berkeley Haas PM</p>
+      <span class="wa"><img class="flag" src="assets/img/flag-ca.png" alt="Canada"><img class="flag" src="assets/img/flag-br.png" alt="Brazil"><img class="flag" src="assets/img/flag-pt.png" alt="Portugal"> Authorized to work · CA · BR · PT + EU</span>
+      <button type="button" class="term-line" data-term aria-label="Open the terminal">jesse@jessethe:~$ <span class="cursor"></span><span class="ghosttext"><span class="kb">press ~ or click</span><span class="touch">tap to type</span></span></button>
+    </div>
+  </section>
+
+  <nav aria-label="Programs">
+    <ul class="programs">
+      <li><a href="about/" style="--c: var(--violet)"><kbd>F1</kbd><span class="pn">About</span><span class="pd">Who I am, where I'm from, what I'm into</span><span class="go">OPEN</span></a></li>
+      <li><a href="work/" style="--c: var(--amber)"><kbd>F2</kbd><span class="pn">Work</span><span class="pd">Two startups, six products, one exit</span><span class="go">OPEN</span></a></li>
+      <li><a href="education/" style="--c: var(--green)"><kbd>F3</kbd><span class="pn">Education</span><span class="pd">Harvard, HBS Online, Berkeley Haas, MIT, Lazaridis</span><span class="go">OPEN</span></a></li>
+      <li><a href="travel/" style="--c: var(--cyan)"><kbd>F4</kbd><span class="pn">Travel</span><span class="pd">13 homes and 40+ countries on a globe</span><span class="go">OPEN</span></a></li>
+      <li><a href="rescue/" style="--c: var(--coral)"><kbd>F5</kbd><span class="pn">Rescue</span><span class="pd">Pidan, Doufu and rescue work in China</span><span class="go">OPEN</span></a></li>
+      <li><a href="hobbies/" style="--c: var(--pink)"><kbd>F6</kbd><span class="pn">Hobbies</span><span class="pd">Stargate, Halo, Civ, books and D&amp;D</span><span class="go">OPEN</span></a></li>
+      <li><a href="contact/" style="--c: var(--text)"><kbd>F7</kbd><span class="pn">Contact</span><span class="pd">Hiring, projects, or coffee in Boston or New York</span><span class="go">OPEN</span></a></li>
+    </ul>
+  </nav>
+</main>
+</body>
+</html>
