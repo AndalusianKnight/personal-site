@@ -35,17 +35,29 @@
   }
   JT.openTerm = openTerm; JT.closeTerm = closeTerm; JT.termOpen = isOpen;
 
+  /* a page, a product (work/zebu, or just zebu) or the adventure, as an address on this site */
+  var PRODUCTS = ['project-rebu', 'zebu', 'tauria-connect', 'tauria-lockbox', 'tauria-cal', 'tauria-calls'];
+  function resolve(p) {
+    p = (p || '').toLowerCase().replace(/^\/+|\/+$/g, '');
+    if (p === '' || p === '~' || p === 'home' || p === 'earth') return { id: 'home', sub: '', path: '', href: JT.url('home') };
+    var parts = p.split('/'), id = parts[0], sub = parts[1] || '';
+    if (parts.length > 2) return null;
+    if (!sub && PRODUCTS.indexOf(id) >= 0) { sub = id; id = 'work'; }
+    if (id === 'adventure' && !sub) return { id: id, sub: '', path: id, href: JT.url(id) };
+    if (!PAGE_IDS[id] || id === 'home') return null;
+    if (sub) return id === 'work' && PRODUCTS.indexOf(sub) >= 0 ? { id: id, sub: sub, path: id + '/' + sub, href: JT.url(id) + sub + '/' } : null;
+    return { id: id, sub: '', path: id, href: JT.url(id) };
+  }
   function openPage(p) {
-    var id = p.split('/')[0] || 'home';
-    if (id === '~' || id === '') id = 'home';
-    if (!PAGE_IDS[id]) {
+    var r = resolve(p);
+    if (!r) {
       print('<span class="p">?FILE NOT FOUND  ERROR</span>\n<span class="a">CHEVRON SEVEN WILL NOT LOCK.</span>\nThe address you dialed doesn\'t exist. <span class="c">Pidan may have eaten this page.</span>\n<span class="d">(this is the 404)  try</span> <span class="u">ls</span>');
       SFX.error(); return;
     }
-    if (id === JT.page) { print('<span class="d">you are already on</span> <span class="u">' + (id === 'home' ? '/' : '/' + id) + '</span>'); return; }
-    print('<span class="d">LOAD "' + id.toUpperCase() + '",8,1</span>');
-    print('→ opening <span class="u">jessethe.com/' + (id === 'home' ? '' : id) + '</span>');
-    setTimeout(function () { JT.goPage(id); }, 450);
+    if (r.id === JT.page && r.sub === JT.sub) { print('<span class="d">you are already on</span> <span class="u">/' + r.path + '</span>'); return; }
+    print('<span class="d">LOAD "' + (r.path || 'HOME').toUpperCase() + '",8,1</span>');
+    print('→ opening <span class="u">jessethe.com/' + r.path + '</span>');
+    setTimeout(function () { JT.go(r.href); }, 450);
   }
 
   /* Stargate */
@@ -97,18 +109,6 @@
     '      ||      ||',
     '      ^^      ^^'].join('\n');
 
-  var BANDS = [
-    [0, 5, 'Jesse is asleep. Pidan is on guard. Doufu is dreaming of being chased.'],
-    [6, 6, 'Early walk. Pidan is suspicious of the morning.'],
-    [7, 8, 'Coffee in progress. Caffeine level rising.'],
-    [9, 11, 'Jesse is online, probably building something.'],
-    [12, 12, 'Lunch. Probably xiaolongbao.'],
-    [13, 17, 'Jesse is online, probably building something.'],
-    [18, 18, 'Evening walk. Doufu is demanding to be chased.'],
-    [19, 19, 'Dinner time in Shanghai.'],
-    [20, 22, 'Evening. On D&D nights, three demigods are in trouble.'],
-    [23, 23, 'Winding down. Sleep schedule: still not found.']];
-  function two(v) { return String(v).padStart(2, '0'); }
 
   /* wild magic: an original surge table, in the spirit of the wild magic sorcerer */
   function termFx(cls, ms) { con.classList.add(cls); setTimeout(function () { con.classList.remove(cls); }, ms); }
@@ -133,6 +133,14 @@
     ['You grow a beard made of feathers. It is magnificent.'],
     ['You regain all your sorcery points. Ajax is jealous.'],
     ['Natural 20. Pure, untamed luck. Ajax\'s character sheet unlocks.', function () { unlockSheet(); }]];
+  function loose(on) {
+    if (!JT.doufu) { print('<span class="d">Doufu is asleep on this page.</span>'); return; }
+    if (!on) { if (JT.doufu.on()) { JT.doufu.stop(); print('Doufu trots back to her bed. <span class="d">Good girl.</span>'); } else print('<span class="d">Doufu is already home.</span>'); return; }
+    if (JT.doufu.on()) { print('<span class="d">She\'s already loose. Look behind you.</span>'); return; }
+    JT.achieve('dogs');
+    print('<span class="c">DOUFU.DOG</span> is loose. ' + (JT.touch ? 'Tap anywhere' : 'Move your cursor') + ' and she\'ll chase it.\n<span class="d">bring her back with</span> <span class="u">doufu home</span> <span class="d">or Esc</span>');
+    setTimeout(function () { closeTerm(); JT.doufu.start($('termbtn')); }, 700);
+  }
   var surged = false;
   function surge() {
     var n = Math.floor(Math.random() * 20) + 1, e = SURGE[n - 1]; SFX.spell();
@@ -151,14 +159,17 @@
         '  <span class="u">dial</span> &lt;page&gt;          go there by Stargate',
         '  <span class="u">home about work education travel rescue hobbies contact</span>',
         '  <span class="u">courses</span>              list my courses',
+        '  <span class="u">adventure</span>            play the text adventure',
         '  <span class="u">mail</span>                 write me a message, right here',
         '  <span class="u">cv</span>                   print my CV',
         '  <span class="u">achievements</span>         your progress',
         '  <span class="u">dogs  pidan  doufu</span>   meet the rescue dogs',
         '  <span class="u">roll d20</span>             test your luck',
         '  <span class="u">time</span>                 what Jesse is probably doing',
+        '  <span class="u">doufu loose</span>          let Doufu chase your cursor',
         '  <span class="u">cheats</span>               every easter egg (spoilers!)',
         '  <span class="u">sound on|off</span>         toggle sound',
+        '  <span class="u">commentary on|off</span>    my notes on why things are the way they are',
         '  <span class="u">reboot  date  history  clear  exit</span>',
         '<span class="d">There are also commands not on this list.</span>'].join('\n'));
     },
@@ -179,14 +190,21 @@
         '  <span class="u">ls -a</span>                 hidden files, then <span class="u">cat .dm_notes</span> or <span class="u">cat .yearbook</span>',
         '  <span class="u">indeed  halo  coffee</span>  try them',
         '  <span class="u">open nowhere</span>          the 404',
-        '  <span class="u">reboot</span>                watch the boot again',
+        '  <span class="u">reboot</span>                watch the full boot again',
+        '  <span class="u">screensaver</span>           or leave the site alone for a minute',
+        '  <span class="u">doufu loose</span>           she chases your cursor, on any page',
+        '  <span class="u">adventure</span>             the text adventure. xyzzy works there too',
         '  Click the headshot on Home five times',
-        '<span class="d">More eggs hatch as the other pages go live.</span>'].join('\n'));
+        '  Click the Stargate cover on Hobbies, then click it again',
+        '  Roll the d20 on Hobbies until it lands on 20',
+        '  Click the redacted award on Education',
+        '<span class="d">Every achievement has a hint in the drawer. Open it from the status bar.</span>'].join('\n'));
     },
     ls: function (a) {
-      if (a === 'work' || a === 'work/') { print('<span class="a">project-rebu</span>  <span class="a">zebu</span>  <span class="p">tauria-connect</span>  <span class="p">tauria-lockbox</span>  <span class="p">tauria-cal</span>  <span class="p">tauria-calls</span>\n<span class="d">the product pages arrive with the Work page</span>'); return; }
-      if (a === '-a' || a === '-la') { print('.  ..  <span class="d">.secrets</span>  <span class="d">.dm_notes</span>  <span class="d">.yearbook</span>  about/  work/  education/  travel/  rescue/  hobbies/  contact/'); return; }
-      print('<span class="v">about/</span>  <span class="a">work/</span>  <span style="color:var(--green)">education/</span>  <span class="cy">travel/</span>  <span class="c">rescue/</span>  <span class="p">hobbies/</span>  <span class="u">contact/</span>');
+      if (a === 'work' || a === 'work/') { print('<span class="a">project-rebu/</span>  <span class="a">zebu/</span>  <span class="p">tauria-connect/</span>  <span class="p">tauria-lockbox/</span>  <span class="p">tauria-cal/</span>  <span class="p">tauria-calls/</span>\n<span class="d">open one with</span> <span class="u">open work/zebu</span>'); return; }
+      if (a === '-a' || a === '-la') { print('.  ..  <span class="d">.secrets</span>  <span class="d">.dm_notes</span>  <span class="d">.yearbook</span>  about/  work/  education/  travel/  rescue/  hobbies/  contact/  adventure/'); return; }
+      if (a && a !== '/' && a !== '~') { print('<span class="d">nothing to list in</span> ' + esc(a) + '<span class="d">. try</span> <span class="u">ls work</span>'); return; }
+      print('<span class="v">about/</span>  <span class="a">work/</span>  <span style="color:var(--green)">education/</span>  <span class="cy">travel/</span>  <span class="c">rescue/</span>  <span class="p">hobbies/</span>  <span class="u">contact/</span>  <span style="color:var(--green)">adventure/</span>');
     },
     'cat .dm_notes': function () { print('<span class="a">DM NOTES:</span> the demigods will never suspect the oracle.'); JT.achieve('dm'); },
     'cat .yearbook': function () { print('<span class="a">YEARBOOK:</span> top student in English Literature of the whole graduating class.\n<span class="d">High school. It still counts.</span>'); },
@@ -211,8 +229,24 @@
       JT.achieve('dogs');
     },
     pidan: function () { print('<span class="c">PIDAN.DOG</span>  皮蛋 · "century egg" · good boy\nMODE: shy / nervous. Last seen shredding page 2 of the CV.'); JT.achieve('dogs'); },
-    doufu: function () { print('<span class="c">DOUFU.DOG</span>  豆腐 · "tofu" · good girl\nMODE: opposite of Pidan. Requests that you chase. Will not take no for an answer.'); JT.achieve('dogs'); },
-    ajax: function () { print('<span class="v">AJAX.EXE</span>  Aberrant Mind sorcerer\nFORM: astral elf <span class="p">(unstable)</span>\nPET: one gnome squidling, currently on Ajax\'s shoulder.\n<span class="d">Roll a natural 20 to read the full sheet.</span>'); },
+    doufu: function (a) {
+      if (a === 'loose' || a === '--loose') { loose(true); return; }
+      if (a === 'home' || a === 'stop' || a === 'sit' || a === 'come' || a === 'back') { loose(false); return; }
+      print('<span class="c">DOUFU.DOG</span>  豆腐 · "tofu" · good girl\nMODE: opposite of Pidan. Requests that you chase. Will not take no for an answer.\n<span class="d">try</span> <span class="u">doufu loose</span>');
+      JT.achieve('dogs');
+    },
+    'let doufu loose': function () { loose(true); },
+    screensaver: function () {
+      if (!JT.saver) { print('<span class="d">no screensaver on this page</span>'); return; }
+      print('<span class="d">PIDAN.SCR · DOUFU.SCR</span> starting… <span class="d">move the mouse or press a key to wake up</span>');
+      setTimeout(function () { closeTerm(); JT.saver.start(); }, 700);
+    },
+    afk: function () { CMDS.screensaver(); },
+    adventure: function () {
+      if (JT.page === 'adventure') { print('<span class="d">you\'re already in it. type in the green box.</span>'); setTimeout(function () { closeTerm(); var i = $('adv-in'); if (i) i.focus({ preventScroll: true }); }, 500); return; }
+      SFX.floppy(); openPage('adventure');
+    },
+    ajax: function () { print('<span class="v">AJAX.EXE</span>  Aberrant Mind sorcerer\nFORM: astral elf <span class="p">(unstable)</span>\nPET: one gnome squidling, currently on Ajax\'s shoulder.\n<span class="d">' + (JT.store('jt-sheet') === '1' ? 'Your natural 20 unlocked the full sheet. It\'s on the Hobbies page:</span> <span class="u">open hobbies</span>' : 'The full sheet is on the Hobbies page, behind a natural 20. Try</span> <span class="u">roll d20</span>')); },
     coffee: function () { printLines(['brewing  [██░░░░░░░░]', 'brewing  [██████░░░░]', 'brewing  [██████████]', 'CAFFEINE LEVEL ............ <span class="a">MAXIMUM</span>', '<span class="d">Real coffee: at the Harvard Club of Boston or New York, if we\'re both in town.</span>'], 300); },
     roll: function (a, loaded) {
       if (a === 'd20 --loaded' || a === '--loaded') loaded = true;
@@ -227,10 +261,10 @@
       if (gateBusy) return;
       if (a === 'atlantis' || a === 'pegasus') { print('<span class="d">intergalactic address: 8 chevrons</span>'); dial(8, dialPrint); return; }
       if (!a) { print('<span class="d">usage:</span> <span class="u">dial</span> &lt;page&gt;  <span class="d">try</span> <span class="u">dial about</span>'); return; }
-      var dest = { earth: 'home', home: 'home' }[a] || a.replace(/^\/|\/$/g, '');
-      if (!PAGE_IDS[dest]) { SFX.error(); print('<span class="p">CHEVRON SEVEN WILL NOT LOCK.</span>\n<span class="d">no gate address for</span> ' + esc(a) + '<span class="d">. try</span> <span class="u">dial about</span>'); return; }
-      print('<span class="d">dialling ' + dest.toUpperCase() + '…</span>');
-      dial(7, function (n, t) { dialPrint(n, t); if (n > t && dest !== JT.page) setTimeout(function () { openPage(dest); }, 900); });
+      var dest = resolve(a);
+      if (!dest) { SFX.error(); print('<span class="p">CHEVRON SEVEN WILL NOT LOCK.</span>\n<span class="d">no gate address for</span> ' + esc(a) + '<span class="d">. try</span> <span class="u">dial about</span>'); return; }
+      print('<span class="d">dialling ' + (dest.path || 'earth').toUpperCase() + '…</span>');
+      dial(7, function (n, t) { dialPrint(n, t); if (n > t && (dest.id !== JT.page || dest.sub !== JT.sub)) setTimeout(function () { openPage(a); }, 900); });
     },
     indeed: function () { print('<span class="a">Indeed.</span>'); },
     halo: function () { print('<span style="color:var(--green)">"Wake me, when you need me."</span>'); },
@@ -243,13 +277,18 @@
     xyzzy: function () { print('Nothing happens.'); JT.achieve('xyzzy'); },
     hello: function () { print('Hi! Type <span class="u">help</span> to see what I can do.'); },
     hi: function () { CMDS.hello(); },
+    commentary: function (a) {
+      var on = a === 'on' ? true : a === 'off' ? false : !JT.dcOn();
+      JT.setDC(on); print(on ? '<span style="color:#ffd77a">DIRECTOR\'S COMMENTARY ON.</span> <span class="d">Look for the yellow notes. There\'s one on every page.</span>' : '<span class="d">commentary off</span>');
+    },
+    notes: function (a) { CMDS.commentary(a); },
     sound: function (a) { if (a === 'on' || a === 'off') { SFX.set(a === 'on'); JT.syncMute(); print('sound ' + a); } else print('usage: sound on|off'); },
     date: function () { print(new Date().toString()); },
-    time: function () { var d = new Date(Date.now() + 8 * 3600000), h = d.getUTCHours(), b = BANDS.filter(function (x) { return h >= x[0] && h <= x[1]; })[0]; print('<span class="a">' + two(h) + ':' + two(d.getUTCMinutes()) + '</span> in Shanghai. ' + esc(b[2])); },
+    time: function () { var n = JT.shanghai(); print('<span class="a">' + JT.two(n.h) + ':' + JT.two(n.m) + '</span> in Shanghai. ' + esc(n.long)); },
     history: function () { print(hist.map(function (h, i) { return '  ' + (i + 1) + '  ' + esc(h); }).join('\n') || '<span class="d">empty</span>'); },
     clear: function () { out.innerHTML = ''; },
     exit: function () { closeTerm(); },
-    reboot: function () { print('<span class="a">REBOOTING…</span>'); try { sessionStorage.removeItem('jt-booted'); } catch (e) {} setTimeout(function () { if (JT.page === 'home' && JT.reboot) { closeTerm(); JT.reboot(); } else JT.goPage('home'); }, 500); },
+    reboot: function () { print('<span class="a">REBOOTING…</span>'); try { sessionStorage.removeItem('jt-booted'); } catch (e) {} setTimeout(function () { if (JT.page === 'home' && JT.reboot) { closeTerm(); JT.reboot(); } else JT.go(JT.url('home') + '?boot'); }, 500); },
     konami: function () { print('Try it with the arrow keys, outside the terminal.'); },
     moo: function () { SFX.moo(); print('<span class="u">' + esc(ZEBEE) + '</span>\n<span class="a">"Have you mooed today?"</span>\n<span class="d">Zebee, the Zebu mascot, says hi.</span>'); },
     'apt-get': function (a) { if (a === 'moo' || a === 'install moo') { CMDS.moo(); return; } print('<span class="p">E:</span> Unable to locate package ' + esc(a || '') + '\n<span class="d">This system has one package, and it moos.</span>'); },
@@ -272,18 +311,25 @@
     if (CMDS[cmd]) { CMDS[cmd](arg); return; }
     SFX.error(); print('<span class="p">?SYNTAX ERROR</span>  type <span class="u">help</span>');
   }
-  /* Until the contact form has its serverless function, a terminal message becomes an email draft. */
+  /* A terminal message goes through the same route as the contact form: delivered, or an email draft. */
   function formStep(v) {
     if (v.toLowerCase() === 'cancel') { form = null; ps1.textContent = PS1; print('<span class="d">message cancelled</span>'); return; }
     if (form.step === 0) { if (!v) { print('<span class="p">name required</span>'); return; } form.data.name = v; form.step = 1; ps1.textContent = 'email>'; }
     else if (form.step === 1) { if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { SFX.error(); print('<span class="p">?ADDRESS ERROR</span> that email looks off, try again'); return; } form.data.email = v; form.step = 2; ps1.textContent = 'message>'; }
     else {
       if (!v) { print('<span class="p">message required</span>'); return; }
-      var d = form.data, href = 'mailto:jessethe@alumni.harvard.edu?subject=' + encodeURIComponent('Hello from jessethe.com: ' + d.name) + '&body=' + encodeURIComponent(v + '\n\n' + d.name + ' <' + d.email + '>');
+      var d = form.data; d.message = v; d.reason = 'From the terminal';
       ps1.textContent = PS1; form = null;
-      printLines(['<span class="d">TRANSMITTING ▓▓▓▓▓▓▓▓▓▓</span>', '<span class="a">MESSAGE READY.</span> Your mail app should open with it. <span class="d">If it doesn\'t,</span> <a href="' + esc(href) + '">send it from here</a><span class="d">.</span>'], 500);
-      setTimeout(function () { location.href = href; }, 1100);
-      JT.achieve('mail');
+      print('<span class="d">TRANSMITTING ▓▓▓▓▓▓▓▓▓▓</span>');
+      JT.sendMail(d).then(function (res) {
+        if (!res.ok) { SFX.error(); print('<span class="p">?SEND ERROR</span> ' + esc(res.error || '') + '. try <span class="u">mail</span> again'); return; }
+        if (res.via === 'api') print('<span class="a">MESSAGE DELIVERED.</span> Thanks, ' + esc(d.name) + '. I\'ll write back soon.');
+        else {
+          print('<span class="a">MESSAGE READY.</span> Your mail app should open with it. <span class="d">If it doesn\'t,</span> <a href="' + esc(res.href) + '">send it from here</a><span class="d">.</span>');
+          setTimeout(function () { location.href = res.href; }, 700);
+        }
+        JT.achieve('mail');
+      });
     }
   }
 
@@ -292,7 +338,7 @@
   cin.addEventListener('keydown', function (e) {
     if ((e.key === '~' || e.key === '`') && !cin.value && !form) { e.preventDefault(); closeTerm(); return; }
     if (e.key === 'Escape') { e.preventDefault(); closeTerm(); return; }
-    if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Enter') SFX.key(e.key === 'Enter' || e.key === ' ');
+    if ((e.key || '').length === 1 || e.key === 'Backspace' || e.key === 'Enter') SFX.key(e.key === 'Enter' || e.key === ' ');
     if (e.key === 'ArrowUp' && hist.length && !form) { e.preventDefault(); hpos = Math.max(0, hpos - 1); cin.value = hist[hpos]; syncMirror(); }
     else if (e.key === 'ArrowDown' && hist.length && !form) { e.preventDefault(); hpos = Math.min(hist.length, hpos + 1); cin.value = hist[hpos] || ''; syncMirror(); }
     else if (e.key === 'Tab' && cin.value && !form) {

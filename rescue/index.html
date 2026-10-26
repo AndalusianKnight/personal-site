@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Rescue · Jesse Thé</title>
-<meta name="description" content="Pidan and Doufu, two tugou from Huangshan, and the dog rescue work in China behind them.">
+<meta name="description" content="Pidan and Doufu, two rescue dogs from Huangshan, and the dog rescue work in China that brought them home.">
 <meta name="theme-color" content="#08070c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rescue · Jesse Thé">
+<meta property="og:description" content="Pidan and Doufu, two rescue dogs from Huangshan, and the dog rescue work in China that brought them home.">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,31 +16,181 @@
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/sfx.js" defer></script>
 <script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/pixel.js" defer></script>
 <script src="../assets/js/terminal.js" defer></script>
+<script src="../assets/js/rescue.js" defer></script>
 </head>
 <body data-page="rescue">
 <a class="skiplink" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="duo-violet" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values=".3 .59 .11 0 0  .3 .59 .11 0 0  .3 .59 .11 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.07 0.55 1"/><feFuncG type="table" tableValues="0.03 0.36 0.84"/><feFuncB type="table" tableValues="0.16 0.92 0.58"/></feComponentTransfer>
+  </filter>
+  <filter id="duo-coral" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values=".3 .59 .11 0 0  .3 .59 .11 0 0  .3 .59 .11 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.06 0.95 1"/><feFuncG type="table" tableValues="0.02 0.42 0.9"/><feFuncB type="table" tableValues="0.06 0.33 0.82"/></feComponentTransfer>
+  </filter>
+</svg>
 <div class="raster" aria-hidden="true"></div>
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
-  <span class="hint">F1–F7 navigate · ~ terminal</span>
+  <nav class="pnav" aria-label="Programs">
+    <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
+    <a href="../work/" style="--c: var(--amber)"><kbd>F2</kbd>Work</a>
+    <a href="../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
+    <a href="../travel/" style="--c: var(--cyan)"><kbd>F4</kbd>Travel</a>
+    <a href="../rescue/" style="--c: var(--coral)" aria-current="page"><kbd>F5</kbd>Rescue</a>
+    <a href="../hobbies/" style="--c: var(--pink)"><kbd>F6</kbd>Hobbies</a>
+    <a href="../contact/" style="--c: var(--text)"><kbd>F7</kbd>Contact</a>
+  </nav>
   <span class="live">Online</span>
 </header>
 
 <main id="main">
-  <section class="stub">
-    <span class="path">F5 · jessethe.com/rescue</span>
-    <h1>Rescue</h1>
-    <p class="lede">Pidan and Doufu, two tugou from Huangshan, and the dog rescue work in China behind them.</p>
-    <div class="diskbox" role="status">LOAD "RESCUE",8,1
-SEARCHING FOR RESCUE
-?DISK NOT INSERTED
-<span class="dim">This program is still being written. Until it ships, the terminal knows plenty: try whoami.</span></div>
-    <div class="acts">
-      <a class="btn" href="../">← Home</a>
-      <button type="button" class="btn g" data-term>~ Open terminal</button>
+<div class="pg">
+  <header class="pg-head">
+    <span class="kicker">F5 · jessethe.com/rescue</span>
+    <h1>Meet Pidan and Doufu.</h1>
+    <p class="lede">Two rescue dogs from Huangshan, China, who now travel the world with me and Player 2. They're the reason I keep volunteering, so more dogs get the same ending.</p>
+  </header>
+
+  <section class="tags" aria-label="Dog tags">
+    <article class="tag hud">
+      <div class="photo dog pidan" tabindex="0" aria-label="Photo of Pidan">
+        <picture><source srcset="../assets/img/pidan.webp" type="image/webp"><img class="col" src="../assets/img/pidan.jpg" alt="Pidan, a black, tan and white dog with big ears, sitting and smiling" width="600" height="813" loading="lazy"></picture>
+        <picture><source srcset="../assets/img/pidan.webp" type="image/webp"><img class="duo" src="../assets/img/pidan.jpg" alt="" width="600" height="813" loading="lazy"></picture>
+        <span class="tag-no">DOG 01</span>
+      </div>
+      <div class="tag-body">
+        <h2>Pidan <small>皮蛋 · century egg</small></h2>
+        <dl>
+          <dt>Breed</dt><dd>Tugou, a Chinese rural dog</dd>
+          <dt>From</dt><dd>Huangshan, China</dd>
+          <dt>Mode</dt><dd>Shy and nervous</dd>
+          <dt>Hobby</dt><dd>Ripping up paper</dd>
+          <dt>Best friend</dt><dd class="bff"><svg viewBox="0 0 14 14" fill="#ff7a5c" aria-hidden="true"><path d="M7 12.5 1.6 7.2a3.2 3.2 0 0 1 4.6-4.5L7 3.5l.8-.8a3.2 3.2 0 0 1 4.6 4.5Z"/></svg>Doufu</dd>
+          <dt>Stamps</dt><dd class="stamps"><span class="stamp"><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15">CHINA</span><span class="stamp"><img class="flag" src="../assets/img/flag-us.png" alt="" width="20" height="15">USA</span><span class="stamp"><img class="flag" src="../assets/img/flag-ca.png" alt="" width="20" height="15">CANADA</span><span class="stamp"><img class="flag" src="../assets/img/flag-es.png" alt="" width="20" height="15">SPAIN</span><span class="stamp"><img class="flag" src="../assets/img/flag-it.png" alt="" width="20" height="15">ITALY</span></dd>
+          <dt>Status</dt><dd class="good">Good boy</dd>
+        </dl>
+      </div>
+    </article>
+    <article class="tag hud">
+      <div class="photo dog doufu" tabindex="0" aria-label="Photo of Doufu">
+        <picture><source srcset="../assets/img/doufu.webp" type="image/webp"><img class="col" src="../assets/img/doufu.jpg" alt="Doufu, a white dog with ginger ears and an orange collar, mouth open mid-bark" width="600" height="900" loading="lazy"></picture>
+        <picture><source srcset="../assets/img/doufu.webp" type="image/webp"><img class="duo" src="../assets/img/doufu.jpg" alt="" width="600" height="900" loading="lazy"></picture>
+        <span class="tag-no">DOG 02</span>
+      </div>
+      <div class="tag-body">
+        <h2>Doufu <small>豆腐 · tofu</small></h2>
+        <dl>
+          <dt>Breed</dt><dd>Tugou, a Chinese rural dog</dd>
+          <dt>From</dt><dd>Huangshan, China</dd>
+          <dt>Mode</dt><dd>The opposite of Pidan</dd>
+          <dt>Hobby</dt><dd>Being chased</dd>
+          <dt>Best friend</dt><dd class="bff"><svg viewBox="0 0 14 14" fill="#ff7a5c" aria-hidden="true"><path d="M7 12.5 1.6 7.2a3.2 3.2 0 0 1 4.6-4.5L7 3.5l.8-.8a3.2 3.2 0 0 1 4.6 4.5Z"/></svg>Pidan</dd>
+          <dt>Stamps</dt><dd class="stamps"><span class="stamp"><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15">CHINA</span><span class="stamp"><img class="flag" src="../assets/img/flag-us.png" alt="" width="20" height="15">USA</span><span class="stamp"><img class="flag" src="../assets/img/flag-ca.png" alt="" width="20" height="15">CANADA</span><span class="stamp"><img class="flag" src="../assets/img/flag-es.png" alt="" width="20" height="15">SPAIN</span><span class="stamp"><img class="flag" src="../assets/img/flag-it.png" alt="" width="20" height="15">ITALY</span></dd>
+          <dt>Status</dt><dd class="good">Good girl</dd>
+        </dl>
+      </div>
+    </article>
+  </section>
+
+  <section class="blk" aria-labelledby="play-h">
+    <div class="blk-head">
+      <span class="label">PLAYGROUND/</span>
+      <h2 id="play-h">Play with them</h2>
+      <p>Everything they do in here is something they really do. Doufu wants to be chased. Pidan wants you to stop looking at him.</p>
+    </div>
+    <div class="labs">
+      <article class="win lab">
+        <div class="win-bar"><i></i><span>DOUFU.EXE</span><i></i></div>
+        <div class="win-in">
+          <div class="blk-head"><h3>Doufu follows you</h3><p>A nod to the old desktop cat that chased your mouse. Move around the box and she runs after you. Stop, and she sits, then naps.</p></div>
+          <div class="stage"><canvas id="dz-cv" aria-label="Doufu runs after your cursor inside the box"></canvas><span class="st-msg" id="dz-msg">Move your cursor in here</span></div>
+          <div class="row"><button type="button" class="btn" id="dz-loose" aria-pressed="false">Let her loose on the whole site</button></div>
+        </div>
+      </article>
+      <article class="win lab">
+        <div class="win-bar"><i></i><span>CHASE.EXE</span><i></i></div>
+        <div class="win-in">
+          <div class="blk-head"><h3>Chase Doufu</h3><p>Being chased is her favourite thing. Corner her against a wall to catch her. Pidan only peeks out of his box when you're far away.</p></div>
+          <div class="stage"><canvas id="ch-cv" aria-label="Chase Doufu around a field while Pidan hides in a box"></canvas><span class="st-msg" id="ch-msg">Move in to chase her</span><span class="st-score" id="ch-score">Caught 0</span></div>
+        </div>
+      </article>
+      <article class="win lab">
+        <div class="win-bar"><i></i><span>TREATS.EXE</span><i></i></div>
+        <div class="win-in">
+          <div class="blk-head"><h3>The treat jar</h3><p>Toss one and Doufu catches it before it lands. Leave one by the box and Pidan only comes out if you keep still. Wait too long and Doufu steals it.</p></div>
+          <div class="stage"><canvas id="tr-cv" aria-label="A treat jar, Doufu, and Pidan's box"></canvas><span class="st-msg" id="tr-msg">Pick a treat</span></div>
+          <div class="row"><button type="button" class="btn" id="tr-toss">Toss a treat</button><button type="button" class="btn ghost" id="tr-leave">Leave one by Pidan's box</button></div>
+          <div class="counter"><span>Doufu <b id="tr-d">0</b></span><span>Pidan <b id="tr-p">0</b></span><span>Stolen by Doufu <b id="tr-s">0</b></span><span>Thrown by you, all time <b id="tr-all">0</b></span></div>
+        </div>
+      </article>
     </div>
   </section>
+
+  <section class="story" aria-labelledby="why-h">
+    <div class="copy">
+      <span class="label">Why it matters</span>
+      <h2 id="why-h">Rescuing dogs and cats in China</h2>
+      <p>China has no national animal-protection law of the kind most countries take for granted. Cruelty to dogs and cats often goes unpunished, so abuse is sadly more common, and in some rural provinces dogs are still eaten.</p>
+      <p>I work alongside other volunteers in Shenzhen and in Anhui province. We rescue dogs, get them to a vet, have them neutered, then feed them, clean them and train them until they're ready to meet families at adoption events.</p>
+      <p>Pidan and Doufu are two of those dogs. Both came from Huangshan, in Anhui, and both came home with me.</p>
+      <p>You can help from anywhere. Adopt, foster, donate, or come and volunteer. Tell me which and I'll put you in touch with the rescues I work with.</p>
+    </div>
+    <div class="wizard hud">
+      <span class="wt">INSTALLING GOOD_HOME.EXE</span>
+      <ol id="wizard">
+        <li><b>Rescue</b><i>OK</i></li>
+        <li><b>Vet care</b><i>OK</i></li>
+        <li><b>Neuter</b><i>OK</i></li>
+        <li><b>Feed and clean</b><i>OK</i></li>
+        <li><b>Train</b><i>OK</i></li>
+        <li><b>Adoption event</b><i>OK</i></li>
+      </ol>
+      <div class="wbar"><b id="wbar" style="width:100%"></b></div>
+      <span class="ws" id="wizard-s">6 of 6 complete · one more good home</span>
+      <div class="where"><span>Shenzhen, Guangdong</span><span>Anhui province</span><span>Huangshan</span></div>
+      <div class="help">
+        <a class="btn" href="../contact/?reason=rescue&amp;help=adopt">Adopt</a>
+        <a class="btn" href="../contact/?reason=rescue&amp;help=foster">Foster</a>
+        <a class="btn" href="../contact/?reason=rescue&amp;help=donate">Donate</a>
+        <a class="btn" href="../contact/?reason=rescue&amp;help=volunteer">Volunteer</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" aria-labelledby="logs-h">
+    <div class="blk-head">
+      <span class="label">DOG_LOGS/</span>
+      <h2 id="logs-h">Their side of the story</h2>
+      <p>Recovered from two very different hard drives. Same day, same apartment.</p>
+    </div>
+    <div class="dlogs">
+      <div class="dlog">
+        <span class="label">PIDAN.LOG</span>
+        <ol>
+          <li><time>07:00</time><span>Woke up. Checked the room for new boxes. Found one. Moved in.</span></li>
+          <li><time>09:30</time><span>Doorbell. Hid under the bed until 11:00. Just to be safe.</span></li>
+          <li><time>13:00</time><span>Found a receipt. It's confetti now.</span></li>
+          <li><time>18:00</time><span>Doufu wanted to play. Supervised from a safe distance.</span></li>
+          <li><time>22:00</time><span>Fell asleep against Doufu. Best friend.</span></li>
+        </ol>
+      </div>
+      <div class="dlog loud">
+        <span class="label">DOUFU.LOG</span>
+        <ol>
+          <li><time>06:58</time><span>AWAKE. CHASE ME.</span></li>
+          <li><time>07:00</time><span>Nobody chased me. Barked about it.</span></li>
+          <li><time>09:30</time><span>DOORBELL! A FRIEND! Every person is a friend.</span></li>
+          <li><time>13:05</time><span>Stole Pidan's treat. Felt nothing.</span></li>
+          <li><time>22:00</time><span>Let Pidan sleep on me. Best friend.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</div>
 </main>
 </body>
 </html>

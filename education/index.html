@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Education · Jesse Thé</title>
-<meta name="description" content="Harvard CS &#x27;25, cum laude, with a secondary in History. Plus HBS Online, Berkeley Haas, MIT and Lazaridis.">
+<meta name="description" content="Harvard CS cum laude with a secondary in History, plus HBS Online, Berkeley Haas, MIT and Lazaridis. Every course, and a few papers.">
 <meta name="theme-color" content="#08070c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Education · Jesse Thé">
+<meta property="og:description" content="Harvard CS cum laude with a secondary in History, plus HBS Online, Berkeley Haas, MIT and Lazaridis. Every course, and a few papers.">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,31 +16,154 @@
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/sfx.js" defer></script>
 <script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/pixel.js" defer></script>
 <script src="../assets/js/terminal.js" defer></script>
+<script src="../assets/js/education.js" defer></script>
 </head>
 <body data-page="education">
 <a class="skiplink" href="#main">Skip to content</a>
 <div class="raster" aria-hidden="true"></div>
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
-  <span class="hint">F1–F7 navigate · ~ terminal</span>
+  <nav class="pnav" aria-label="Programs">
+    <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
+    <a href="../work/" style="--c: var(--amber)"><kbd>F2</kbd>Work</a>
+    <a href="../education/" style="--c: var(--green)" aria-current="page"><kbd>F3</kbd>Education</a>
+    <a href="../travel/" style="--c: var(--cyan)"><kbd>F4</kbd>Travel</a>
+    <a href="../rescue/" style="--c: var(--coral)"><kbd>F5</kbd>Rescue</a>
+    <a href="../hobbies/" style="--c: var(--pink)"><kbd>F6</kbd>Hobbies</a>
+    <a href="../contact/" style="--c: var(--text)"><kbd>F7</kbd>Contact</a>
+  </nav>
   <span class="live">Online</span>
 </header>
 
 <main id="main">
-  <section class="stub">
-    <span class="path">F3 · jessethe.com/education</span>
-    <h1>Education</h1>
-    <p class="lede">Harvard CS '25, cum laude, with a secondary in History. Plus HBS Online, Berkeley Haas, MIT and Lazaridis.</p>
-    <div class="diskbox" role="status">LOAD "EDUCATION",8,1
-SEARCHING FOR EDUCATION
-?DISK NOT INSERTED
-<span class="dim">This program is still being written. Until it ships, the terminal knows plenty: try whoami.</span></div>
-    <div class="acts">
-      <a class="btn" href="../">← Home</a>
-      <button type="button" class="btn g" data-term>~ Open terminal</button>
+<div class="pg">
+  <header class="pg-head">
+    <span class="kicker">F3 · jessethe.com/education</span>
+    <h1>Sold the company. Went back to school.</h1>
+    <p class="lede">After the exit, Harvard: Computer Science first, History a close second, and a habit of collecting courses I still haven't kicked.</p>
+  </header>
+
+  <section class="blk" aria-label="Highlights">
+    <div class="kpis">
+      <div><b>3.91</b><span>Harvard GPA</span></div>
+      <div><b>Cum laude</b><span>Harvard, 2025</span></div>
+      <div><b>38</b><span>Courses and counting</span></div>
+      <div><b>1st</b><span>HBS case competition</span></div>
     </div>
   </section>
+
+  <section class="blk" aria-labelledby="schools-h">
+    <div class="blk-head"><span class="label">SCHOOLS.DAT</span><h2 id="schools-h">Where I studied</h2></div>
+    <div class="schools">
+      <article class="school">
+        <div class="crest" aria-hidden="true"><b>H</b><span>2025</span></div>
+        <div>
+          <span class="when">2022–2025 · Cambridge, MA</span>
+          <h3>Harvard University</h3>
+          <p class="deg">Bachelor of Liberal Arts in Extension Studies. Concentration in Computer Science, Secondary in History.</p>
+          <ul>
+            <li>GPA 3.91, cum laude, Dean's Academic Achievement Award</li>
+            <li>Undergraduate Certificates in Coding, Web Development and Professional Communications</li>
+            <li>A hybrid degree, so I was in and out of Cambridge the whole way through, and loved every week on campus</li>
+          </ul>
+        </div>
+      </article>
+      <article class="school">
+        <div class="crest" aria-hidden="true"><b>HBS</b><span>ONLINE</span></div>
+        <div>
+          <span class="when">Online</span>
+          <h3>Harvard Business School Online</h3>
+          <p class="deg">Certificate of Specialization in Leadership &amp; Management</p>
+          <ul><li>Leadership Principles, Negotiation Mastery and Strategy Execution</li></ul>
+        </div>
+      </article>
+      <article class="school">
+        <div class="crest" aria-hidden="true"><b>Haas</b><span>2022</span></div>
+        <div>
+          <span class="when">2022 · Berkeley, CA</span>
+          <h3>UC Berkeley, Haas School of Business</h3>
+          <p class="deg">Executive Education, Product Management Certificate</p>
+          <ul><li>1st place in the Harvard Business School case competition at Berkeley Haas, ahead of senior PMs and VPs from Google, Apple, Microsoft, Samsung and JPMorgan</li></ul>
+        </div>
+      </article>
+      <article class="school">
+        <div class="crest" aria-hidden="true"><b>MIT</b><span>COURSE</span></div>
+        <div>
+          <span class="when">Course · Cambridge, MA</span>
+          <h3>Massachusetts Institute of Technology</h3>
+          <p class="deg">Frontiers of Computer Science: Artificial Intelligence, the Internet of Things, and Cybersecurity</p>
+          <ul><li>Taught by MIT faculty through the Harvard–MIT partnership</li></ul>
+        </div>
+      </article>
+      <article class="school">
+        <div class="crest" aria-hidden="true"><b>LAZ</b><span>WLU</span></div>
+        <div>
+          <span class="when">Courses · Waterloo, ON</span>
+          <h3>Lazaridis School of Business &amp; Economics, Wilfrid Laurier University</h3>
+          <p class="deg">Courses in business, accounting, statistics and economics</p>
+        </div>
+      </article>
+      <article class="school">
+        <div class="crest" aria-hidden="true"><b>CLEP</b><span>EXAM</span></div>
+        <div>
+          <span class="when">Credit by exam</span>
+          <h3>CLEP: History of Western Civilization</h3>
+          <p class="deg">Earned college credit by examination</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="edu-cols" aria-label="Awards and clubs">
+    <div class="blk">
+      <div class="blk-head"><span class="label">TROPHIES.SYS</span><h2>Awards</h2></div>
+      <ul class="awards">
+        <li>Cum laude, Harvard University</li>
+        <li>Dean's Academic Achievement Award</li>
+        <li>1st place, Harvard Business School case competition at Berkeley Haas</li>
+        <li class="egg"><button type="button" class="redact" id="yearbook" aria-label="A redacted award. Click to decrypt.">████ ███████ ██ ███████ ██████████ ██ ███ █████</button></li>
+      </ul>
+    </div>
+    <div class="blk">
+      <div class="blk-head"><span class="label">SOCIETIES.SYS</span><h2>Clubs and societies</h2></div>
+      <ul class="clubs">
+        <li><div>Harvard Computer Society</div></li>
+        <li><div>Harvard Extension Student Association <span>· Deputy Director of Events</span></div></li>
+        <li><div>Harvard Outing Club</div></li>
+        <li><div>Harvard Clubs of Boston and New York <span>· member</span></div></li>
+      </ul>
+      <div class="coffee hud">
+        <span class="label">Open invitation</span>
+        <p>I'm a member of the Harvard Clubs of Boston and New York. I'm not always in town, but if we're in the same city at the same time, let's get a coffee there.</p>
+        <a class="btn g" href="../contact/?reason=coffee">Book a coffee</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" aria-labelledby="courses-h">
+    <div class="blk-head"><span class="label">COURSES.LST</span><h2 id="courses-h">Every course, filed</h2><p>Computer science, history and philosophy, business, and a few wild cards like improv and astronomy.</p></div>
+    <div class="courses-head">
+      <button type="button" class="btn g" id="courses-btn" aria-expanded="true" aria-controls="courses-box" hidden>Hide courses ▴</button>
+    </div>
+    <div class="courses-box" id="courses-box">
+      <div class="filters" id="course-filters" role="group" aria-label="Filter courses" hidden></div>
+      <ul class="courses" id="courses"><li data-cat="cs"><span class="cc">CSCI S-80</span><span>Artificial Intelligence</span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">EXPO E-34</span><span>Business Rhetoric</span><span class="sc">Harvard</span></li><li data-cat="arts"><span class="cc">MA129</span><span>Calculus<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="cs"><span class="cc">CP164</span><span>Data Structures<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="cs"><span class="cc">CSCI E-59</span><span>Designing and Developing Relational and NoSQL Databases</span><span class="sc">Harvard</span></li><li data-cat="cs"><span class="cc">DGMD E-28</span><span>Developing Single-Page Web Applications</span><span class="sc">Harvard</span></li><li data-cat="hist"><span class="cc">ANTH E-1000</span><span>Egyptian Civilization</span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">BU127</span><span>Financial Accounting<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="arts"><span class="cc">FREN E-1</span><span>French I</span><span class="sc">Harvard</span></li><li data-cat="arts"><span class="cc">FREN E-2</span><span>French II</span><span class="sc">Harvard</span></li><li data-cat="cs"><span class="cc">CSCI E-11</span><span>Frontiers of Computer Science: Artificial Intelligence, the Internet of Things, and Cybersecurity</span><span class="sc">MIT</span></li><li data-cat="cs"><span class="cc">CSCI E-12</span><span>Fundamentals of Web Development</span><span class="sc">Harvard</span></li><li data-cat="hist"><span class="cc">PHIL E-110</span><span>Hindu Philosophy</span><span class="sc">Harvard</span></li><li data-cat="hist"><span class="cc">HIST E-1588</span><span>History of Judaism and Jewish Cultures</span><span class="sc">Harvard</span></li><li data-cat="hist"><span class="cc">CLEP</span><span>History of Western Civilization<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="hist"><span class="cc">HIST E-1960</span><span>History of the Cold War</span><span class="sc">Harvard</span></li><li data-cat="arts"><span class="cc">DRAM E-21</span><span>Improvisation</span><span class="sc">Harvard</span></li><li data-cat="arts"><span class="cc">DRAM E-10</span><span>Introduction to Acting</span><span class="sc">Harvard</span></li><li data-cat="cs"><span class="cc">COMPSCI 50</span><span>Introduction to Computer Science</span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">HBS Online</span><span>Leadership Principles</span><span class="sc">Harvard Business School</span></li><li data-cat="biz"><span class="cc">EC140</span><span>Macroeconomics<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">EC120</span><span>Microeconomics<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="hist"><span class="cc">PHIL E-154 / EXPO E-25</span><span>Mindfulness: Self, Science, and Sport</span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">HBS Online</span><span>Negotiation Mastery</span><span class="sc">Harvard Business School</span></li><li data-cat="arts"><span class="cc">AS101</span><span>Our Place in the Cosmos: Astronomy<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="hist"><span class="cc">PHIL E-155</span><span>Philosophy of Happiness</span><span class="sc">Harvard</span></li><li data-cat="cs"><span class="cc">DGMD E-23</span><span>Planning Successful Websites and Applications</span><span class="sc">Harvard</span></li><li data-cat="hist"><span class="cc">HIST E-1825</span><span>Power and Civilization of China</span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">MGMT E-2035</span><span>Principles of Real Estate</span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">Exec Ed</span><span>Product Management: Translate Opportunities into Profitability</span><span class="sc">Berkeley Haas</span></li><li data-cat="cs"><span class="cc">CP104</span><span>Programming with Python<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">MGMT E-5030</span><span>Project Management<span class="tc">GRAD</span></span><span class="sc">Harvard</span></li><li data-cat="arts"><span class="cc">MATH E-3</span><span>Quantitative Reasoning</span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">EC285</span><span>Statistics &amp; Econometrics<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">HBS Online</span><span>Strategy Execution</span><span class="sc">Harvard Business School</span></li><li data-cat="hist"><span class="cc">HIST E-1465</span><span>The United States World Order</span><span class="sc">Harvard</span></li><li data-cat="biz"><span class="cc">BU111</span><span>Understanding and Assessing the Business Environment<span class="tc">TC</span></span><span class="sc">Harvard</span></li><li data-cat="cs"><span class="cc">CSCI S-33A</span><span>Web Programming</span><span class="sc">Harvard</span></li></ul>
+      <span class="label foot">TC = transfer credit · Grad = graduate credit</span>
+    </div>
+  </section>
+
+  <section class="blk" aria-labelledby="papers-h">
+    <div class="blk-head"><span class="label">PAPERS/</span><h2 id="papers-h">Papers and projects</h2><p>A few things I wrote and built along the way. Open one in the reader.</p></div>
+    <ul class="papers" id="papers"><li><a href="#cold-war-crypto" data-paper="cold-war-crypto"><svg viewBox="0 0 22 26" fill="none" stroke="#59ff95" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">COLDWAR.PDF</span><span class="pt">Munitions of the Mind: Encryption, Export Controls and the End of the Cold War<small>HIST E-1960 · History of the Cold War</small></span><span class="sz">12 pp</span></a></li><li><a href="#dm-screen" data-paper="dm-screen"><svg viewBox="0 0 22 26" fill="none" stroke="#59ff95" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">CS50_FINAL.ZIP</span><span class="pt">DM Screen: a web app for running D&amp;D at the table<small>COMPSCI 50 · Introduction to Computer Science</small></span><span class="sz">Flask · SQL · JS</span></a></li><li><a href="#song-paper-money" data-paper="song-paper-money"><svg viewBox="0 0 22 26" fill="none" stroke="#59ff95" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">SONG_MONEY.PDF</span><span class="pt">Paper Promises: The Song Dynasty and the First Government Paper Money<small>HIST E-1825 · Power and Civilization of China</small></span><span class="sz">9 pp</span></a></li></ul>
+    <div class="paper-texts" id="paper-texts"><article class="paper-src" id="cold-war-crypto" data-fn="COLDWAR.PDF"><span class="label">HIST E-1960 · History of the Cold War · 12 pp</span><h3>Munitions of the Mind: Encryption, Export Controls and the End of the Cold War</h3><p>For most of the Cold War, the United States treated strong encryption the way it treated missiles: as a munition, licensed for export and kept away from the Soviet bloc through CoCom, the Western export-control regime. This paper follows that logic from wartime codebreaking to the personal computer, when cryptography stopped being a state secret and started shipping inside ordinary software.</p><p>When the Soviet Union collapsed, the controls lost their enemy but kept their rules. What followed was the crypto wars of the 1990s, which decided whether ordinary people could own unbreakable encryption at all. I argue those fights were the Cold War&#x27;s last policy argument, and the reason a company like Tauria could exist twenty years later.</p><p class="more">The full text is available on request. <a href="../contact/?reason=hi">Ask me for a copy</a>.</p></article><article class="paper-src" id="dm-screen" data-fn="CS50_FINAL.ZIP"><span class="label">COMPSCI 50 · Introduction to Computer Science · Flask · SQL · JS</span><h3>DM Screen: a web app for running D&amp;D at the table</h3><p>My CS50 final project: everything a dungeon master juggles mid-session, in one browser tab. An initiative tracker, a dice roller with a full log, monster stat blocks, and session notes the players can&#x27;t peek at.</p><p>Built with Python, Flask, SQL and JavaScript. The players&#x27; view and the DM&#x27;s view are separate pages that share one game state, which taught me more about permissions than any lecture did. My players still say the dice roller is rigged. It isn&#x27;t. Probably.</p><p class="more">The full text is available on request. <a href="../contact/?reason=hi">Ask me for a copy</a>.</p></article><article class="paper-src" id="song-paper-money" data-fn="SONG_MONEY.PDF"><span class="label">HIST E-1825 · Power and Civilization of China · 9 pp</span><h3>Paper Promises: The Song Dynasty and the First Government Paper Money</h3><p>In eleventh-century Sichuan, merchants were tired of hauling strings of heavy iron coins, so they started trading paper receipts called jiaozi. The Song state took the idea over and issued the world&#x27;s first government paper money.</p><p>This paper looks at how the Song persuaded people to trust a piece of paper, and how later governments lost that trust by printing too much of it. Nine hundred years on, it&#x27;s still the best case study I know of what happens when you spend trust faster than you earn it.</p><p class="more">The full text is available on request. <a href="../contact/?reason=hi">Ask me for a copy</a>.</p></article></div>
+    <article class="win reader" id="reader" hidden aria-live="polite">
+      <div class="win-bar"><i></i><span id="reader-title">READER.EXE</span><button type="button" id="reader-x" aria-label="Close the reader">✕</button></div>
+      <div class="win-in" id="reader-in"></div>
+    </article>
+  </section>
+</div>
 </main>
 </body>
 </html>

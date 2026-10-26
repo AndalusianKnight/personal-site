@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Contact · Jesse Thé</title>
-<meta name="description" content="Hiring, a project, or coffee at the Harvard Club in Boston or New York if we&#x27;re both in town.">
+<meta name="description" content="Hiring, a project, or coffee at the Harvard Club in Boston or New York. Send Jesse a message.">
 <meta name="theme-color" content="#08070c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact · Jesse Thé">
+<meta property="og:description" content="Hiring, a project, or coffee at the Harvard Club in Boston or New York. Send Jesse a message.">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,33 +16,101 @@
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/sfx.js" defer></script>
 <script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/pixel.js" defer></script>
 <script src="../assets/js/terminal.js" defer></script>
+<script src="../assets/js/contact.js" defer></script>
 </head>
 <body data-page="contact">
 <a class="skiplink" href="#main">Skip to content</a>
 <div class="raster" aria-hidden="true"></div>
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
-  <span class="hint">F1–F7 navigate · ~ terminal</span>
+  <nav class="pnav" aria-label="Programs">
+    <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
+    <a href="../work/" style="--c: var(--amber)"><kbd>F2</kbd>Work</a>
+    <a href="../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
+    <a href="../travel/" style="--c: var(--cyan)"><kbd>F4</kbd>Travel</a>
+    <a href="../rescue/" style="--c: var(--coral)"><kbd>F5</kbd>Rescue</a>
+    <a href="../hobbies/" style="--c: var(--pink)"><kbd>F6</kbd>Hobbies</a>
+    <a href="../contact/" style="--c: var(--text)" aria-current="page"><kbd>F7</kbd>Contact</a>
+  </nav>
   <span class="live">Online</span>
 </header>
 
 <main id="main">
-  <section class="stub">
-    <span class="path">F7 · jessethe.com/contact</span>
-    <h1>Contact</h1>
-    <p class="lede">Hiring, a project, or coffee at the Harvard Club in Boston or New York if we're both in town.</p>
-    <div class="diskbox" role="status">LOAD "CONTACT",8,1
-SEARCHING FOR CONTACT
-?DISK NOT INSERTED
-<span class="dim">This program is still being written. Until it ships, the terminal knows plenty: try whoami.</span></div>
-    <div class="acts">
-      <a class="btn" href="../">← Home</a>
-      <button type="button" class="btn g" data-term>~ Open terminal</button>
-      <a class="btn" href="mailto:jessethe@alumni.harvard.edu">Email jessethe@alumni.harvard.edu</a>
-      <button type="button" class="btn g" data-cv>Get my CV</button>
+<div class="pg">
+  <header class="pg-head">
+    <span class="kicker">F7 · jessethe.com/contact</span>
+    <h1>Send me a message.</h1>
+    <p class="lede">Hiring for a product role, building something people need to trust, or in Boston or New York and up for coffee? Write to me. It goes straight to my inbox.</p>
+  </header>
+
+  <section class="contact" aria-label="Contact">
+    <form class="cform" id="contact-form" action="mailto:jessethe@alumni.harvard.edu" method="post" enctype="text/plain" novalidate>
+      <div class="bar"><span>NEW MESSAGE · TO JESSE</span><span>ALL FIELDS REQUIRED</span></div>
+      <div class="cf-row"><label for="cf-name">NAME&gt;</label><input id="cf-name" name="name" autocomplete="name" spellcheck="false" maxlength="100" required></div>
+      <div class="cf-row"><label for="cf-email">EMAIL&gt;</label><input id="cf-email" name="email" type="email" autocomplete="email" spellcheck="false" maxlength="200" required></div>
+      <fieldset class="cf-reason"><legend>ABOUT&gt;</legend><div class="opts" id="cf-opts">
+        <input type="radio" name="reason" id="cf-r0" value="Hiring" checked><label for="cf-r0">Hiring</label>
+        <input type="radio" name="reason" id="cf-r1" value="A project"><label for="cf-r1">A project</label>
+        <input type="radio" name="reason" id="cf-r2" value="Coffee at the Harvard Club"><label for="cf-r2">Coffee at the Harvard Club</label>
+        <input type="radio" name="reason" id="cf-r3" value="Rescue"><label for="cf-r3">Rescue</label>
+        <input type="radio" name="reason" id="cf-r4" value="Just saying hi"><label for="cf-r4">Just saying hi</label>
+      </div></fieldset>
+      <div class="cf-row"><label for="cf-msg">MESSAGE&gt;</label><textarea id="cf-msg" name="message" rows="5" maxlength="5000" required></textarea></div>
+      <div class="cf-hp" aria-hidden="true"><label for="cf-web">Leave this empty</label><input id="cf-web" name="website" tabindex="-1" autocomplete="off"></div>
+      <div class="cf-err" id="cf-err" aria-live="polite"></div>
+      <button type="submit" class="send">TRANSMIT ▶</button>
+      <div class="cf-out" id="cf-out" aria-live="polite"></div>
+    </form>
+
+    <aside class="reach hud" aria-label="Other ways to reach me">
+      <span class="label">REACH.CFG</span>
+      <dl>
+        <div><dt>Email</dt><dd><a href="mailto:jessethe@alumni.harvard.edu">jessethe@alumni.harvard.edu</a></dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/jesse-david-the" target="_blank" rel="noopener">linkedin.com/in/jesse-david-the</a></dd></div>
+        <div><dt>CV</dt><dd><button type="button" class="btn g" data-cv>Print my CV</button></dd></div>
+        <div><dt>Coffee</dt><dd>I'm a member of the Harvard Clubs of Boston and New York. If we're in the same city at the same time, let's get a coffee there.</dd></div>
+      </dl>
+      <span class="wa"><img class="flag" src="../assets/img/flag-ca.png" alt="Canada" width="20" height="15"><img class="flag" src="../assets/img/flag-br.png" alt="Brazil" width="20" height="15"><img class="flag" src="../assets/img/flag-pt.png" alt="Portugal" width="20" height="15"> Authorized to work · CA · BR · PT + EU</span>
+    </aside>
+  </section>
+
+  <section class="blk" aria-labelledby="why-h">
+    <div class="blk-head">
+      <span class="label">GOOD_REASONS.TXT</span>
+      <h2 id="why-h">Good reasons to write</h2>
+    </div>
+    <ul class="reasons">
+      <li><button type="button" data-reason="0"><b>You're hiring a product leader.</b><span>I've taken six products from zero to market and sold a company. I'm ready for the next big one.</span></button></li>
+      <li><button type="button" data-reason="1"><b>You're building something people need to trust.</b><span>Privacy, security, regulated industries, or any product where one mistake costs a customer for good.</span></button></li>
+      <li><button type="button" data-reason="2"><b>You're in Boston or New York.</b><span>Coffee at the Harvard Club. You pick the day, I'll check which continent I'm on.</span></button></li>
+      <li><button type="button" data-reason="3"><b>You want to help a rescue dog.</b><span>Adopt, foster, donate or volunteer. I'll put you in touch with the rescues I work with in China.</span></button></li>
+      <li><button type="button" data-reason="4"><b>You found all 21 achievements.</b><span>Tell me how long it took. I want to know which one was hardest.</span></button></li>
+    </ul>
+  </section>
+
+  <section class="blk" aria-labelledby="clock-h">
+    <div class="blk-head">
+      <span class="label">CLOCK.SYS</span>
+      <h2 id="clock-h">What I'm probably doing right now</h2>
+      <p>I'm in Shanghai at the moment, so replies follow China time. Here's roughly what that means.</p>
+    </div>
+    <div class="clock hud" id="clk">
+      <div class="clk-face">
+        <span class="label">Shanghai · UTC+8</span>
+        <span class="big" id="clk-t">--:--:--</span>
+        <p class="msg" id="clk-m"></p>
+        <span class="you" id="clk-you"></span>
+      </div>
+      <div class="clk-ctl">
+        <label class="label" for="clk-r">Preview another hour</label>
+        <input type="range" id="clk-r" min="0" max="23" step="1" value="12">
+        <button type="button" class="btn ghost" id="clk-live">Back to live time</button>
+      </div>
     </div>
   </section>
+</div>
 </main>
 </body>
 </html>

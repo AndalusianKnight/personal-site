@@ -17,7 +17,10 @@
       if (ctx.state === 'suspended') ctx.resume();
       return ctx;
     }
-    function ok() { return on && ac(); }
+    /* No AudioContext until the visitor has clicked or pressed a key on this page (browsers block it anyway). */
+    var unlocked = false;
+    function active() { return unlocked || !!(navigator.userActivation && navigator.userActivation.hasBeenActive); }
+    function ok() { return on && active() && ac(); }
     function env(g, t, a, peak, d) { g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + d); }
     function osc(type, f, t, a, peak, d, dest, detune) {
       var o = ctx.createOscillator(), g = ctx.createGain();
@@ -39,7 +42,7 @@
       });
     }
     var api = {
-      unlock: ac,
+      unlock: function () { unlocked = true; return ac(); },
       get on() { return on; },
       set: function (v) { on = v; store('jt-sound', v ? 'on' : 'off'); },
       click: function () { if (!ok()) return; var t = ctx.currentTime; burst(t, 0.008, 0.16, 'bandpass', 2100, 2.5); burst(t + 0.07, 0.006, 0.08, 'bandpass', 2600, 2.5); },

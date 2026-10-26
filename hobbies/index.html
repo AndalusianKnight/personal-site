@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Hobbies · Jesse Thé</title>
-<meta name="description" content="Stargate, Halo, Civilization IV, a shelf of books, scuba, bouldering, and a D&amp;D campaign two years deep.">
+<meta name="description" content="Stargate, Halo, Civ and The Three-Body Problem. Scuba, bouldering, a retro console shelf and a D&amp;D campaign two years deep.">
 <meta name="theme-color" content="#08070c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hobbies · Jesse Thé">
+<meta property="og:description" content="Stargate, Halo, Civ and The Three-Body Problem. Scuba, bouldering, a retro console shelf and a D&amp;D campaign two years deep.">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,31 +16,151 @@
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/sfx.js" defer></script>
 <script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/pixel.js" defer></script>
 <script src="../assets/js/terminal.js" defer></script>
+<script src="../assets/js/hobbies.js" defer></script>
 </head>
 <body data-page="hobbies">
 <a class="skiplink" href="#main">Skip to content</a>
 <div class="raster" aria-hidden="true"></div>
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
-  <span class="hint">F1–F7 navigate · ~ terminal</span>
+  <nav class="pnav" aria-label="Programs">
+    <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
+    <a href="../work/" style="--c: var(--amber)"><kbd>F2</kbd>Work</a>
+    <a href="../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
+    <a href="../travel/" style="--c: var(--cyan)"><kbd>F4</kbd>Travel</a>
+    <a href="../rescue/" style="--c: var(--coral)"><kbd>F5</kbd>Rescue</a>
+    <a href="../hobbies/" style="--c: var(--pink)" aria-current="page"><kbd>F6</kbd>Hobbies</a>
+    <a href="../contact/" style="--c: var(--text)"><kbd>F7</kbd>Contact</a>
+  </nav>
   <span class="live">Online</span>
 </header>
 
 <main id="main">
-  <section class="stub">
-    <span class="path">F6 · jessethe.com/hobbies</span>
-    <h1>Hobbies</h1>
-    <p class="lede">Stargate, Halo, Civilization IV, a shelf of books, scuba, bouldering, and a D&amp;D campaign two years deep.</p>
-    <div class="diskbox" role="status">LOAD "HOBBIES",8,1
-SEARCHING FOR HOBBIES
-?DISK NOT INSERTED
-<span class="dim">This program is still being written. Until it ships, the terminal knows plenty: try whoami.</span></div>
-    <div class="acts">
-      <a class="btn" href="../">← Home</a>
-      <button type="button" class="btn g" data-term>~ Open terminal</button>
+<div class="pg">
+  <header class="pg-head">
+    <span class="kicker">F6 · jessethe.com/hobbies</span>
+    <h1>Off the clock.</h1>
+    <p class="lede">When I'm not building, I'm 18 metres underwater, halfway up a boulder problem, or behind a dungeon master's screen. And there's a shelf of favourites I'll defend to anyone.</p>
+  </header>
+
+  <section class="blk" aria-labelledby="shelf-h">
+    <div class="blk-head">
+      <span class="label">SHELF.EXE</span>
+      <h2 id="shelf-h">The shelf</h2>
+      <p>Books, shows and games I keep coming back to. Pick one up for my take. Some of them do something if you pick them up twice.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Shelf" id="shelf-tabs" hidden>
+      <button type="button" role="tab" id="t-books" data-k="books" aria-selected="true" aria-controls="shelf-panel">Books</button>
+      <button type="button" role="tab" id="t-shows" data-k="shows" aria-selected="false" aria-controls="shelf-panel" tabindex="-1">Shows &amp; films</button>
+      <button type="button" role="tab" id="t-games" data-k="games" aria-selected="false" aria-controls="shelf-panel" tabindex="-1">Games</button>
+    </div>
+    <div class="shelf-wrap" id="shelf-panel" role="tabpanel" aria-labelledby="t-books" hidden>
+      <div class="shelf" id="shelf"></div>
+      <div class="info hud" id="info" aria-live="polite"></div>
+    </div>
+    <div class="favs" id="favs"><section data-kind="books"><h3>Books</h3><ul><li data-id="jobs"><b>Steve Jobs</b><span class="meta">Walter Isaacson · 2011</span><p>The authorized biography, written from more than forty interviews with Jobs.</p><p class="take">Every founder should read it twice: once for the taste and the focus, once for the warnings. I kept the obsession with details nobody asked for.</p></li><li data-id="meditations"><b>Meditations</b><span class="meta">Marcus Aurelius · c. 170–180 AD</span><p>A Roman emperor&#x27;s private notes to himself on Stoic discipline.</p><p class="take">The most powerful man in the world, reminding himself every night to stay humble. Still the best management book I own.</p></li><li data-id="threebody"><b>The Three-Body Problem</b><span class="meta">Liu Cixin · 2008 · translated by Ken Liu, 2014</span><p>Hard science fiction that starts in China&#x27;s Cultural Revolution and turns into first contact.</p><p class="take">It opens in a piece of Chinese history most Western readers never learn, then goes somewhere much bigger. Read the whole trilogy.</p></li><li data-id="dmg"><b>Dungeon Master&#x27;s Guide</b><span class="meta">Wizards of the Coast</span><p>The rulebook every dungeon master keeps behind the screen.</p><p class="take">Half rulebook, half permission slip to make things up. Two years into my campaign, it&#x27;s the most worn book I own.</p></li></ul></section><section data-kind="shows"><h3>Shows &amp; films</h3><ul><li data-id="sg1"><b>Stargate SG-1</b><span class="meta">MGM · 1997–2007 · 10 seasons</span><p>A team steps through an ancient ring to a different planet every week.</p><p class="take">My favourite show, full stop. Ten seasons of mythology, history and a team that actually likes each other. Click the tape again to dial the gate.</p></li><li data-id="atlantis"><b>Stargate Atlantis</b><span class="meta">MGM · 2004–2009 · 5 seasons</span><p>The expedition that found the lost city of the Ancients in the Pegasus galaxy.</p><p class="take">The spin-off that held up: a lost city, a new galaxy, and Rodney McKay&#x27;s ego. Click again to dial Earth, all eight chevrons.</p></li><li data-id="irongiant"><b>The Iron Giant</b><span class="meta">Warner Bros. · 1999 · directed by Brad Bird</span><p>A boy, a giant robot from space, and Cold War paranoia in 1957 Maine.</p><p class="take">&quot;You are who you choose to be.&quot; The best Cold War film ever made for kids, and maybe for adults too.</p></li><li data-id="shrek"><b>Shrek</b><span class="meta">DreamWorks · 2001</span><p>An ogre, a donkey and every fairy tale turned inside out.</p><p class="take">Still funny on the tenth watch. A fairy tale that refuses to take itself seriously, which I respect.</p></li></ul></section><section data-kind="games"><h3>Games</h3><ul><li data-id="halo3"><b>Halo 3</b><span class="meta">Bungie · 2007 · Xbox 360</span><p>Finish the fight. The end of the original trilogy.</p><p class="take">Couch co-op, late nights and the best ending of the trilogy. I still know the Warthog run by heart.</p></li><li data-id="civ4"><b>Civilization IV</b><span class="meta">Firaxis · 2005 · PC</span><p>Just one more turn. Its theme, &quot;Baba Yetu&quot;, was the first video game music to win a Grammy.</p><p class="take">History as a strategy game, which is basically my two favourite things. &quot;One more turn&quot; has cost me more sleep than both startups.</p></li><li data-id="aom"><b>Age of Mythology</b><span class="meta">Ensemble Studios · 2002 · PC</span><p>Real-time strategy with Greek, Egyptian and Norse gods on your side.</p><p class="take">A lifelong excuse to read mythology. My D&amp;D campaign of Greek demigods owes it a debt.</p></li><li data-id="dnd"><b>Dungeons &amp; Dragons</b><span class="meta">TSR, then Wizards of the Coast · since 1974</span><p>The game I run as dungeon master.</p><p class="take">Two years in, three Greek demigods are on a mythic quest across Ionia, and they still don&#x27;t know what the oracle wants. Click the box again to roll the d20.</p></li></ul></section></div>
+  </section>
+
+  <section class="blk" aria-labelledby="table-h">
+    <div class="blk-head">
+      <span class="label">TABLETOP/</span>
+      <h2 id="table-h">Behind the screen</h2>
+    </div>
+    <div class="tabletop">
+      <div class="campaign hud">
+        <span class="label">CAMPAIGN.LOG</span>
+        <h3>The Ionian Quest</h3>
+        <p>I've been running the same Dungeons &amp; Dragons campaign for two years. Three Greek demigods, one mythic quest across Ionia, and more angry gods than any of them would like.</p>
+        <dl>
+          <dt>Role</dt><dd>Dungeon master</dd>
+          <dt>Running</dt><dd>Two years and counting</dd>
+          <dt>Party</dt><dd>Three demigods</dd>
+          <dt>Setting</dt><dd>Ionia, in the age of heroes</dd>
+        </dl>
+        <p class="hint">The DM's notes are hidden somewhere on this site. Hidden files are still files.</p>
+      </div>
+      <div class="roller">
+        <button type="button" class="d20" id="d20" aria-label="Roll the d20" aria-describedby="d20-out">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#ffb340" stroke-width="2.5" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="50,4 91,27 91,73 50,96 9,73 9,27" fill="rgba(255,179,64,.08)"/>
+            <polygon points="50,26 76,68 24,68"/>
+            <path d="M50,4 L50,26 M91,27 L76,68 M91,73 L76,68 M50,96 L76,68 M50,96 L24,68 M9,73 L24,68 M9,27 L24,68 M9,27 L50,26 M91,27 L50,26"/>
+            <text x="50" y="58" text-anchor="middle" fill="#ffb340" stroke="none" font-family="Chakra Petch, sans-serif" font-weight="700" font-size="20" id="d20n">20</text>
+          </svg>
+        </button>
+        <div>
+          <b>Roll for it</b>
+          <p>When I'm not running the game, I play Ajax. Roll a natural 20 and his character sheet unlocks.</p>
+          <span class="label" id="d20-out" aria-live="polite">Click the die</span>
+        </div>
+      </div>
+    </div>
+    <div class="sheet" id="sheet" hidden>
+      <div class="sheet-head"><h3>AJAX.SHT</h3><span class="label">Unlocked by a natural 20</span></div>
+      <div class="ajax-wrap">
+        <button type="button" class="ajax-btn" id="ajax-btn" aria-label="Ajax. Click him to cast a spell"><canvas id="ajax-cv" width="260" height="170"></canvas></button>
+        <div class="ajax-cast" aria-live="polite"><span class="label">AJAX.SPR · click him</span><b id="ajax-spell">Click Ajax to cast</b><p id="ajax-sd">He knows five psionic spells, and every one of them is a little unsettling. Reveal his true form and the sprite changes too.</p></div>
+      </div>
+      <div class="rows">
+        <div><b>Name</b> · Ajax</div>
+        <div><b>Race</b> · <span id="ajax-race">Astral elf</span><button type="button" class="reveal" id="ajax-reveal">Reveal true form</button></div>
+        <div><b>Class</b> · Sorcerer, Aberrant Mind</div>
+        <div><b>Companion</b> · A gnome squidling (pet)</div>
+        <div><b>Player</b> · Jesse</div>
+        <div><b>Level</b> · 7</div>
+      </div>
+      <div class="feats"><span>Shapechanger</span><span>Telepathic Speech</span><span>Psionic Spells</span><span>Squidling, loyal</span></div>
+      <div class="stats">
+        <div class="stat"><span>STR</span><b>8</b><i>−1</i></div><div class="stat"><span>DEX</span><b>14</b><i>+2</i></div>
+        <div class="stat"><span>CON</span><b>14</b><i>+2</i></div><div class="stat"><span>INT</span><b>12</b><i>+1</i></div>
+        <div class="stat"><span>WIS</span><b>10</b><i>+0</i></div><div class="stat"><span>CHA</span><b>18</b><i>+4</i></div>
+      </div>
     </div>
   </section>
+
+  <section class="blk" aria-labelledby="out-h">
+    <div class="blk-head">
+      <span class="label">OUTDOORS/</span>
+      <h2 id="out-h">Underwater and up a wall</h2>
+      <p>Two hobbies that make you forget your phone exists. Dive as deep as I'm certified to go, or send the amber problem.</p>
+    </div>
+    <div class="outdoor">
+      <div class="dive hud" id="dive">
+        <canvas id="dive-cv" aria-label="The water column. Drag up or down to change depth, or use the slider."></canvas>
+        <div class="dive-side">
+          <span class="label">DIVE.LOG</span>
+          <div class="gauge"><b id="dive-d">0.0</b><span>m</span></div>
+          <label class="label" for="dive-r">Descend</label>
+          <input type="range" id="dive-r" min="0" max="18" step="0.1" value="0">
+          <div class="dive-stats"><span>Pressure <b id="dive-p">1.0</b> ata</span><br><span>No-stop limit <b id="dive-n">—</b></span></div>
+          <p class="dive-msg" id="dive-msg">At the surface. Mask on, regulator in. Drag down in the water to descend.</p>
+          <dl><dt>Certification</dt><dd>Open Water Diver</dd><dt>Max depth</dt><dd>18 m</dd><dt>Dives logged</dt><dd>20+</dd><dt>Favourite site</dt><dd>The USAT Liberty wreck, Bali</dd></dl>
+        </div>
+      </div>
+      <div class="climb hud" id="climb">
+        <canvas id="cl-cv" aria-label="A bouldering wall. Click the amber holds from the bottom up."></canvas>
+        <div class="climb-side">
+          <span class="label">BOULDER.EXE</span>
+          <p class="climb-msg" id="cl-msg">Click the amber holds from the bottom up. Start on S, finish on T.</p>
+          <dl><dt>Problem</dt><dd>The amber one</dd><dt>Grade</dt><dd>V3–V4, on a good day</dd><dt>Home gym</dt><dd>Whichever one is closest to home this year</dd></dl>
+          <button type="button" class="btn ghost" id="cl-reset">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" aria-labelledby="retro-h">
+    <div class="blk-head">
+      <span class="label">RETRO.SYS</span>
+      <h2 id="retro-h">The console collection</h2>
+      <p>Every console I've owned, in the order they came out. Yes, the site boots like one of these on purpose.</p>
+    </div>
+    <ul class="retro" id="retro"><li><button type="button" aria-pressed="false" data-note="Where a lot of childhood weekends went, most of them to Crash Bandicoot." data-year="1994"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="8" y="22" width="68" height="26" rx="3" fill="#c9c6d2"/><circle cx="32" cy="35" r="10" fill="#b3afbd" stroke="#8d8a99"/><rect x="54" y="38" width="9" height="3" fill="#8d8a99"/><rect x="65" y="38" width="6" height="3" fill="#8d8a99"/></svg><b>PlayStation</b><span>1994</span></button></li><li><button type="button" aria-pressed="false" data-note="Four controller ports, GoldenEye, and a lot of arguments about who was looking at whose screen." data-year="1996"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="10" y="26" width="64" height="22" rx="7" fill="#3a3946"/><rect x="28" y="19" width="28" height="9" rx="2" fill="#2a2933"/><rect x="31" y="21" width="22" height="3" fill="#15141b"/><rect x="18" y="40" width="6" height="3" fill="#59ff95"/></svg><b>Nintendo 64</b><span>1996</span></button></li><li><button type="button" aria-pressed="false" data-note="The one that stood up on its own stand. Ratchet &amp; Clank lived in it for a year." data-year="2000"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="30" y="6" width="24" height="46" fill="#111016" stroke="#3a3946"/><path d="M33 12h18M33 18h18M33 24h18" stroke="#2a2933"/><rect x="31" y="46" width="22" height="1.5" fill="#3d6bff"/><rect x="24" y="52" width="36" height="4" fill="#2a2933"/></svg><b>PlayStation 2</b><span>2000</span></button></li><li><button type="button" aria-pressed="false" data-note="Big, black and heavy enough to stop a door. Where Halo started." data-year="2001"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="8" y="20" width="68" height="30" rx="4" fill="#1b1a22" stroke="#3a3946"/><circle cx="42" cy="35" r="8" fill="#59ff95"/><path d="M38 31l8 8M46 31l-8 8" stroke="#0b2a14" stroke-width="2"/></svg><b>Xbox</b><span>2001</span></button></li><li><button type="button" aria-pressed="false" data-note="It came with a carrying handle, which was never a bad idea. Smash Bros. Melee, every weekend." data-year="2001"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="30" y="8" width="24" height="10" rx="3" fill="none" stroke="#3a2f72" stroke-width="4"/><rect x="22" y="16" width="40" height="36" rx="3" fill="#4b3d8f"/><circle cx="42" cy="32" r="9" fill="#5a4ba3"/></svg><b>GameCube</b><span>2001</span></button></li><li><button type="button" aria-pressed="false" data-note="Where Civilization IV and Age of Mythology ate entire weekends." data-year="2001"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="5" y="12" width="20" height="44" fill="#e3dcc8"/><rect x="9" y="18" width="12" height="3" fill="#b9b19c"/><rect x="31" y="8" width="48" height="38" fill="#e3dcc8"/><rect x="36" y="13" width="38" height="26" fill="#5aa0e6"/><path d="M36 39 Q50 26 74 32 V39z" fill="#4caf50"/><rect x="47" y="46" width="16" height="6" fill="#cfc7b1"/></svg><b>Windows XP PC</b><span>2001</span></button></li><li><button type="button" aria-pressed="false" data-note="Halo 3. Finish the fight." data-year="2005"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="14" y="18" width="56" height="32" rx="9" fill="#e9e7ef"/><circle cx="58" cy="34" r="6" fill="none" stroke="#9b96a8" stroke-width="2"/><path d="M58 28 A6 6 0 0 1 64 34" fill="none" stroke="#59ff95" stroke-width="2.5"/></svg><b>Xbox 360</b><span>2005</span></button></li><li><button type="button" aria-pressed="false" data-note="Wii Sports bowling, and a wrist strap that saved at least one TV." data-year="2006"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="34" y="6" width="16" height="46" rx="3" fill="#f1f0f5"/><rect x="36" y="10" width="12" height="2" fill="#5fe3e8"/><rect x="28" y="52" width="28" height="4" fill="#d6d4dd"/></svg><b>Wii</b><span>2006</span></button></li><li><button type="button" aria-pressed="false" data-note="The newest machine in the collection, mostly running Halo: The Master Chief Collection." data-year="2013"><svg viewBox="0 0 84 60" aria-hidden="true"><rect x="6" y="24" width="72" height="20" fill="#15141b" stroke="#3a3946"/><rect x="6" y="24" width="40" height="20" fill="#1f1e27"/><circle cx="70" cy="34" r="2.5" fill="#efeaf5"/></svg><b>Xbox One</b><span>2013</span></button></li></ul>
+    <div class="retro-info hud" id="retro-info" aria-live="polite"><b>Pick a console</b><p>Nine machines, from the first PlayStation to the Xbox One.</p></div>
+  </section>
+</div>
 </main>
 </body>
 </html>
