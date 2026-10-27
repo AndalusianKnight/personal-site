@@ -1,5 +1,6 @@
 /* First visit of a session: welcome screen, power on, BIOS, drives and tape, READY countdown, then home.
-   Space (or the Pause button) freezes it so every line can be read. Skip intro is always one click away. */
+   Space (or the Pause button) freezes it so every line can be read. Skip intro is always one click away.
+   A returning visitor gets the short boot instead: their achievements, and nothing about their last visit. */
 (function () {
   var JT = window.JT, SFX = JT.SFX, reduce = JT.reduce, html = document.documentElement;
   function $(id) { return document.getElementById(id); }
@@ -44,7 +45,7 @@
   var bootBody = BOOT.map(function (l) { return l[0]; }).join('\n') + '\n';
   function anyLine(n) { return '<span class="any">PRESS ANY KEY TO BOOT JESSETHE.COM ... ' + n + '</span> <span class="cursor"></span>'; }
 
-  var phase = html.classList.contains('boot-on') ? 'welcome' : 'home';
+  var phase = html.classList.contains('boot-on') ? (html.classList.contains('boot-back') ? 'back' : 'welcome') : 'home';
   var timers = [], queue = [], qTimer = 0, paused = false, curHTML = '', count = 5;
   JT.blockKeys = function () { return phase !== 'home'; };
 
@@ -94,7 +95,7 @@
   }
   function done() {
     phase = 'home'; clearAll();
-    html.classList.remove('boot-on');
+    html.classList.remove('boot-on', 'boot-back');
     try { sessionStorage.setItem('jt-booted', '1'); } catch (e) {}
     JT.store('jt-visited', '1');
     JT.achieve('boot');
@@ -113,15 +114,32 @@
   }
   JT.reboot = function () {
     clearAll(); phase = 'welcome'; pre.innerHTML = ''; welcome.hidden = false;
-    html.classList.add('boot-on'); $('pw').focus({ preventScroll: true });
+    html.classList.remove('boot-back'); html.classList.add('boot-on'); $('pw').focus({ preventScroll: true });
   };
+
+  /* WELCOME_BACK.SYS: the short boot. What it knows lives only in this browser, so the last visit stays redacted. */
+  function backChk(label, status, cls) { return label + ' ' + new Array(Math.max(3, 18 - label.length)).join('.') + ' <span class="' + (cls || 'ok') + '">' + status + '</span>'; }
+  function fastBoot() {
+    clearAll(); phase = 'back'; welcome.hidden = true;
+    skipBtn.hidden = false; ctl.hidden = false; ctl.textContent = 'Full boot ▶'; skipBtn.focus({ preventScroll: true });
+    var got = Object.keys(JT.found()).length, out = '';
+    var L = ['<span class="dim">JESSETHE BIOS v2.6 · FAST BOOT</span>', '', 'WELCOME BACK, VISITOR.', '',
+      backChk('VISITOR ID', 'ENCRYPTED'), backChk('LAST SEEN', '██████ REDACTED', 'warn'), backChk('ACHIEVEMENTS', got + ' / 21'),
+      backChk('DOUFU.DOG', 'MISSED YOU'), backChk('PIDAN.DOG', 'PRETENDING HE DIDN\'T', 'warn'), ''];
+    L.forEach(function (l) { seq(reduce ? 0 : 140, function () { out += l + '\n'; paint(out + '<span class="cursor"></span>'); if (l) SFX.blip(); }); });
+    var n = 3;
+    function line() { return out + '<span class="any">SKIPPING THE LONG BOOT. PRESS ANY KEY ... ' + n + '</span> <span class="cursor"></span>'; }
+    seq(reduce ? 0 : 200, function () { paint(line()); });
+    for (var i = 0; i < 3; i++) seq(1000, function () { n -= 1; if (n <= 0) { arrive(true); return; } paint(line()); SFX.tick(); });
+    pump();
+  }
 
   $('pw').addEventListener('click', function (e) { e.stopPropagation(); powerOn(); });
   welcome.addEventListener('click', function (e) { if (phase === 'welcome' && !e.target.closest('.small')) powerOn(); });
   $('skip').addEventListener('click', function (e) { e.stopPropagation(); arrive(false); });
   skipBtn.addEventListener('click', function (e) { e.stopPropagation(); arrive(false); });
-  ctl.addEventListener('click', function (e) { e.stopPropagation(); setPaused(!paused); });
-  boot.addEventListener('click', function () { if (phase === 'count') { SFX.key(); arrive(true); } });
+  ctl.addEventListener('click', function (e) { e.stopPropagation(); if (phase === 'back') powerOn(); else setPaused(!paused); });
+  boot.addEventListener('click', function () { if (phase === 'count' || phase === 'back') { SFX.key(); arrive(true); } });
   document.addEventListener('keydown', function (e) {
     if (phase === 'home' || phase === 'transition' || JT.printerOpen() || JT.inField(e)) return;
     if (e.metaKey || e.ctrlKey || e.altKey || e.key === 'Tab' || e.key === 'Shift') return;
@@ -130,8 +148,13 @@
       if (e.key === 'Enter' || e.key === ' ') { if (e.target.closest && e.target.closest('.small button')) return; }
       e.preventDefault(); powerOn(); return;
     }
+    if (phase === 'back') {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('.bootctl')) return;
+      e.preventDefault(); SFX.key(); arrive(true); return;
+    }
     if (e.key === ' ' || e.key === 'p' || e.key === 'P') { e.preventDefault(); setPaused(!paused); return; }
     if (phase === 'count') { e.preventDefault(); SFX.key(); arrive(true); }
   });
   if (phase === 'welcome') $('pw').focus({ preventScroll: true });
+  else if (phase === 'back') fastBoot();
 })();

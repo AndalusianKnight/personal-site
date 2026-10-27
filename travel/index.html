@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Travel · Jesse Thé</title>
-<meta name="description" content="Thirteen homes on four continents, from Toronto to Shanghai, and 40+ countries on a spinning globe.">
+<meta name="description" content="Thirteen homes on four continents and 40+ countries, on a dot-matrix globe with a postcard from every home.">
 <meta name="theme-color" content="#08070c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Travel · Jesse Thé">
+<meta property="og:description" content="Thirteen homes on four continents and 40+ countries, on a dot-matrix globe with a postcard from every home.">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,31 +16,107 @@
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/sfx.js" defer></script>
 <script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/pixel.js" defer></script>
 <script src="../assets/js/terminal.js" defer></script>
+<script src="../assets/js/travel.js" defer></script>
 </head>
 <body data-page="travel">
 <a class="skiplink" href="#main">Skip to content</a>
 <div class="raster" aria-hidden="true"></div>
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
-  <span class="hint">F1–F7 navigate · ~ terminal</span>
+  <nav class="pnav" aria-label="Programs">
+    <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
+    <a href="../work/" style="--c: var(--amber)"><kbd>F2</kbd>Work</a>
+    <a href="../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
+    <a href="../travel/" style="--c: var(--cyan)" aria-current="page"><kbd>F4</kbd>Travel</a>
+    <a href="../rescue/" style="--c: var(--coral)"><kbd>F5</kbd>Rescue</a>
+    <a href="../hobbies/" style="--c: var(--pink)"><kbd>F6</kbd>Hobbies</a>
+    <a href="../contact/" style="--c: var(--text)"><kbd>F7</kbd>Contact</a>
+  </nav>
   <span class="live">Online</span>
 </header>
 
 <main id="main">
-  <section class="stub">
-    <span class="path">F4 · jessethe.com/travel</span>
-    <h1>Travel</h1>
-    <p class="lede">Thirteen homes on four continents, from Toronto to Shanghai, and 40+ countries on a spinning globe.</p>
-    <div class="diskbox" role="status">LOAD "TRAVEL",8,1
-SEARCHING FOR TRAVEL
-?DISK NOT INSERTED
-<span class="dim">This program is still being written. Until it ships, the terminal knows plenty: try whoami.</span></div>
-    <div class="acts">
-      <a class="btn" href="../">← Home</a>
-      <button type="button" class="btn g" data-term>~ Open terminal</button>
+<div class="pg">
+  <header class="pg-head">
+    <span class="kicker">F4 · jessethe.com/travel</span>
+    <h1>Thirteen homes, one flight path.</h1>
+    <p class="lede">I don't visit cities, I move in. Thirteen homes on four continents so far, and 40+ countries along the way. The globe traces them in the order I lived in them. Pick any home for the story, the coffee and the food.</p>
+  </header>
+
+  <section class="blk" aria-labelledby="globe-h">
+    <div class="blk-head">
+      <span class="label">TRAVEL.LOG</span>
+      <h2 id="globe-h">Every home, in order</h2>
+      <p>Drag to spin the globe. Click a city or pick one from the list to open its postcard. The white flashes are places I've been.</p>
+    </div>
+    <div class="globe-wrap" id="globe-wrap" hidden>
+      <div class="globe-box hud">
+        <span class="globe-hud tl">TRAVEL.LOG · VECTOR MODE</span>
+        <span class="globe-hud tr" id="globe-leg">LEG 01/12</span>
+        <canvas id="globe" role="img" aria-label="A spinning dot-matrix globe that traces the thirteen homes in order, from Toronto to Shanghai"></canvas>
+        <span class="globe-hud br" id="globe-rot">ROT 000.0° · DRAG TO SPIN</span>
+      </div>
+      <div class="globe-side">
+        <div class="postcard hud" id="postcard">
+          <div class="ph"><canvas id="sky" aria-hidden="true"></canvas><span id="pc-geo"></span></div>
+          <div class="pc-head"><img class="flag big" id="pc-flag" src="../assets/img/flag-ca.png" alt="" width="20" height="15"><div><span class="pc-mode" id="pc-mode">NOW ARRIVING · HOME 01/13</span><h3 id="pc-city">Toronto, Canada</h3></div></div>
+          <p class="pc-note" id="pc-note"></p>
+          <dl class="pc-eats"><div><dt>Best coffee</dt><dd id="pc-coffee"></dd></div><div><dt>Best food</dt><dd id="pc-food"></dd></div></dl>
+          <button type="button" class="btn ghost" id="pc-resume" hidden>▶ Resume the tour</button>
+        </div>
+        <ul class="homes" id="homes" aria-label="Pick a home"></ul>
+        <p class="sr-only" id="pc-live" aria-live="polite"></p>
+      </div>
+    </div>
+    <ol class="pc-src" id="pc-src"><li id="toronto" data-lat="43.65" data-lon="-79.38" data-cc="ca"><span class="no">01</span><img class="flag" src="../assets/img/flag-ca.png" alt="" width="20" height="15"><h3><span class="pc-n">Toronto</span><span class="pc-c">, Canada</span></h3><p>Tauria&#x27;s first headquarters. I ran the company from here.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Pilot Coffee Roasters</dd></div><div><dt>Best food</dt><dd>A peameal bacon sandwich at St. Lawrence Market</dd></div></dl></li><li id="mexico-city" data-lat="19.43" data-lon="-99.13" data-cc="mx"><span class="no">02</span><img class="flag" src="../assets/img/flag-mx.png" alt="" width="20" height="15"><h3><span class="pc-n">Mexico City</span><span class="pc-c">, Mexico</span></h3><p>I worked remotely from here while running Tauria.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Café de olla, sweet with cinnamon</dd></div><div><dt>Best food</dt><dd>Late-night tacos al pastor</dd></div></dl></li><li id="belgrade" data-lat="44.79" data-lon="20.45" data-cc="rs"><span class="no">03</span><img class="flag" src="../assets/img/flag-rs.png" alt="" width="20" height="15"><h3><span class="pc-n">Belgrade</span><span class="pc-c">, Serbia</span></h3><p>I came here to set up a new office for Tauria.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Domaća kafa, thick and strong</dd></div><div><dt>Best food</dt><dd>Ćevapi with kajmak</dd></div></dl></li><li id="lisbon" data-lat="38.72" data-lon="-9.14" data-cc="pt"><span class="no">04</span><img class="flag" src="../assets/img/flag-pt.png" alt="" width="20" height="15"><h3><span class="pc-n">Lisbon</span><span class="pc-c">, Portugal</span></h3><p>I worked remotely while we set up a small Tauria team here. Player 2 volunteered cleaning pollution off the coral reefs.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>A bica at the counter</dd></div><div><dt>Best food</dt><dd>Warm pastéis de nata in Belém</dd></div></dl></li><li id="amsterdam" data-lat="52.37" data-lon="4.9" data-cc="nl"><span class="no">05</span><img class="flag" src="../assets/img/flag-nl.png" alt="" width="20" height="15"><h3><span class="pc-n">Amsterdam</span><span class="pc-c">, Netherlands</span></h3><p>We were invited to join The Hague Security Delta, a government-backed security initiative, so we came to set it up. It became Tauria&#x27;s HQ until the acquisition. I lived in Amsterdam and took the train to the office in The Hague. The transit is great.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Koffie verkeerd</dd></div><div><dt>Best food</dt><dd>Bitterballen at a brown café</dd></div></dl></li><li id="sao-paulo" data-lat="-23.55" data-lon="-46.63" data-cc="br"><span class="no">06</span><img class="flag" src="../assets/img/flag-br.png" alt="" width="20" height="15"><h3><span class="pc-n">São Paulo</span><span class="pc-c">, Brazil</span></h3><p>I spent time here to reconnect with Brazil.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>A cafezinho, anywhere</dd></div><div><dt>Best food</dt><dd>The mortadella sandwich at the Mercadão</dd></div></dl></li><li id="copenhagen" data-lat="55.68" data-lon="12.57" data-cc="dk"><span class="no">07</span><img class="flag" src="../assets/img/flag-dk.png" alt="" width="20" height="15"><h3><span class="pc-n">Copenhagen</span><span class="pc-c">, Denmark</span></h3><p>Player 2 did an exchange term at Copenhagen Business School, so we moved here for the term.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Coffee Collective in Torvehallerne</dd></div><div><dt>Best food</dt><dd>Smørrebrød, then a cardamom bun</dd></div></dl></li><li id="cambridge" data-lat="42.37" data-lon="-71.11" data-cc="us"><span class="no">08</span><img class="flag" src="../assets/img/flag-us.png" alt="" width="20" height="15"><h3><span class="pc-n">Cambridge</span><span class="pc-c">, USA</span></h3><p>We were in and out constantly over four years, since my degree was hybrid, online and on campus. I loved it here. My time on campus will never be forgotten.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Darwin&#x27;s, near Harvard Square</dd></div><div><dt>Best food</dt><dd>A lobster roll</dd></div></dl></li><li id="montreal" data-lat="45.5" data-lon="-73.57" data-cc="ca"><span class="no">09</span><img class="flag" src="../assets/img/flag-ca.png" alt="" width="20" height="15"><h3><span class="pc-n">Montreal</span><span class="pc-c">, Canada</span></h3><p>I had back surgery here, and did my physiotherapy here too. Amazing food, and a great place to practise my French.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Café Olimpico in Mile End</dd></div><div><dt>Best food</dt><dd>St-Viateur bagels and Schwartz&#x27;s smoked meat</dd></div></dl></li><li id="shenzhen" data-lat="22.54" data-lon="114.06" data-cc="cn"><span class="no">10</span><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15"><h3><span class="pc-n">Shenzhen</span><span class="pc-c">, China</span></h3><p>Player 2 grew up here. It&#x27;s also where I started volunteering with dog rescues in China.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>A flat white in OCT-LOFT</dd></div><div><dt>Best food</dt><dd>Cantonese morning tea: har gow and siu mai</dd></div></dl></li><li id="valencia" data-lat="39.47" data-lon="-0.38" data-cc="es"><span class="no">11</span><img class="flag" src="../assets/img/flag-es.png" alt="" width="20" height="15"><h3><span class="pc-n">Valencia</span><span class="pc-c">, Spain</span></h3><p>I worked remotely from here.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Café del temps, iced with lemon</dd></div><div><dt>Best food</dt><dd>Paella valenciana, then horchata with fartons</dd></div></dl></li><li id="florence" data-lat="43.77" data-lon="11.26" data-cc="it"><span class="no">12</span><img class="flag" src="../assets/img/flag-it.png" alt="" width="20" height="15"><h3><span class="pc-n">Florence</span><span class="pc-c">, Italy</span></h3><p>I worked remotely from here.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Espresso standing at the bar</dd></div><div><dt>Best food</dt><dd>A lampredotto sandwich</dd></div></dl></li><li id="shanghai" data-lat="31.23" data-lon="121.47" data-cc="cn"><span class="no">13</span><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15"><h3><span class="pc-n">Shanghai</span><span class="pc-c">, China</span> <i class="nowtag">NOW</i></h3><p>Where I live right now.</p><dl class="pc-eats"><div><dt>Best coffee</dt><dd>Pour-over in the former French Concession</dd></div><div><dt>Best food</dt><dd>Xiaolongbao and shengjian bao</dd></div></dl></li></ol>
+    <div class="gstats"><span><b>13</b> homes</span><span><b>11</b> countries lived in</span><span><b>40+</b> countries visited</span><span><b>4</b> continents</span><span><b>77,693</b> km of flight path</span></div>
+  </section>
+
+  <section class="blk" aria-labelledby="rules-h">
+    <div class="blk-head">
+      <span class="label">ROAD_RULES.TXT</span>
+      <h2 id="rules-h">How I move</h2>
+    </div>
+    <ol class="how">
+      <li><b>Move in, don't pass through.</b><span>Stay long enough to have a regular café, a favourite street and neighbours who know the dogs by name.</span></li>
+      <li><b>Find the coffee first.</b><span>Every postcard on this page has my pick. The food pick comes straight after.</span></li>
+      <li><b>Learn the words that matter.</b><span>Hello, thank you, and "can the dog come in?" French got a workout in Montreal. Mandarin is getting one in Shanghai.</span></li>
+      <li><b>Pack for four.</b><span>Player 2, Pidan and Doufu come too. Every move starts with a vet visit and a pile of pet paperwork, which Pidan then tries to eat.</span></li>
+    </ol>
+  </section>
+
+  <section class="blk" aria-labelledby="party-h">
+    <div class="blk-head">
+      <span class="label">PARTY.CFG</span>
+      <h2 id="party-h">The travelling party</h2>
+      <p>Four adventurers, one apartment at a time.</p>
+    </div>
+    <ul class="party">
+      <li><picture><source srcset="../assets/img/headshot.webp" type="image/webp"><img class="pav" src="../assets/img/headshot.jpg" alt="" width="48" height="48" loading="lazy"></picture><div><b>Jesse</b><span class="cls">Lv 13 Navigator</span><p>Picks the city, finds the coffee, books the flat that allows dogs.</p></div></li>
+      <li><canvas class="pav" data-who="p2" width="48" height="48" aria-hidden="true"></canvas><div><b>Player 2</b><span class="cls">Co-op partner</span><p>Grew up in Shenzhen, studied in Copenhagen, cleaned coral reefs in Lisbon. The reason half these moves happened.</p></div></li>
+      <li><canvas class="pav" data-who="pidan" width="48" height="48" aria-hidden="true"></canvas><div><b>Pidan</b><span class="cls">Rogue · Stealth +10</span><p>A nervous flyer. Hides in boxes and shreds any paper in reach, boarding passes included.</p></div></li>
+      <li><canvas class="pav" data-who="doufu" width="48" height="48" aria-hidden="true"></canvas><div><b>Doufu</b><span class="cls">Scout · Speed +10</span><p>First one off the plane. She'll make you chase her through arrivals.</p></div></li>
+    </ul>
+    <p class="party-foot"><span class="label">Dog passports</span> <img class="flag" src="../assets/img/flag-ca.png" alt="Canada" width="20" height="15"> <img class="flag" src="../assets/img/flag-us.png" alt="USA" width="20" height="15"> <img class="flag" src="../assets/img/flag-es.png" alt="Spain" width="20" height="15"> <img class="flag" src="../assets/img/flag-it.png" alt="Italy" width="20" height="15"> <img class="flag" src="../assets/img/flag-cn.png" alt="China" width="20" height="15"> <span>Pidan and Doufu have been to five countries, which is more than most dogs. <a href="../rescue/">Meet them</a>.</span></p>
+  </section>
+
+  <section class="blk" aria-labelledby="next-h">
+    <div class="blk-head">
+      <span class="label">DEPARTURES.DAT</span>
+      <h2 id="next-h">Next stop</h2>
+      <p>Home number fourteen hasn't been picked yet. Ask the board.</p>
+    </div>
+    <div class="flapboard" id="flapboard">
+      <div class="fb-row fb-th" aria-hidden="true"><span>Flight</span><span>Destination</span><span>Status</span></div>
+      <div class="fb-row"><span class="fb-code">JT012</span><span class="flaps" data-text="FLORENCE">FLORENCE</span><span class="fb-st">Departed</span></div>
+      <div class="fb-row now"><span class="fb-code">JT013</span><span class="flaps" data-text="SHANGHAI">SHANGHAI</span><span class="fb-st">Home now</span></div>
+      <div class="fb-row next"><span class="fb-code">JT014</span><span class="flaps" id="flap-next" data-text="CLASSIFIED" aria-live="polite">CLASSIFIED</span><span class="fb-st blink">Boarding soon</span></div>
+      <button type="button" class="btn" id="flap-btn" hidden>Ask the board again</button>
     </div>
   </section>
+</div>
 </main>
 </body>
 </html>

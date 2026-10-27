@@ -16,11 +16,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
 <script>
-  /* Boot on the first visit of a session (or with ?boot). Without JavaScript the boot never shows. */
-  (function () { var h = document.documentElement; try { if (/[?&]boot\b/.test(location.search) || !sessionStorage.getItem('jt-booted')) h.classList.add('boot-on'); } catch (e) { h.classList.add('boot-on'); } })();
+  /* Boot on the first visit of a session (or with ?boot). Returning visitors get the short boot.
+     Without JavaScript the boot never shows. */
+  (function () {
+    var h = document.documentElement;
+    try {
+      var full = /[?&]boot\b/.test(location.search);
+      if (full || !sessionStorage.getItem('jt-booted')) { h.classList.add('boot-on'); if (!full && localStorage.getItem('jt-visited')) h.classList.add('boot-back'); }
+    } catch (e) { h.classList.add('boot-on'); }
+  })();
 </script>
 <script src="assets/js/sfx.js" defer></script>
 <script src="assets/js/site.js" defer></script>
+<script src="assets/js/pixel.js" defer></script>
 <script src="assets/js/terminal.js" defer></script>
 <script src="assets/js/boot.js" defer></script>
 <script type="application/ld+json">

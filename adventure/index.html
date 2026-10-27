@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Encrypted CV · a text adventure</title>
+<meta name="description" content="A short text adventure across six of Jesse&#x27;s homes. Your CV is encrypted on an old floppy, and the key was split in three.">
+<meta name="theme-color" content="#08070c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Encrypted CV · a text adventure">
+<meta property="og:description" content="A short text adventure across six of Jesse&#x27;s homes. Your CV is encrypted on an old floppy, and the key was split in three.">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/sfx.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/pixel.js" defer></script>
+<script src="../assets/js/terminal.js" defer></script>
+<script src="../assets/js/adventure.js" defer></script>
+</head>
+<body data-page="adventure">
+<a class="skiplink" href="#main">Skip to content</a>
+<div class="raster" aria-hidden="true"></div>
+<header class="menubar">
+  <a class="logo" href="../">JESSETHE.COM</a>
+  <nav class="pnav" aria-label="Programs">
+    <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
+    <a href="../work/" style="--c: var(--amber)"><kbd>F2</kbd>Work</a>
+    <a href="../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
+    <a href="../travel/" style="--c: var(--cyan)"><kbd>F4</kbd>Travel</a>
+    <a href="../rescue/" style="--c: var(--coral)"><kbd>F5</kbd>Rescue</a>
+    <a href="../hobbies/" style="--c: var(--pink)"><kbd>F6</kbd>Hobbies</a>
+    <a href="../contact/" style="--c: var(--text)"><kbd>F7</kbd>Contact</a>
+  </nav>
+  <span class="live">Online</span>
+</header>
+
+<main id="main">
+<div class="pg">
+  <header class="pg-head">
+    <span class="kicker">LOAD "ADVENTURE",8,1 · jessethe.com/adventure</span>
+    <h1>The Encrypted CV.</h1>
+    <p class="lede">A five-minute text adventure across six of my homes. My CV is on an old floppy disk, encrypted, and the key was split into three parts, the way any good security founder would do it. Find all three and the printer does the rest.</p>
+  </header>
+
+  <section class="advwrap" id="advwrap" aria-label="The adventure">
+    <div class="win advwin">
+      <div class="win-bar"><i></i><span>ADVENTURE.EXE · THE ENCRYPTED CV</span><i></i></div>
+      <div class="adv">
+        <div class="adv-out" id="adv-out" role="log" aria-live="polite"><div class="adv-nojs">ADVENTURE.EXE needs JavaScript to run, and it looks like yours is switched off.
+Turn it on and reload, or read the story the long way, on the <a href="../work/">Work</a> page.</div></div>
+        <form class="adv-in" id="adv-form" autocomplete="off" hidden>
+          <label for="adv-in">&gt;</label>
+          <input id="adv-in" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" enterkeyhint="send" maxlength="80">
+        </form>
+      </div>
+      <div class="adv-btns" id="adv-btns" hidden>
+        <button type="button" data-cmd="look">look</button>
+        <button type="button" data-cmd="map">map</button>
+        <button type="button" data-cmd="inventory">inventory</button>
+        <button type="button" data-cmd="hint">hint</button>
+        <button type="button" data-cmd="help">help</button>
+      </div>
+    </div>
+
+    <aside class="adv-side hud" id="adv-side" aria-label="Quest log" hidden>
+      <span class="label">QUEST.LOG</span>
+      <div class="adv-keys">
+        <div class="kslot" id="adv-k1"><small>Key part 1</small><b>????</b></div>
+        <div class="kslot" id="adv-k2"><small>Key part 2</small><b>????</b></div>
+        <div class="kslot" id="adv-k3"><small>Key part 3</small><b>????</b></div>
+      </div>
+      <div class="adv-won" id="adv-won" hidden><b>CV.TXT UNLOCKED</b><button type="button" class="btn g" data-cv>Print it again</button></div>
+      <span class="label">MAP · pick a city to fly there</span>
+      <ol class="adv-map" id="adv-map">
+        <li><button type="button" data-city="toronto"><img class="flag" src="../assets/img/flag-ca.png" alt="" width="20" height="15">Toronto</button></li>
+        <li><button type="button" data-city="cambridge"><img class="flag" src="../assets/img/flag-us.png" alt="" width="20" height="15">Cambridge</button></li>
+        <li><button type="button" data-city="lisbon"><img class="flag" src="../assets/img/flag-pt.png" alt="" width="20" height="15">Lisbon</button></li>
+        <li><button type="button" data-city="amsterdam"><img class="flag" src="../assets/img/flag-nl.png" alt="" width="20" height="15">Amsterdam</button></li>
+        <li><button type="button" data-city="shenzhen"><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15">Shenzhen</button></li>
+        <li><button type="button" data-city="shanghai"><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15">Shanghai</button></li>
+      </ol>
+      <span class="label">INVENTORY</span>
+      <ul class="adv-inv" id="adv-inv"><li>A d20</li></ul>
+      <span class="adv-save">Saved in this browser after every move · <button type="button" id="adv-restart">Restart</button></span>
+    </aside>
+  </section>
+
+  <section class="blk" aria-labelledby="how-h">
+    <div class="blk-head">
+      <span class="label">HOW_TO_PLAY.TXT</span>
+      <h2 id="how-h">How to play</h2>
+    </div>
+    <ol class="how advhow">
+      <li><b>Type what you want to do, in plain words.</b><span>Look, examine the whiteboard, take the floppy, talk to the duck, fly to Lisbon. Short words work best.</span></li>
+      <li><b>On a phone? Tap instead.</b><span>The buttons under the screen and the cities on the map type the common commands for you.</span></li>
+      <li><b>Stuck? Type hint.</b><span>It always knows where you are and what you're missing. No judgement.</span></li>
+      <li><b>Your game saves itself.</b><span>Close the tab and come back later. It's kept in this browser only. Type restart to begin again.</span></li>
+    </ol>
+    <details class="walk">
+      <summary>Walkthrough · spoilers</summary>
+      <ol>
+        <li>In Toronto, read the whiteboard and take the floppy.</li>
+        <li>Fly to Cambridge and talk to the duck. Key part 1.</li>
+        <li>Fly to Lisbon, rent some gear and dive. Key part 2.</li>
+        <li>Fly to Shenzhen, chase Doufu, then give the treats to Pidan. Key part 3.</li>
+        <li>Fly home to Shanghai and use the floppy.</li>
+      </ol>
+      <p>Amsterdam has nothing for the quest, but the train ride is lovely.</p>
+    </details>
+    <p class="credit">A small tribute to Colossal Cave Adventure and Zork, the games that taught a generation to type GO NORTH. Some of their magic words still work here.</p>
+  </section>
+</div>
+</main>
+</body>
+</html>

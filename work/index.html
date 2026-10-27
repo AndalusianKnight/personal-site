@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Work · Jesse Thé</title>
-<meta name="description" content="Two startups, six products, one exit. Project Rebu and Zebu first, then Tauria Connect, Lockbox, Cal and Calls, all zero-knowledge encrypted.">
+<meta name="description" content="Two startups, six products from zero to market, one exit. Project Rebu, Zebu, and the zero-knowledge Tauria suite.">
 <meta name="theme-color" content="#08070c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Work · Jesse Thé">
+<meta property="og:description" content="Two startups, six products from zero to market, one exit. Project Rebu, Zebu, and the zero-knowledge Tauria suite.">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,31 +16,92 @@
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/sfx.js" defer></script>
 <script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/pixel.js" defer></script>
 <script src="../assets/js/terminal.js" defer></script>
+<script src="../assets/js/work.js" defer></script>
 </head>
 <body data-page="work">
 <a class="skiplink" href="#main">Skip to content</a>
 <div class="raster" aria-hidden="true"></div>
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
-  <span class="hint">F1–F7 navigate · ~ terminal</span>
+  <nav class="pnav" aria-label="Programs">
+    <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
+    <a href="../work/" style="--c: var(--amber)" aria-current="page"><kbd>F2</kbd>Work</a>
+    <a href="../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
+    <a href="../travel/" style="--c: var(--cyan)"><kbd>F4</kbd>Travel</a>
+    <a href="../rescue/" style="--c: var(--coral)"><kbd>F5</kbd>Rescue</a>
+    <a href="../hobbies/" style="--c: var(--pink)"><kbd>F6</kbd>Hobbies</a>
+    <a href="../contact/" style="--c: var(--text)"><kbd>F7</kbd>Contact</a>
+  </nav>
   <span class="live">Online</span>
 </header>
 
 <main id="main">
-  <section class="stub">
-    <span class="path">F2 · jessethe.com/work</span>
-    <h1>Work</h1>
-    <p class="lede">Two startups, six products, one exit. Project Rebu and Zebu first, then Tauria Connect, Lockbox, Cal and Calls, all zero-knowledge encrypted.</p>
-    <div class="diskbox" role="status">LOAD "WORK",8,1
-SEARCHING FOR WORK
-?DISK NOT INSERTED
-<span class="dim">This program is still being written. Until it ships, the terminal knows plenty: try whoami.</span></div>
-    <div class="acts">
-      <a class="btn" href="../">← Home</a>
-      <button type="button" class="btn g" data-term>~ Open terminal</button>
+<div class="pg">
+  <header class="pg-head">
+    <span class="kicker">F2 · jessethe.com/work</span>
+    <h1>Six products from zero to market. One exit.</h1>
+    <p class="lede">Two startups, a lot of late nights, and one big idea that stuck: build software people can trust with the things they can't afford to lose.</p>
+  </header>
+
+  <section class="blk" aria-label="By the numbers">
+    <div class="kpis">
+      <div><b>2</b><span>Startups founded</span></div>
+      <div><b>6</b><span>Products shipped</span></div>
+      <div><b>$5M</b><span>Raised</span></div>
+      <div><b>4→50+</b><span>Team grown</span></div>
+      <div><b>1</b><span>Acquisition</span></div>
     </div>
   </section>
+
+  <section class="blk" aria-labelledby="disks-h">
+    <div class="blk-head">
+      <span class="label">The disk box</span>
+      <h2 id="disks-h">Insert a disk</h2>
+      <p>Each product has its own page. The four Tauria disks are locked: open one and it arrives as ciphertext, then decrypts on your device, which is exactly how Tauria worked.</p>
+    </div>
+    <div class="disks"><a class="disk" href="../work/project-rebu/" style="--c: #ffb340" data-disk="project-rebu" aria-label="Project Rebu: Taxi ride-hailing"><span class="lbl"><b>Project Rebu</b><span>Taxi ride-hailing</span></span></a><a class="disk" href="../work/zebu/" style="--c: #ffb340" data-disk="zebu" aria-label="Zebu: ERP for small firms"><span class="lbl"><b>Zebu</b><span>ERP for small firms</span></span></a><a class="disk" href="../work/tauria-connect/" style="--c: #a77bff" data-disk="tauria-connect" aria-label="Tauria Connect: Encrypted messaging (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Connect</b><span>Encrypted messaging</span></span></a><a class="disk" href="../work/tauria-lockbox/" style="--c: #5fe3e8" data-disk="tauria-lockbox" aria-label="Tauria Lockbox: Encrypted files (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Lockbox</b><span>Encrypted files</span></span></a><a class="disk" href="../work/tauria-cal/" style="--c: #59ff95" data-disk="tauria-cal" aria-label="Tauria Cal: Encrypted calendar (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Cal</b><span>Encrypted calendar</span></span></a><a class="disk" href="../work/tauria-calls/" style="--c: #ff5fa8" data-disk="tauria-calls" aria-label="Tauria Calls: Encrypted video calls (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Calls</b><span>Encrypted video calls</span></span></a></div>
+  </section>
+
+  <section class="blk" aria-labelledby="log-h">
+    <div class="blk-head">
+      <span class="label">CAREER.LOG</span>
+      <h2 id="log-h">The short version</h2>
+    </div>
+    <ul class="log">
+      <li><span class="yr">2015–2018</span><span class="co">Zebu<small>Founder, CEO &amp; Product Lead</small></span><p>Started with <a href="project-rebu/">Project Rebu</a>, ride-hailing that let taxi companies fight back against Uber. It went live with a taxi company and a limo company, then we pivoted to <a href="zebu/">Zebu</a>, an ERP for small service firms, and that led to Tauria.</p></li>
+      <li><span class="yr">2018–2023</span><span class="co">Tauria<span class="tagx">ACQUIRED</span><small>Founder, CEO &amp; Head of Product</small></span><p>Zero-knowledge encrypted <a href="tauria-connect/">Connect</a>, <a href="tauria-lockbox/">Lockbox</a>, <a href="tauria-cal/">Cal</a> and <a href="tauria-calls/">Calls</a> for regulated industries, close to feature parity with Slack, Dropbox, Google Calendar and Zoom. Raised $5M and grew the team from 4 to more than 50. HQ in Toronto, then The Hague, with an office in Belgrade and a team in Lisbon.</p></li>
+      <li><span class="yr">2022–2025</span><span class="co">Harvard<small>Back to school after the exit</small></span><p>Sold the company, went back to school. Finished a <a href="../education/">CS degree</a> cum laude, and stayed part-time at Tauria for a year to support the transition.</p></li>
+      <li><span class="yr">2025–now</span><span class="co">Next<small>Personal projects</small></span><p>A year on the road with Player 2 and the dogs, then back to building. Now I'm working on personal projects and looking for my next big product challenge.</p></li>
+    </ul>
+  </section>
+
+  <section class="blk" aria-labelledby="how-h">
+    <div class="blk-head">
+      <span class="label">README.MD</span>
+      <h2 id="how-h">How I build</h2>
+    </div>
+    <ol class="how">
+      <li><b>Earn trust first.</b><span>Then earn attention. At Tauria that meant encryption the company itself couldn't break, and guardrails until account loss hit zero.</span></li>
+      <li><b>Ship to real users, fast.</b><span>Rebu carried real passengers before we knew if the market wanted it. Live rides teach more than surveys.</span></li>
+      <li><b>Pivot without ego.</b><span>Rebu became Zebu, and Zebu became Tauria. Each pivot kept what we learned and dropped what didn't work.</span></li>
+      <li><b>Explain the hard part inside the product.</b><span>Nobody reads the security whitepaper. Put the explanation where the decision happens.</span></li>
+    </ol>
+  </section>
+
+  <section class="blk side-proj hud" aria-labelledby="side-h">
+    <div class="blk-head">
+      <span class="label">SIDE_PROJECTS/</span>
+      <h2 id="side-h">What I'm building now</h2>
+    </div>
+    <ul class="slots3">
+      <li><b>01 · jessethe.com</b><span>This site. Hand-coded, no framework, boots like my parents' old computer. You're in it.</span></li>
+      <li><b>02 · [LOADING]</b><span>In the lab. Ships when it's ready<span class="cursor" aria-hidden="true"></span></span></li>
+      <li><b>03 · [RESERVED]</b><span>Slot reserved. Check back soon.</span></li>
+    </ul>
+  </section>
+</div>
 </main>
 </body>
 </html>
