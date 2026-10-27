@@ -77,7 +77,7 @@
     '<footer class="osbar" aria-label="Status bar">' +
       '<span class="left"><span class="ready">READY.</span><span>' + esc(here) + '</span><span class="tz" id="osclock"></span></span>' +
       '<span class="right"><button type="button" class="achbtn" id="achbtn" aria-expanded="false" aria-controls="drawer"><img alt="" src="' + trophyGold + '"><span class="achlbl">Achievements</span><span><b class="ach-n">0</b>/21</span></button>' +
-      '<button type="button" id="termbtn" title="Open the terminal (~)" aria-label="Terminal">~<span class="tlbl"> Terminal</span></button><button type="button" id="dcbtn" aria-pressed="false" title="Director\'s commentary: Jesse\'s notes on why things are the way they are">Notes off</button><button type="button" id="mute" aria-pressed="false">Sound on</button></span>' +
+      '<button type="button" id="termbtn" title="Open the terminal (~)" aria-label="Terminal">~<span class="tlbl"> Terminal</span><i class="tcur" aria-hidden="true"></i></button><button type="button" id="dcbtn" aria-pressed="false" title="Director\'s commentary: Jesse\'s notes on why things are the way they are">Notes off</button><button type="button" id="mute" aria-pressed="false">Sound on</button></span>' +
     '</footer>' +
     '<div class="toast" id="toast" role="status" aria-live="polite"><img id="trophy" alt="" src="' + trophyGold + '"><div><small id="toast-k">ACHIEVEMENT UNLOCKED</small><b id="toast-t"></b><span id="toast-d"></span></div></div>' +
     '<aside class="drawer" id="drawer" hidden aria-label="Achievements">' +

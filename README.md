@@ -21,7 +21,7 @@ about/                  Story, system specs, slide projector
 work/                   Career, the disk box, side projects
 work/<product>/         Project Rebu, Zebu, Tauria Connect, Lockbox, Cal and Calls (each with its own tabs and demo)
 education/              Schools, awards, clubs, the course list and the paper reader
-travel/                 Dot-matrix globe with a postcard per home, party, departures board
+travel/                 Dot-matrix globe with a postcard per home, every place visited, party, departures board
 rescue/                 Pidan and Doufu, the playground (DOUFU.EXE, CHASE.EXE, TREATS.EXE), rescue work
 hobbies/                The shelf (with a Stargate to dial), D&D table and Ajax's sheet, dive gauge, boulder, retro consoles
 contact/                Contact form, other ways to reach Jesse, Shanghai clock
@@ -38,6 +38,8 @@ assets/js/boot.js       Welcome screen, BIOS, countdown, short boot for returnin
 assets/js/<page>.js     One script per page for its widgets
 assets/img/             Headshot, dog photos, flags, favicon
 ```
+
+Each page opens with a Status card (what Jesse is up to right now, plus a terminal command to try). Its lines live in that page's HTML: edit them there and change the "Updated" month.
 
 Pages use relative paths (`data-root` on `<html>` tells the scripts how deep they are), so the site works from any host or subfolder.
 
