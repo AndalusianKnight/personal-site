@@ -25,6 +25,7 @@
     if (isOpen()) { cin.focus({ preventScroll: true }); return; }
     opener = document.activeElement;
     con.classList.add('open'); con.setAttribute('aria-hidden', 'false'); cin.tabIndex = 0;
+    JT.store('jt-tnudge', '9'); var nd = document.querySelector('.tnudge'); if (nd) nd.remove();
     SFX.blip();
     setTimeout(function () { cin.focus({ preventScroll: true }); }, reduce ? 0 : 120);
   }
@@ -334,6 +335,18 @@
   }
 
   function syncMirror() { mtext.textContent = cin.value; }
+  /* type a command for the visitor, one key at a time, then run it */
+  var typing = 0;
+  function typeIn(cmd) {
+    if (form) return;
+    clearTimeout(typing); cin.value = ''; syncMirror();
+    var k = 0;
+    typing = setTimeout(function step() {
+      if (k < cmd.length) { cin.value += cmd[k++]; syncMirror(); SFX.key(false); typing = setTimeout(step, reduce ? 0 : 60); return; }
+      typing = setTimeout(function () { var v = cin.value; cin.value = ''; syncMirror(); run(v); }, reduce ? 0 : 260);
+    }, reduce ? 0 : 280);
+  }
+  JT.typeIn = function (cmd) { openTerm(); typeIn(cmd); };
   cin.addEventListener('input', syncMirror);
   cin.addEventListener('keydown', function (e) {
     if ((e.key === '~' || e.key === '`') && !cin.value && !form) { e.preventDefault(); closeTerm(); return; }
@@ -350,11 +363,36 @@
   con.addEventListener('click', function (e) { if (!e.target.closest('a, button')) cin.focus({ preventScroll: true }); });
   $('console-x').addEventListener('click', closeTerm);
   $('termbtn').addEventListener('click', function () { if (isOpen()) closeTerm(); else openTerm(); });
-  document.querySelectorAll('[data-term]').forEach(function (b) { b.addEventListener('click', function () { openTerm(); }); });
+  /* [data-term] opens the terminal; data-term="roll d20" also types that command */
+  document.querySelectorAll('[data-term]').forEach(function (b) {
+    var c = b.getAttribute('data-term'); if (b.classList.contains('now-try')) b.hidden = false;
+    b.addEventListener('click', function () { openTerm(); if (c) typeIn(c); });
+  });
   document.addEventListener('keydown', function (e) {
     if (e.key !== '~' && e.key !== '`') return;
     if (JT.inField(e) || e.metaKey || e.ctrlKey || e.altKey || JT.printerOpen() || (JT.blockKeys && JT.blockKeys())) return;
     e.preventDefault(); openTerm();
   });
   print('<span class="d">JESSETHE TERMINAL v2.6 · type</span> <span class="u">help</span> <span class="d">to begin</span>');
+
+  /* a nudge pointing at the terminal button, on a visitor's first two page views, until they open it */
+  (function () {
+    var seen = +(JT.store('jt-tnudge') || 0), btn = $('termbtn'), tries = 0; if (seen >= 2 || !btn) return;
+    function show() {
+      if (isOpen()) return;
+      if (root.classList.contains('boot-on') || !btn.offsetParent || document.hidden) { if (++tries < 40) setTimeout(show, 1500); return; }
+      JT.store('jt-tnudge', String(seen + 1));
+      var r = btn.getBoundingClientRect(), d = document.createElement('div');
+      d.className = 'tnudge'; d.setAttribute('role', 'status');
+      d.innerHTML = (JT.touch ? 'Psst. There\'s a terminal on every page. Tap <b>~</b> down here.' : 'Psst. There\'s a terminal on every page. Press <b>~</b> to open it.') + '<button type="button" aria-label="Dismiss">✕</button>';
+      d.addEventListener('click', function (e) { d.remove(); if (!e.target.closest('button')) openTerm(); });
+      document.body.appendChild(d);
+      /* sit above the button, kept on screen, with the tail pointing at the button's middle */
+      var w = d.offsetWidth, mid = r.left + r.width / 2, left = Math.max(16, Math.min(window.innerWidth - w - 16, mid - w + 28));
+      d.style.left = left + 'px'; d.style.bottom = (window.innerHeight - r.top + 12) + 'px';
+      d.style.setProperty('--tail', Math.max(8, Math.min(w - 18, mid - left - 5)) + 'px');
+      setTimeout(function () { d.remove(); }, 9000);
+    }
+    setTimeout(show, 2500);
+  })();
 })();

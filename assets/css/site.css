@@ -191,6 +191,56 @@ nav > .dc { margin: 0 0 24px; }
 @keyframes dc-in { from { opacity: 0; transform: rotate(-.6deg) translateY(-8px); } }
 @media (prefers-reduced-motion: reduce) { .dc { animation: none; } }
 
+/* the terminal button's blinking cursor, and the one-time nudge that points at it */
+#termbtn .tcur { display: inline-block; width: .55em; height: 1em; margin-left: 5px; background: var(--green); vertical-align: -.2em; animation: blink 1s steps(1) infinite; }
+.tnudge { position: fixed; z-index: 31; width: max-content; max-width: min(300px, calc(100vw - 32px)); padding: 10px 34px 11px 14px; background: #040806; border: 1px solid var(--green); color: var(--green);
+  font: 19px/1.2 var(--f-term); box-shadow: 0 0 18px rgba(89,255,149,.25); animation: dc-in .25s ease-out; }
+.tnudge::after { content: ""; position: absolute; left: var(--tail, 22px); bottom: -6px; width: 10px; height: 10px; background: #040806; border-right: 1px solid var(--green); border-bottom: 1px solid var(--green); transform: rotate(45deg); }
+.tnudge b { color: var(--text); font-weight: 400; }
+.tnudge button { position: absolute; top: 4px; right: 6px; background: none; border: 0; color: var(--green); font: 16px var(--f-term); padding: 2px 4px; }
+@media (prefers-reduced-motion: reduce) { #termbtn .tcur, .tnudge { animation: none; } }
+
+/* STATUS: what Jesse is up to right now, in the empty right half of each page's opening */
+.pg-head.has-now { grid-template-columns: minmax(0, 1fr) minmax(260px, 330px); column-gap: clamp(32px, 5vw, 72px); align-items: start; }
+.pg-head.has-now > :not(.now) { grid-column: 1; }
+.now { grid-column: 2; grid-row: 1 / span 3; align-self: end; justify-self: stretch; padding: 16px 18px; display: grid; gap: 12px; background-color: color-mix(in srgb, var(--c) 4%, transparent); }
+.now-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.now-top .label { color: var(--c); }
+.now-top .label::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; background: var(--green); box-shadow: 0 0 6px var(--green); vertical-align: 1px; animation: blink 2s steps(1) infinite; }
+.now-top small { font: 10px var(--f-label); letter-spacing: .12em; color: var(--steel); text-transform: uppercase; }
+.now dl { margin: 0; display: grid; gap: 10px; }
+.now dl div { display: grid; gap: 1px; }
+.now dt { font: 10px var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--steel); }
+.now dd { margin: 0; font: 500 16px/1.35 var(--f-body); color: var(--text); }
+.now dd small { color: var(--steel); font-size: 14px; }
+.now dd .flag { margin-right: 6px; }
+.now-try { display: grid; gap: 2px; justify-items: start; width: 100%; text-align: left; padding: 9px 12px; background: #040806; border: 1px solid rgba(89,255,149,.3); color: var(--green); }
+.now-try span { font: 10px var(--f-label); letter-spacing: .12em; text-transform: uppercase; color: #3fae6b; }
+.now-try code { font: 20px/1.1 var(--f-term); text-shadow: 0 0 6px rgba(89,255,149,.4); }
+.now-try:hover { border-color: var(--green); background: rgba(89,255,149,.06); }
+@media (max-width: 860px) {
+  .pg-head.has-now { grid-template-columns: minmax(0, 1fr); }
+  .now { grid-column: 1; grid-row: auto; max-width: 440px; }
+}
+@media (prefers-reduced-motion: reduce) { .now-top .label::before { animation: none; } }
+
+/* Travel: every place I've been */
+.places { display: grid; gap: 16px; }
+.places-bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.places-note { color: var(--steel); font-size: 15px; }
+.places-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px 32px; }
+.places-list .region { display: grid; gap: 6px; align-content: start; }
+.places-list .region .label { color: var(--cyan); }
+.places-list ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.places-list li { display: grid; gap: 2px; padding: 8px 0; border-top: 1px solid var(--line); }
+.places-list li b { font: 600 15px var(--f-head); }
+.places-list li span { display: flex; flex-wrap: wrap; gap: 2px 4px; }
+.places-list li button { background: none; border: 0; padding: 1px 4px 1px 0; font: 14px var(--f-body); color: var(--steel); text-align: left; }
+.places-list li button:not(:last-child)::after { content: " ·"; color: var(--line); }
+.places-list li button:hover, .places-list li button[aria-current="true"] { color: var(--cyan); }
+.places-list li button.home { color: var(--text); }
+.places-list li button.home i { font: 9px var(--f-label); font-style: normal; letter-spacing: .1em; text-transform: uppercase; color: var(--void); background: var(--violet); padding: 0 4px; margin-left: 5px; vertical-align: 2px; }
+
 /* achievements: toast + drawer */
 .toast {
   position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(64px + env(safe-area-inset-bottom, 0px)); z-index: 60;
