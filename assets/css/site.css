@@ -690,11 +690,14 @@ code.g { font: 1.05em var(--f-term); color: var(--green); }
 
 /* education */
 .schools { display: grid; }
-.school { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 18px; padding: 20px 0; border-top: 1px solid var(--line); }
+.school { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 20px; padding: 20px 0; border-top: 1px solid var(--line); }
 .school:last-child { border-bottom: 1px solid var(--line); }
-.crest { width: 64px; height: 72px; border: 1px solid color-mix(in srgb, var(--green) 50%, var(--line)); display: grid; place-content: center; text-align: center; gap: 2px; clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%); background: color-mix(in srgb, var(--green) 7%, transparent); padding-bottom: 12px; }
-.crest b { font: 700 15px/1 var(--f-head); color: var(--green); }
-.crest span { font: 8px var(--f-label); letter-spacing: .12em; color: var(--steel); }
+/* school logos sit on a small glass tile; CLEP has no logo, so it gets a terminal prompt instead */
+.crest { width: 112px; height: 88px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.015)); }
+.crest img { display: block; width: auto; height: auto; max-width: 84px; max-height: 70px; }
+.crest.wide img { max-width: 100px; }
+.crest.term { border-color: color-mix(in srgb, var(--green) 45%, var(--line)); background: color-mix(in srgb, var(--green) 6%, transparent); }
+.crest.term b { font: 700 17px/1 var(--f-label); color: var(--green); text-shadow: 0 0 8px color-mix(in srgb, var(--green) 60%, transparent); }
 .school h3 { font: 600 20px/1.2 var(--f-head); margin-top: 2px; }
 .school .when { font: 12px var(--f-label); color: var(--green); letter-spacing: .06em; }
 .school .deg { color: var(--text); margin-top: 4px; }
@@ -754,6 +757,13 @@ code.g { font: 1.05em var(--f-term); color: var(--green); }
   .papers a { grid-template-columns: 28px minmax(0, 1fr) auto; }
   .papers .fn { grid-column: 2 / -1; }
   .papers .pt { grid-column: 2; }
+}
+@media (max-width: 520px) {
+  .school { grid-template-columns: 76px minmax(0, 1fr); gap: 14px; }
+  .crest { width: 76px; height: 64px; border-radius: 10px; }
+  .crest img { max-width: 56px; max-height: 46px; }
+  .crest.wide img { max-width: 66px; }
+  .crest.term b { font-size: 13px; }
 }
 
 /* travel */
