@@ -127,6 +127,14 @@
   $('sl-prev').addEventListener('click', function () { go(-1); });
   scr.addEventListener('click', function () { go(1); });
   scr.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
+  /* the arrow keys work whenever the projector is on screen, with no click first (unless you're typing somewhere) */
+  var onScreen = false;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { onScreen = es[0].intersectionRatio > 0.4; }, { threshold: [0, 0.4, 1] }).observe(scr);
+  document.addEventListener('keydown', function (e) {
+    if (!onScreen || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || JT.inField(e) || scr.contains(e.target)) return;
+    if (document.querySelector('.console.open')) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  });
   autoB.addEventListener('click', function () {
     if (timer) { stopAuto(); return; }
     autoB.setAttribute('aria-pressed', 'true'); go(1); timer = setInterval(function () { go(1); }, 3800);
