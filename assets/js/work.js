@@ -24,28 +24,6 @@
   if (content) {
     JT.achieve('disk');
     var enc = !!document.querySelector('.pwin.enc');
-    var tablist = document.querySelector('.ptabs'), tabs = [].slice.call(tablist.querySelectorAll('[role="tab"]')), body = $('pw-body');
-    var panels = tabs.map(function (t) { return $(t.getAttribute('aria-controls')); });
-    function select(i, opts) {
-      opts = opts || {};
-      tabs.forEach(function (t, k) { var on = k === i; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; panels[k].hidden = !on; });
-      if (opts.focus) tabs[i].focus();
-      if (opts.hash) history.replaceState(null, '', '#' + panels[i].id.replace(/^p-/, ''));
-      if (enc && opts.fx && !reduce) { SFX.decrypt(0.4); scramble(panels[i], 400); }
-    }
-    tablist.hidden = false; body.classList.add('tabbed');
-    tabs.forEach(function (t, k) {
-      t.addEventListener('click', function () { select(k, { hash: true, fx: true }); });
-      t.addEventListener('keydown', function (e) {
-        var n = { ArrowRight: k + 1, ArrowLeft: k - 1, Home: 0, End: tabs.length - 1 }[e.key];
-        if (n === undefined) return;
-        e.preventDefault(); SFX.click(); select((n + tabs.length) % tabs.length, { focus: true, hash: true, fx: true });
-      });
-    });
-    var start = 0, h = location.hash.slice(1);
-    panels.forEach(function (p, k) { if (h && p.id === 'p-' + h) start = k; });
-    select(start);
-
     if (enc) {
       var crypt = $('pw-crypt'), ct = $('pw-crypt-t'), hx = $('pw-hex'), bar = $('pw-cbar');
       var finish = function () {
@@ -219,5 +197,218 @@
       packet = { iv: packet.iv, ct: c }; showCt(); SFX.blip(); log(slog, 'Flipped a single bit, then forwarded it anyway.', 'bad'); deliver();
     });
     newKey(function () { quiet = true; send(); });
+  })();
+  /* ---------- shared by the three Tauria demos below: real AES-GCM, in the browser ---------- */
+  var SUB = window.crypto && window.crypto.subtle;
+  function hexOf(u8, n) { var s = '', m = Math.min(u8.length, n || u8.length); for (var i = 0; i < m; i++) s += ('0' + u8[i].toString(16)).slice(-2); return s; }
+  function zkSay(el, text, cls) { el.textContent = text; el.className = 'zk-log' + (cls ? ' ' + cls : ''); }
+  function aesKey() { return SUB.generateKey({ name: 'AES-GCM', length: 256 }, true, ['encrypt', 'decrypt']); }
+  function aesSeal(key, bytes) { var iv = crypto.getRandomValues(new Uint8Array(12)); return SUB.encrypt({ name: 'AES-GCM', iv: iv }, key, bytes).then(function (ct) { return { iv: iv, ct: new Uint8Array(ct) }; }); }
+  function fingerprint(key) { return SUB.exportKey('raw', key).then(function (raw) { return SUB.digest('SHA-256', raw); }).then(function (h) { return hexOf(new Uint8Array(h), 8).replace(/(....)/g, '$1 ').trim(); }); }
+  function fsize(n) { return n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1) + ' KB' : (n / 1048576).toFixed(1) + ' MB'; }
+  function noCrypto(el) { zkSay(el, 'This browser has no WebCrypto (it needs a secure https page), so this demo can\'t run here.', 'bad'); }
+
+  /* ---------- LOCKBOX.EXE: cut a file into chunks and encrypt each one before it leaves the device ---------- */
+  if ($('lbx-chunks')) (function () {
+    var drop = $('lbx-drop'), input = $('lbx-file'), list = $('lbx-chunks'), logEl = $('lbx-log'), view = $('lbx-view'), peekB = $('lbx-peek'), openB = $('lbx-open');
+    var box = null, busy = false;
+    if (!SUB) { noCrypto(logEl); return; }
+    var SAMPLE_NAME = 'contract_FINAL_v7_actually_final.txt';
+    var SAMPLE = 'This agreement is made in Shanghai between Pidan ("the Good Boy") and Doufu ("the Other One").\n\n' +
+      '1. Pidan keeps the sofa. Doufu keeps the bed. Nobody keeps the cat.\n2. Neither party shall eat the other party\'s homework.\n' +
+      '3. Treats are split 50/50 and audited nightly.\n4. Walks happen at 7:00 and 19:00, rain or shine.\n5. Any squirrel sighted is jointly owned.\n\nSigned with two paw prints.';
+    function lock(name, buf) {
+      if (busy) return;
+      if (buf.byteLength > 25 * 1048576) { zkSay(logEl, 'That one is over 25 MB. Try something smaller.', 'bad'); return; }
+      busy = true; view.hidden = true; peekB.disabled = openB.disabled = true;
+      var bytes = new Uint8Array(buf), n = Math.min(12, Math.max(3, Math.ceil(bytes.length / 2048))), size = Math.max(1, Math.ceil(bytes.length / n)), key, hash;
+      $('lbx-name').textContent = name + ' · ' + fsize(bytes.length) + ' · cut into ' + n + ' chunks';
+      list.innerHTML = '';
+      SUB.digest('SHA-256', bytes).then(function (h) { hash = hexOf(new Uint8Array(h)); return aesKey(); })
+        .then(function (k) { key = k; return fingerprint(k); })
+        .then(function (fp) {
+          $('lbx-key').textContent = fp;
+          var jobs = [];
+          for (var i = 0; i < n; i++) jobs.push(aesSeal(key, bytes.subarray(i * size, Math.min(bytes.length, (i + 1) * size))));
+          return Promise.all(jobs);
+        })
+        .then(function (chunks) {
+          box = { name: name, key: key, chunks: chunks, hash: hash, text: /\.(txt|md|csv|json|html?|js|css|svg|xml)$/i.test(name) };
+          var total = 0;
+          chunks.forEach(function (c, i) {
+            total += c.ct.length;
+            var el = document.createElement('div'); el.className = 'lbx-c'; el.style.setProperty('--i', i);
+            el.innerHTML = '<b>' + JT.two(i + 1) + '</b><code>' + hexOf(c.ct, 9) + '…</code><small>' + fsize(c.ct.length) + '</small>';
+            list.appendChild(el);
+          });
+          SFX.decrypt(0.6);
+          zkSay(logEl, 'Stored ' + chunks.length + ' encrypted chunks, ' + fsize(total) + ' in all, each with its own IV. Lockbox has no key.', '');
+          peekB.disabled = openB.disabled = false; busy = false;
+        }, function () { busy = false; zkSay(logEl, 'Something went wrong encrypting that file. Try another one.', 'bad'); });
+    }
+    function readFile(f) { if (!f) return; var r = new FileReader(); r.onload = function () { lock(f.name, r.result); }; r.readAsArrayBuffer(f); }
+    input.addEventListener('change', function () { readFile(input.files[0]); input.value = ''; });
+    ['dragenter', 'dragover'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+    ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function () { drop.classList.remove('over'); }); });
+    drop.addEventListener('drop', function (e) { e.preventDefault(); readFile(e.dataTransfer && e.dataTransfer.files[0]); });
+    $('lbx-sample').addEventListener('click', function () { lock(SAMPLE_NAME, new TextEncoder().encode(SAMPLE).buffer); });
+    peekB.addEventListener('click', function () {
+      if (!box) return;
+      var c = box.chunks[0].ct, s = '';
+      for (var i = 0; i < Math.min(c.length, 260); i++) s += String.fromCharCode(33 + (c[i] % 94));
+      view.hidden = false; view.className = 'lbx-view noise screen-dark'; view.textContent = s;
+      SFX.error(); zkSay(logEl, 'Lockbox opens chunk 01 without the key and gets noise. It can store, sync and share this file, but never read it.', 'bad');
+    });
+    openB.addEventListener('click', function () {
+      if (!box) return;
+      Promise.all(box.chunks.map(function (c) { return SUB.decrypt({ name: 'AES-GCM', iv: c.iv }, box.key, c.ct); })).then(function (parts) {
+        var len = parts.reduce(function (a, p) { return a + p.byteLength; }, 0), all = new Uint8Array(len), o = 0;
+        parts.forEach(function (p) { all.set(new Uint8Array(p), o); o += p.byteLength; });
+        return SUB.digest('SHA-256', all).then(function (h) {
+          var ok = hexOf(new Uint8Array(h)) === box.hash;
+          view.hidden = false; view.className = 'lbx-view screen-dark';
+          view.textContent = box.text ? new TextDecoder().decode(all.subarray(0, 1400)) : '(' + fsize(len) + ' of ' + box.name + ', back in one piece)';
+          SFX.page();
+          zkSay(logEl, (ok ? '✓ ' : '✗ ') + 'Decrypted ' + parts.length + ' chunks on your device and stitched them back together. The SHA-256 ' + (ok ? 'matches' : 'doesn\'t match') + ' the original: ' + box.hash.slice(0, 16) + '…', ok ? 'ok' : 'bad');
+        });
+      });
+    });
+  })();
+
+  /* ---------- FREEBUSY.EXE: four calendars, encrypted; the overlap is found on the organiser's device ---------- */
+  if ($('fb-grid')) (function () {
+    var grid = $('fb-grid'), logEl = $('fb-log'), view = 'you', hit = -1, sealed = {}, N = 18, T0 = 9;
+    var PEOPLE = [
+      { id: 'you', name: 'You', city: 'The Hague', off: 0, ev: [[9, 10, 'Standup'], [11, 12.5, 'Board prep'], [14, 15, 'Walk the dogs'], [17, 18, 'Investor call']] },
+      { id: 'ana', name: 'Ana', city: 'Lisbon', off: -1, ev: [[12, 13, 'Lunch with a client'], [15, 16, 'Design review']] },
+      { id: 'luka', name: 'Luka', city: 'Belgrade', off: 0, ev: [[10, 11.5, 'Sprint planning'], [13, 14, 'Dentist'], [16.5, 17, '1:1']] },
+      { id: 'sam', name: 'Sam', city: 'Toronto', off: -6, ev: [[15, 15.5, 'School run'], [17.5, 18, 'Customer call']] }
+    ];
+    function hm(h) { var m = Math.round(((h % 24) + 24) % 24 * 60); return JT.two(Math.floor(m / 60)) + ':' + JT.two(m % 60); }
+    /* each slot: off (outside that person's 9 to 6), busy (with the event's title) or free. Times are The Hague's. */
+    function state(p, s) {
+      var h = T0 + s / 2, local = h + p.off;
+      if (local < 9 || local >= 18) return { k: 'off' };
+      for (var i = 0; i < p.ev.length; i++) if (h >= p.ev[i][0] && h < p.ev[i][1]) return { k: 'busy', t: p.ev[i][2], e: i };
+      return { k: 'free' };
+    }
+    function segs(p) {
+      var out = [];
+      for (var s = 0; s < N; s++) {
+        var st = state(p, s), last = out[out.length - 1];
+        if (last && last.k === st.k && last.e === st.e) last.n += 1; else out.push({ k: st.k, t: st.t, e: st.e, s: s, n: 1 });
+      }
+      return out;
+    }
+    function draw() {
+      var html = '<span class="fb-corner">The Hague</span>';
+      for (var s = 0; s < N; s += 2) html += '<span class="fb-h" style="grid-column: ' + (s + 2) + ' / span 2">' + (T0 + s / 2) + ':00</span>';
+      PEOPLE.forEach(function (p, r) {
+        var row = r + 2;
+        html += '<span class="fb-who" style="grid-row: ' + row + '"><b>' + p.name + '</b>' + p.city + '</span>';
+        if (view === 'server') {
+          html += '<span class="fb-seg fb-ct" style="grid-row: ' + row + '; grid-column: 2 / span ' + N + '">' + (sealed[p.id] || 'encrypting…') + '</span>';
+          return;
+        }
+        var mine = (view === p.id);
+        segs(p).forEach(function (g) {
+          var label = g.k === 'off' ? 'off' : g.k === 'busy' ? (mine ? JT.esc(g.t) : 'busy') : '';
+          html += '<span class="fb-seg ' + g.k + (mine && g.k === 'busy' ? ' mine' : '') + '" style="grid-row: ' + row + '; grid-column: ' + (g.s + 2) + ' / span ' + g.n + '">' + label + '</span>';
+        });
+      });
+      if (hit >= 0 && view !== 'server') html += '<span class="fb-hit" style="grid-row: 2 / span ' + PEOPLE.length + '; grid-column: ' + (hit + 2) + ' / span 1"><b>' + hm(T0 + hit / 2) + '</b></span>';
+      grid.innerHTML = html;
+      grid.classList.toggle('srv', view === 'server');
+    }
+    document.querySelectorAll('.fb-views [data-view]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        view = b.getAttribute('data-view'); SFX.click();
+        document.querySelectorAll('.fb-views [data-view]').forEach(function (x) { var on = x === b; x.setAttribute('aria-pressed', String(on)); x.classList.toggle('ghost', !on); });
+        draw();
+        zkSay(logEl, view === 'server' ? 'The server stores and relays four encrypted calendars. It can\'t tell who is busy when, let alone why.'
+          : view === 'ana' ? 'Ana sees her own day in full. Everyone else is just busy or free.' : 'You see your own day in full. Everyone else is just busy or free.', view === 'server' ? 'bad' : '');
+      });
+    });
+    $('fb-find').addEventListener('click', function () {
+      if (view === 'server') {
+        zkSay(logEl, 'The server can\'t do this: it can\'t read the maps. Handing it to your device…', 'bad');
+        setTimeout(function () { var b = document.querySelector('.fb-views [data-view="you"]'); b.click(); find(); }, 1100);
+        return;
+      }
+      find();
+    });
+    function find() {
+      hit = -1;
+      for (var s = 0; s < N && hit < 0; s++) if (PEOPLE.every(function (p) { return state(p, s).k === 'free'; })) hit = s;
+      draw(); SFX.page();
+      if (hit < 0) { zkSay(logEl, 'No time works for everyone today.', 'bad'); return; }
+      var h = T0 + hit / 2;
+      zkSay(logEl, '✓ ' + hm(h) + ' in The Hague works for everyone: that\'s ' + hm(h - 1) + ' in Lisbon, ' + hm(h) + ' in Belgrade and ' + hm(h - 6) + ' in Toronto. Your device found it. The server relayed four encrypted maps and learned nothing.', 'ok');
+    }
+    draw();
+    if (!SUB) { noCrypto(logEl); return; }
+    var enc = new TextEncoder();
+    PEOPLE.forEach(function (p) {
+      aesKey().then(function (k) { return aesSeal(k, enc.encode(JSON.stringify(p.ev))); }).then(function (c) {
+        var h = hexOf(c.ct); sealed[p.id] = (h + h).slice(0, 150); if (view === 'server') draw();
+      });
+    });
+  })();
+
+  /* ---------- REKEY.EXE: a group call whose key changes every time someone joins or leaves ---------- */
+  if ($('rk-call')) (function () {
+    var callEl = $('rk-call'), framesEl = $('rk-frames'), logEl = $('rk-log'), spyB = $('rk-spy');
+    var people = [['You', 'var(--violet)'], ['Ana', 'var(--cyan)'], ['Luka', 'var(--amber)']];
+    var spare = [['Sam', 'var(--green)'], ['Mei', 'var(--pink)'], ['Omar', 'var(--coral)'], ['Lena', 'var(--text)']];
+    var epoch = 0, key = null, last = null, gone = null, vis = true, busy = false;
+    if (!SUB) { noCrypto(logEl); return; }
+    function draw() {
+      callEl.innerHTML = people.map(function (p) { return '<div class="rk-p" style="--c: ' + p[1] + '"><b>' + p[0].charAt(0) + '</b><span>' + p[0] + '</span></div>'; }).join('');
+    }
+    function frame() {
+      if (!key) return;
+      var e = epoch;
+      aesSeal(key, crypto.getRandomValues(new Uint8Array(24))).then(function (f) {
+        last = f;
+        var el = document.createElement('code'); el.className = 'rk-f'; el.style.setProperty('--h', String((e * 67 + 200) % 360));
+        el.innerHTML = '<b>key #' + e + '</b> ' + hexOf(f.ct, 10);
+        framesEl.insertBefore(el, framesEl.firstChild);
+        while (framesEl.children.length > 6) framesEl.removeChild(framesEl.lastChild);
+      });
+    }
+    function rotate(msg) {
+      busy = true; epoch += 1;
+      return aesKey().then(function (k) { key = k; return fingerprint(k); }).then(function (fp) {
+        $('rk-key').textContent = fp; $('rk-epoch').textContent = 'Key #' + epoch + ' · held by ' + people.length + ' devices';
+        callEl.classList.remove('flash'); void callEl.offsetWidth; callEl.classList.add('flash');
+        zkSay(logEl, msg, ''); busy = false; frame();
+      });
+    }
+    $('rk-join').addEventListener('click', function () {
+      if (busy) return;
+      if (!spare.length) { zkSay(logEl, 'The call is full. Someone has to leave first.', 'bad'); return; }
+      var p = spare.shift(); people.push(p); draw(); SFX.blip();
+      rotate(p[0] + ' joined. Key #' + (epoch + 1) + ' went to all ' + people.length + ' devices, each copy encrypted for that device alone. ' + p[0] + ' can\'t decrypt anything said before they arrived.');
+    });
+    $('rk-leave').addEventListener('click', function () {
+      if (busy) return;
+      if (people.length <= 2) { zkSay(logEl, 'Two people is the smallest call there is. Add someone first.', 'bad'); return; }
+      var i = 1 + Math.floor(Math.random() * (people.length - 1)), p = people.splice(i, 1)[0];
+      spare.push(p); draw(); SFX.tick();
+      gone = { name: p[0], key: key, epoch: epoch };
+      spyB.disabled = false; spyB.textContent = 'Listen in with ' + p[0] + '\'s old key';
+      rotate(p[0] + ' left. Key #' + (epoch + 1) + ' went to the ' + people.length + ' devices still on the call, so ' + p[0] + '\'s copy of key #' + epoch + ' is now useless.');
+    });
+    spyB.addEventListener('click', function () {
+      if (!gone || !last) return;
+      SUB.decrypt({ name: 'AES-GCM', iv: last.iv }, gone.key, last.ct).then(function () { zkSay(logEl, 'That should never happen.', 'bad'); }, function () {
+        SFX.error();
+        zkSay(logEl, 'Decryption failed: AES-GCM rejected it. ' + gone.name + ' tried the newest frame with key #' + gone.epoch + ' and heard nothing.', 'bad');
+      });
+    });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; }).observe(callEl);
+    if (!reduce) setInterval(function () { if (vis && !document.hidden && !busy) frame(); }, 1100);
+    draw();
+    rotate('Three people on the call, one shared key. Every frame on the wire is sealed with it.');
   })();
 })();
