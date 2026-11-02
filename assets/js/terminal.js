@@ -12,16 +12,30 @@
         '<span class="mirror" aria-hidden="true"><span id="mtext"></span><span class="cursor"></span></span>' +
         '<input id="cin" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="send" tabindex="-1">' +
       '</form>' +
+      '<div class="tchips" id="tchips" aria-label="Try a command"></div>' +
     '</section>');
 
-  var con = $('console'), out = $('out'), cin = $('cin'), mtext = $('mtext'), ps1 = $('ps1'), cform = $('cform');
+  var con = $('console'), out = $('out'), cin = $('cin'), mtext = $('mtext'), ps1 = $('ps1'), cform = $('cform'), chips = $('tchips');
   var PS1 = 'jesse@jessethe:~$', hist = [], hpos = 0, form = null, cmdCount = 0, opener = null;
   function print(html) { var d = document.createElement('div'); d.innerHTML = html; out.appendChild(d); out.scrollTop = out.scrollHeight; }
+  /* a command in the output that runs when clicked or tapped */
+  function R(cmd, label, cls) { return '<button type="button" class="run ' + (cls || 'u') + '" data-run="' + esc(cmd) + '">' + esc(label || cmd) + '</button>'; }
+  function hrow(html, vis, desc) { return '<span class="hrow"><span>' + html + '</span><span>' + desc + '</span></span>'; }
+  chips.innerHTML = ['help', 'whoami', 'ls', 'roll d20', 'doufu loose', 'tour', 'mail'].map(function (c) { return '<button type="button" data-run="' + c + '">' + c + '</button>'; }).join('');
   function printLines(lines, gap) { lines.forEach(function (l, i) { setTimeout(function () { print(l); }, i * (gap || 120)); }); }
   var PAGE_IDS = {}; JT.PAGES.forEach(function (p) { PAGE_IDS[p.id] = p; }); PAGE_IDS.home = { id: 'home', name: 'Home', c: 'violet' };
 
-  function isOpen() { return con.classList.contains('open'); }
+  /* a page can give the terminal a home of its own (the homepage lab) instead of the drop-down */
+  var host = null;
+  function isOpen() { return host ? document.activeElement === cin : con.classList.contains('open'); }
   function openTerm() {
+    if (host) {
+      JT.store('jt-tnudge', '9'); var nd0 = document.querySelector('.tnudge'); if (nd0) nd0.remove();
+      host.dispatchEvent(new CustomEvent('jt:termfocus', { bubbles: true }));
+      cin.focus({ preventScroll: true });
+      var hr = host.getBoundingClientRect(); if (hr.top < 0 || hr.bottom > window.innerHeight) host.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      return;
+    }
     if (isOpen()) { cin.focus({ preventScroll: true }); return; }
     opener = document.activeElement;
     con.classList.add('open'); con.setAttribute('aria-hidden', 'false'); cin.tabIndex = 0;
@@ -30,16 +44,28 @@
     setTimeout(function () { cin.focus({ preventScroll: true }); }, reduce ? 0 : 120);
   }
   function closeTerm() {
+    if (host) { cin.blur(); host.dispatchEvent(new CustomEvent('jt:termclose', { bubbles: true })); return; }
     if (!isOpen()) return;
     con.classList.remove('open'); con.setAttribute('aria-hidden', 'true'); cin.tabIndex = -1; cin.blur();
     if (opener && opener.focus && opener !== document.body) opener.focus({ preventScroll: true });
   }
   JT.openTerm = openTerm; JT.closeTerm = closeTerm; JT.termOpen = isOpen;
+  JT.termMount = function (el) {
+    host = el; el.classList.add('console-host');
+    el.appendChild(out); el.appendChild(cform); el.appendChild(chips);
+    cin.tabIndex = 0;
+    el.addEventListener('click', function (e) { if (!e.target.closest('a, button') && !String(window.getSelection ? window.getSelection() : '')) cin.focus({ preventScroll: true }); });
+    return el;
+  };
+  JT.termPrint = function (h) { print(h); };
+  JT.termClear = function () { out.innerHTML = ''; };
+  JT.termIdle = function () { return !form && !cin.value && document.activeElement !== cin; };
 
   /* a page, a product (work/zebu, or just zebu) or the adventure, as an address on this site */
   var PRODUCTS = ['project-rebu', 'zebu', 'tauria-connect', 'tauria-lockbox', 'tauria-cal', 'tauria-calls'];
   function resolve(p) {
-    p = (p || '').toLowerCase().replace(/^\/+|\/+$/g, '');
+    p = (p || '').toLowerCase().replace(/^\.?\/+|\/+$/g, '');
+    if (p === 'encrypted_cv.adv' || p === 'encrypted_cv') p = 'adventure';
     if (p === '' || p === '~' || p === 'home' || p === 'earth') return { id: 'home', sub: '', path: '', href: JT.url('home') };
     var parts = p.split('/'), id = parts[0], sub = parts[1] || '';
     if (parts.length > 2) return null;
@@ -140,7 +166,7 @@
     if (JT.doufu.on()) { print('<span class="d">She\'s already loose. Look behind you.</span>'); return; }
     JT.achieve('dogs');
     print('<span class="c">DOUFU.DOG</span> is loose. ' + (JT.touch ? 'Tap anywhere' : 'Move your cursor') + ' and she\'ll chase it.\n<span class="d">bring her back with</span> <span class="u">doufu home</span> <span class="d">or Esc</span>');
-    setTimeout(function () { closeTerm(); JT.doufu.start($('termbtn')); }, 700);
+    setTimeout(function () { closeTerm(); JT.doufu.start(host || $('termbtn')); }, 700);
   }
   var surged = false;
   function surge() {
@@ -152,29 +178,33 @@
 
   var CMDS = {
     help: function () {
-      print(['<span class="a">AVAILABLE COMMANDS</span>',
-        '  <span class="u">help</span>                 this list',
-        '  <span class="u">whoami</span>               who is Jesse',
-        '  <span class="u">ls</span> [work]            list pages or products',
-        '  <span class="u">open</span> &lt;page&gt;          go to a page (or cd)',
-        '  <span class="u">dial</span> &lt;page&gt;          go there by Stargate',
-        '  <span class="u">home about work education travel rescue hobbies contact</span>',
-        '  <span class="u">courses</span>              list my courses',
-        '  <span class="u">adventure</span>            play the text adventure',
-        '  <span class="u">mail</span>                 write me a message, right here',
-        '  <span class="u">cv</span>                   print my CV',
-        '  <span class="u">achievements</span>         your progress',
-        '  <span class="u">dogs  pidan  doufu</span>   meet the rescue dogs',
-        '  <span class="u">roll d20</span>             test your luck',
-        '  <span class="u">time</span>                 what Jesse is probably doing',
-        '  <span class="u">doufu loose</span>          let Doufu chase your cursor',
-        '  <span class="u">cheats</span>               every easter egg (spoilers!)',
-        '  <span class="u">sound on|off</span>         toggle sound',
-        '  <span class="u">commentary on|off</span>    my notes on why things are the way they are',
-        '  <span class="u">reboot  date  history  clear  exit</span>',
-        '<span class="d">There are also commands not on this list.</span>'].join('\n'));
+      var pages = ['home', 'about', 'work', 'education', 'travel', 'rescue', 'hobbies', 'contact'];
+      print(['<span class="a">AVAILABLE COMMANDS</span> <span class="d">(click one, or type it)</span>\n',
+        hrow(R('help'), 'help', 'this list'),
+        hrow(R('whoami'), 'whoami', 'who is Jesse'),
+        hrow(R('now'), 'now', 'what I\'m up to right now'),
+        hrow(R('ls') + ' [work]', 'ls [work]', 'list pages or products'),
+        hrow('<span class="u">open</span> &lt;page&gt;', 'open <page>', 'go to a page (or cd)'),
+        hrow('<span class="u">dial</span> &lt;page&gt;', 'dial <page>', 'go there by Stargate'),
+        '<span class="hrow"><span class="wide">' + pages.map(function (p) { return R(p); }).join(' ') + '</span></span>',
+        hrow(R('tour'), 'tour', 'the 90-second guided tour'),
+        hrow(R('courses'), 'courses', 'list my courses'),
+        hrow(R('adventure'), 'adventure', 'play the text adventure'),
+        hrow(R('mail'), 'mail', 'write me a message, right here'),
+        hrow(R('cv'), 'cv', 'print my CV'),
+        hrow(R('achievements'), 'achievements', 'your progress'),
+        hrow(R('dogs') + '  ' + R('pidan') + '  ' + R('doufu'), 'dogs  pidan  doufu', 'meet the rescue dogs'),
+        hrow(R('roll d20'), 'roll d20', 'test your luck'),
+        hrow(R('time'), 'time', 'what Jesse is probably doing'),
+        hrow(R('doufu loose'), 'doufu loose', 'let Doufu chase your cursor'),
+        hrow(R('cheats'), 'cheats', 'every easter egg (spoilers!)'),
+        hrow(R('theme') + ' light|dark', 'theme light|dark', 'lights on or off'),
+        hrow('<span class="u">sound</span> on|off', 'sound on|off', 'toggle sound'),
+        hrow(R('commentary') + ' on|off', 'commentary on|off', 'my notes on how each page was made'),
+        '<span class="hrow"><span class="wide">' + ['reboot', 'date', 'history', 'clear', 'exit'].map(function (c) { return R(c); }).join('  ') + '</span></span>',
+        '<span class="d">There are also commands not on this list.</span>'].join(''));
     },
-    whoami: function () { print('<span class="v">Jesse Thé</span>. Founder, product builder, <span class="a">Harvard alum</span>.\nBuilt six products from zero to market at Zebu and Tauria (acquired),\nthen finished a CS degree at Harvard, cum laude, with a secondary in History.\nCanadian, Brazilian, Portuguese. 13 cities so far, currently Shanghai.\nScuba diver, boulderer, dungeon master. Two rescue dogs.'); },
+    whoami: function () { print('<span class="v">Jesse Thé</span> · founder · product builder · <span class="a">Harvard CS \'25</span> · dungeon master\nSix products from zero to market, one exit (Tauria, acquired).\nCanadian, Brazilian, Portuguese. Thirteen homes so far, Shanghai right now.\nOpen to Senior PM and product consulting work: type ' + R('mail') + ' to say hi.'); },
     cheats: function () {
       print(['<span class="a">CHEAT CODES AND EASTER EGGS</span> <span class="d">(spoilers ahead)</span>',
         '  <span class="u">↑ ↑ ↓ ↓ ← → ← → B A</span>  Commodore 64 colours (outside the terminal)',
@@ -202,12 +232,22 @@
         '<span class="d">Every achievement has a hint in the drawer. Open it from the status bar.</span>'].join('\n'));
     },
     ls: function (a) {
-      if (a === 'work' || a === 'work/') { print('<span class="a">project-rebu/</span>  <span class="a">zebu/</span>  <span class="p">tauria-connect/</span>  <span class="p">tauria-lockbox/</span>  <span class="p">tauria-cal/</span>  <span class="p">tauria-calls/</span>\n<span class="d">open one with</span> <span class="u">open work/zebu</span>'); return; }
-      if (a === '-a' || a === '-la') { print('.  ..  <span class="d">.secrets</span>  <span class="d">.dm_notes</span>  <span class="d">.yearbook</span>  about/  work/  education/  travel/  rescue/  hobbies/  contact/  adventure/'); return; }
-      if (a && a !== '/' && a !== '~') { print('<span class="d">nothing to list in</span> ' + esc(a) + '<span class="d">. try</span> <span class="u">ls work</span>'); return; }
-      print('<span class="v">about/</span>  <span class="a">work/</span>  <span style="color:var(--green)">education/</span>  <span class="cy">travel/</span>  <span class="c">rescue/</span>  <span class="p">hobbies/</span>  <span class="u">contact/</span>  <span style="color:var(--green)">adventure/</span>');
+      if (a === 'work' || a === 'work/') {
+        print(['project-rebu', 'zebu'].map(function (x) { return R('open work/' + x, x + '/', 'a'); }).concat(['tauria-connect', 'tauria-lockbox', 'tauria-cal', 'tauria-calls'].map(function (x) { return R('open work/' + x, x + '/', 'p'); })).join('  ') + '\n<span class="d">click one, or type</span> <span class="u">open work/zebu</span>');
+        return;
+      }
+      if (a === '-a' || a === '-la') { print('.  ..  ' + R('cat .secrets', '.secrets', 'd') + '  ' + R('cat .dm_notes', '.dm_notes', 'd') + '  ' + R('cat .yearbook', '.yearbook', 'd') + '  about/  work/  education/  travel/  rescue/  hobbies/  contact/  encrypted_cv.adv'); return; }
+      if (a && a !== '/' && a !== '~') { print('<span class="d">nothing to list in</span> ' + esc(a) + '<span class="d">. try</span> ' + R('ls work')); return; }
+      print([['about', 'v'], ['work', 'a'], ['education', 'g'], ['travel', 'cy'], ['rescue', 'c'], ['hobbies', 'p'], ['contact', 'u']].map(function (d) { return R('open ' + d[0], d[0] + '/', d[1]); }).join('  ') + '  ' + R('open encrypted_cv.adv', 'encrypted_cv.adv', 'g') +
+        '\n<span class="d">click one, or type</span> <span class="u">open about</span><span class="d">. the .adv file is a text adventure with my CV locked inside.</span>');
     },
-    'cat .dm_notes': function () { print('<span class="a">DM NOTES:</span> the demigods will never suspect the oracle.'); JT.achieve('dm'); },
+    now: function () {
+      print('<span class="a">NOW.TXT</span> <span class="d">· updated ' + esc(JT.NOW_UPDATED) + '</span>' + JT.NOW.map(function (r) { return '<span class="hrow kv"><span class="d">' + esc(r[0].toLowerCase()) + '</span><span>' + esc(r[1]) + '</span></span>'; }).join(''));
+    },
+    'cat now.txt': function () { CMDS.now(); },
+    'cat encrypted_cv.adv': function () { print('<span class="d">binary file, and encrypted. run it instead:</span> ' + R('open encrypted_cv.adv')); },
+    './encrypted_cv.adv': function () { CMDS.adventure(); },
+    'cat .dm_notes': function () { print('<span class="a">DM NOTES · IONIA:</span> the demigods will never suspect the oracle.\n<span class="d">also: stop letting them talk to the minotaur.</span>'); JT.achieve('dm'); },
     'cat .yearbook': function () { print('<span class="a">YEARBOOK:</span> top student in English Literature of the whole graduating class.\n<span class="d">High school. It still counts.</span>'); },
     'cat .secrets': function () { print('The real secret: Pidan has eaten at least one of these notes.'); },
     cat: function (a) { print(a ? '<span class="p">cat:</span> ' + esc(a) + ': no such file <span class="d">(try</span> <span class="u">ls -a</span><span class="d">)</span>' : '<span class="d">usage:</span> <span class="u">cat</span> &lt;file&gt;'); },
@@ -223,7 +263,7 @@
     },
     achievements: function () {
       var f = JT.found();
-      print(JT.ACH.map(function (a) { var got = f[a.id], hide = a.secret && !got; return (got ? '<span class="a">[x]</span> ' : '[ ] ') + esc(hide ? '??? (' + a.hint + ')' : a.t); }).join('\n') + '\n<span class="d">' + Object.keys(f).length + '/21 earned</span>');
+      print(JT.ACH.map(function (a) { var got = f[a.id], hide = a.secret && !got; return (got ? '<span class="a">[x]</span> ' : '[ ] ') + esc(hide ? '??? (' + a.hint + ')' : a.t); }).join('\n') + '\n<span class="d">' + JT.countFound() + '/' + JT.ACH.length + ' earned</span>');
     },
     dogs: function () {
       print('<span class="c">' + esc('   / \\__        __/ \\\n  (    @\\___  ___/@    )\n  /         O O         \\\n /   (_____/   \\_____)   \\\n/_____/   U     U   \\_____\\') + '</span>\n<span class="c">Pidan</span> (皮蛋) and <span class="c">Doufu</span> (豆腐), best friends from Huangshan, China.\nType <span class="u">pidan</span> or <span class="u">doufu</span> for a status report.');
@@ -248,7 +288,7 @@
       SFX.floppy(); openPage('adventure');
     },
     ajax: function () { print('<span class="v">AJAX.EXE</span>  Aberrant Mind sorcerer\nFORM: astral elf <span class="p">(unstable)</span>\nPET: one gnome squidling, currently on Ajax\'s shoulder.\n<span class="d">' + (JT.store('jt-sheet') === '1' ? 'Your natural 20 unlocked the full sheet. It\'s on the Hobbies page:</span> <span class="u">open hobbies</span>' : 'The full sheet is on the Hobbies page, behind a natural 20. Try</span> <span class="u">roll d20</span>')); },
-    coffee: function () { printLines(['brewing  [██░░░░░░░░]', 'brewing  [██████░░░░]', 'brewing  [██████████]', 'CAFFEINE LEVEL ............ <span class="a">MAXIMUM</span>', '<span class="d">Real coffee: at the Harvard Club of Boston or New York, if we\'re both in town.</span>'], 300); },
+    coffee: function () { printLines(['brewing  [██░░░░░░░░]', 'brewing  [██████░░░░]', 'brewing  [██████████]', 'CAFFEINE LEVEL ............ <span class="a">MAXIMUM</span>', '<span class="d">Real coffee: tell me which city you\'re in.</span> ' + R('mail')], 300); },
     roll: function (a, loaded) {
       if (a === 'd20 --loaded' || a === '--loaded') loaded = true;
       else if (a && a !== 'd20') { print('<span class="d">only the d20 is calibrated</span>'); return; }
@@ -283,6 +323,21 @@
       JT.setDC(on); print(on ? '<span style="color:#ffd77a">DIRECTOR\'S COMMENTARY ON.</span> <span class="d">Look for the yellow notes. There\'s one on every page.</span>' : '<span class="d">commentary off</span>');
     },
     notes: function (a) { CMDS.commentary(a); },
+    theme: function (a) {
+      var t = a === 'light' || a === 'dark' ? a : (a ? '' : (JT.theme() === 'light' ? 'dark' : 'light'));
+      if (!t) { print('<span class="d">usage:</span> <span class="u">theme light|dark</span>'); return; }
+      JT.setTheme(t);
+      print(t === 'light' ? 'Lights on. <span class="d">The screens stay dark. They\'re screens.</span>' : 'Lights off. <span class="d">Better for neon.</span>');
+    },
+    light: function () { CMDS.theme('light'); },
+    dark: function () { CMDS.theme('dark'); },
+    'lights on': function () { CMDS.theme('light'); },
+    'lights off': function () { CMDS.theme('dark'); },
+    tour: function (a) {
+      if (a === 'stop' || a === 'end' || a === 'off') { JT.tour.stop(); print('<span class="d">tour ended</span>'); return; }
+      print('Starting the 90-second tour. <span class="d">Five stops. Follow the card in the corner.</span>');
+      setTimeout(function () { closeTerm(); JT.tour.start(); }, 600);
+    },
     sound: function (a) { if (a === 'on' || a === 'off') { SFX.set(a === 'on'); JT.syncMute(); print('sound ' + a); } else print('usage: sound on|off'); },
     date: function () { print(new Date().toString()); },
     time: function () { var n = JT.shanghai(); print('<span class="a">' + JT.two(n.h) + ':' + JT.two(n.m) + '</span> in Shanghai. ' + esc(n.long)); },
@@ -299,13 +354,12 @@
   ['home', 'about', 'work', 'education', 'travel', 'rescue', 'hobbies'].forEach(function (p) { CMDS[p] = function () { openPage(p); }; });
   var NAMES = Object.keys(CMDS).filter(function (k) { return k.indexOf(' ') < 0 && k.indexOf('.') < 0; });
 
-  function run(raw) {
+  function run(raw, demo) {
     var line = raw.trim();
     print('<span>' + esc(ps1.textContent) + '</span> <span class="u">' + esc(raw) + '</span>');
     if (form) { formStep(line); return; }
     if (!line) return;
-    hist.push(line); hpos = hist.length;
-    cmdCount += 1; if (cmdCount >= 5) JT.achieve('term');
+    if (!demo) { hist.push(line); hpos = hist.length; cmdCount += 1; if (cmdCount >= 5) JT.achieve('term'); }
     var lower = line.toLowerCase().replace(/\s+/g, ' ');
     if (CMDS[lower]) { CMDS[lower](); return; }
     var sp = lower.indexOf(' '), cmd = sp < 0 ? lower : lower.slice(0, sp), arg = sp < 0 ? '' : lower.slice(sp + 1).trim();
@@ -337,16 +391,23 @@
   function syncMirror() { mtext.textContent = cin.value; }
   /* type a command for the visitor, one key at a time, then run it */
   var typing = 0;
-  function typeIn(cmd) {
+  function typeIn(cmd, done, demo) {
     if (form) return;
     clearTimeout(typing); cin.value = ''; syncMirror();
     var k = 0;
     typing = setTimeout(function step() {
       if (k < cmd.length) { cin.value += cmd[k++]; syncMirror(); SFX.key(false); typing = setTimeout(step, reduce ? 0 : 60); return; }
-      typing = setTimeout(function () { var v = cin.value; cin.value = ''; syncMirror(); run(v); }, reduce ? 0 : 260);
+      typing = setTimeout(function () { var v = cin.value; cin.value = ''; syncMirror(); run(v, demo); if (done) done(); }, reduce ? 0 : 260);
     }, reduce ? 0 : 280);
   }
   JT.typeIn = function (cmd) { openTerm(); typeIn(cmd); };
+  /* a page typing for the visitor (the homepage demos): it doesn't count toward Terminal Velocity */
+  JT.termType = function (cmd, done) { typeIn(cmd, done, true); };
+  JT.termLink = R;
+  JT.termRun = function (cmd) { run(cmd, true); };
+  [out, chips].forEach(function (el) {
+    el.addEventListener('click', function (e) { var b = e.target.closest('[data-run]'); if (!b) return; e.preventDefault(); e.stopPropagation(); typeIn(b.getAttribute('data-run')); });
+  });
   cin.addEventListener('input', syncMirror);
   cin.addEventListener('keydown', function (e) {
     if ((e.key === '~' || e.key === '`') && !cin.value && !form) { e.preventDefault(); closeTerm(); return; }
@@ -379,7 +440,7 @@
   (function () {
     var seen = +(JT.store('jt-tnudge') || 0), btn = $('termbtn'), tries = 0; if (seen >= 2 || !btn) return;
     function show() {
-      if (isOpen()) return;
+      if (isOpen() || host) return;
       if (root.classList.contains('boot-on') || !btn.offsetParent || document.hidden) { if (++tries < 40) setTimeout(show, 1500); return; }
       JT.store('jt-tnudge', String(seen + 1));
       var r = btn.getBoundingClientRect(), d = document.createElement('div');
