@@ -18,7 +18,7 @@
     var HOMES = [].slice.call(src.children).map(function (li, i) {
       var la = +li.getAttribute('data-lat'), lo = +li.getAttribute('data-lon');
       return { n: li.querySelector('.pc-n').textContent, c: li.querySelector('.pc-c').textContent.replace(/^,\s*/, ''), cc: li.getAttribute('data-cc'), slug: li.id,
-        lat: la, lon: lo, note: li.querySelector('p').textContent, coffee: li.querySelectorAll('dd')[0].textContent, food: li.querySelectorAll('dd')[1].textContent, i: i, p: vec(la, lo) };
+        lat: la, lon: lo, note: li.querySelector('p').innerHTML, coffee: li.querySelectorAll('dd')[0].textContent, food: li.querySelectorAll('dd')[1].textContent, i: i, p: vec(la, lo) };
     });
     var LAST = HOMES.length - 1;
     /* places visited: they flash as they roll past the middle of the globe. They come from the #places-list in the page */
@@ -87,8 +87,10 @@
       if (shown === h) return; shown = h;
       pcCity.textContent = h.n + ', ' + h.c;
       pcFlag.src = flag(h.cc); pcFlag.alt = h.c;
-      pcNote.textContent = h.note; pcGeo.textContent = geo(h);
+      pcNote.innerHTML = h.note; pcGeo.textContent = geo(h);
       $('pc-coffee').textContent = h.coffee; $('pc-food').textContent = h.food;
+      /* ask for a recommendation: Contact opens with the city already filled in */
+      var ask = $('pc-ask'); if (ask) { ask.href = JT.base + 'contact/?reason=hi&city=' + encodeURIComponent(h.n); $('pc-ask-city').textContent = h.n; }
       drawSky(h.n);
     }
     function mark(b) { placeBtns.forEach(function (x) { x.setAttribute('aria-current', String(x === b)); }); }

@@ -124,16 +124,39 @@
         }, reduce ? 100 : 600);
       })();
     }
+    /* the Now spine: the status card's lines also sit on the shelf, so the shelf changes whenever the status does */
+    var NOWK = { reading: 'books', rewatching: 'shows', watching: 'shows', playing: 'games' }, NOW = {};
+    [].forEach.call(document.querySelectorAll('.pg-head .now dl > div'), function (d) {
+      var verb = d.querySelector('dt').textContent.trim(), k = NOWK[verb.toLowerCase()]; if (!k) return;
+      var dd = d.querySelector('dd').cloneNode(true), by = dd.querySelector('small'); if (by) by.remove();
+      var full = dd.textContent.trim();
+      NOW[k] = { verb: verb, full: full, t: full.split(',')[0].trim(), with: full.split(',').slice(1).join(',').trim(), by: by ? by.textContent.trim() : '' };
+    });
+    function press(el) { shelf.querySelectorAll('.cover, .spine').forEach(function (x) { x.setAttribute('aria-pressed', String(x === el)); }); }
+    function spine(k) {
+      var nw = NOW[k], match = SHELF[k].filter(function (it) { return it.t.toLowerCase() === nw.t.toLowerCase(); })[0];
+      var sp = document.createElement('button'); sp.type = 'button'; sp.className = 'spine'; sp.setAttribute('aria-pressed', 'false');
+      sp.setAttribute('aria-label', nw.verb + ' right now: ' + nw.full + (nw.by ? ', ' + nw.by : ''));
+      sp.innerHTML = '<span class="sp-now">Now ' + esc(nw.verb.toLowerCase()) + '</span><b>' + esc(nw.t) + '</b>' + (nw.by || nw.with ? '<span class="sp-by">' + esc(nw.by || nw.with) + '</span>' : '');
+      sp.addEventListener('click', function () {
+        press(sp); JT.achieve('shelf'); SFX.page();
+        var line = '<p class="now-line">' + esc(nw.verb) + ' it right now' + (nw.with ? ', ' + esc(nw.with) : '') + '. This spine changes when my status does.</p>';
+        if (match) { setInfo(match, line); return; }
+        info.innerHTML = '<span class="fname">NOW_' + esc(nw.verb.toUpperCase()) + '.TXT</span><h3>' + esc(nw.t) + '</h3>' + (nw.by ? '<span class="meta">' + esc(nw.by) + '</span>' : '') +
+          '<p>Straight off my status card: what I\'m ' + esc(nw.verb.toLowerCase()) + ' right now. When that changes, so does this spine.</p><p class="take"><span>My take</span>Ask me how it\'s going.</p>';
+      });
+      shelf.appendChild(sp);
+    }
     function fill(k) {
       shelf.innerHTML = '';
+      if (NOW[k]) spine(k);
       SHELF[k].forEach(function (it, i) {
         var b = document.createElement('button'); b.type = 'button'; b.className = 'cover' + (it.art.kind === 'book' ? ' book' : '');
         b.setAttribute('aria-pressed', String(i === 0)); b.setAttribute('aria-label', it.t);
         b.innerHTML = caseSVG(it.id, it.art);
         b.addEventListener('click', function () {
           var again = b.getAttribute('aria-pressed') === 'true' && b.dataset.seen === '1'; b.dataset.seen = '1';
-          shelf.querySelectorAll('.cover').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-          setInfo(it); JT.achieve('shelf'); SFX.page();
+          press(b); setInfo(it); JT.achieve('shelf'); SFX.page();
           if (again && typeof it.art.egg === 'number') dial(b, it.art.egg);
           else if (again && it.art.egg === 'd20') { rollD20(); info.insertAdjacentHTML('beforeend', '<p class="dial">The d20 is rolling, further down the page.</p>'); }
         });

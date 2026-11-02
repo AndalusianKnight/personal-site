@@ -453,7 +453,7 @@
     { page: 'rescue', path: 'rescue/', spot: '#play-h', btn: 'Last stop ▶',
       t: 'Pidan and Doufu, the two rescues from Huangshan who run my life. Let Doufu loose and she\'ll follow your cursor around the site.' },
     { page: 'contact', path: 'contact/', spot: '#main', btn: 'Finish the tour ✓',
-      t: 'That\'s the tour. If any of it sparked something, write to me. I read everything.' }
+      t: 'That\'s the tour. If any of it sparked something, write to me. And if you\'d rather earn my CV than download it, there\'s a text adventure that ends with it: type adventure in the terminal.' }
   ];
   function tourStep() { var v = null; try { v = sessionStorage.getItem('jt-tour'); } catch (e) {} return v === null ? -1 : (parseInt(v, 10) || 0); }
   function setTourStep(i) { try { if (i < 0) sessionStorage.removeItem('jt-tour'); else sessionStorage.setItem('jt-tour', String(i)); } catch (e) {} }

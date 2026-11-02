@@ -44,19 +44,19 @@
   <header class="pg-head has-now">
     <span class="kicker">F7 · jessethe.com/contact</span>
     <h1>Send me a message.</h1>
-    <p class="lede">Hiring for a product role, building something people need to trust, or in Boston or New York and up for coffee? Write to me. It goes straight to my inbox.</p>
-      <aside class="now hud" aria-label="What I'm up to right now"><div class="now-top"><span class="label">Status</span><small>Updated Oct 2026</small></div><dl><div><dt>Living in</dt><dd><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15">Shanghai, China <small>UTC+8</small></dd></div></dl><button type="button" class="now-try" data-term="mail" hidden><span>Try it in the terminal</span><code>&gt; mail</code></button></aside>
+    <p class="lede">Hiring for a product role, building something people need to trust, or in the same city as me and up for a coffee? Write to me.</p>
+      <aside class="now hud" aria-label="What I'm up to right now"><div class="now-top"><span class="label">Status</span><small>Updated Nov 2026</small></div><dl><div><dt>Living in</dt><dd><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15">Shanghai, China <small>UTC+8</small></dd></div></dl><button type="button" class="now-try" data-term="mail" hidden><span>Try it in the terminal</span><code>&gt; mail</code></button></aside>
   </header>
 
   <section class="contact" aria-label="Contact">
     <form class="cform" id="contact-form" action="mailto:jessethe@alumni.harvard.edu" method="post" enctype="text/plain" novalidate>
-      <div class="bar"><span>NEW MESSAGE · TO JESSE</span><span>ALL FIELDS REQUIRED</span></div>
+      <div class="bar"><span>NEW MESSAGE · TO JESSE</span><span>TOPIC OPTIONAL</span></div>
       <div class="cf-row"><label for="cf-name">NAME&gt;</label><input id="cf-name" name="name" autocomplete="name" spellcheck="false" maxlength="100" required></div>
       <div class="cf-row"><label for="cf-email">EMAIL&gt;</label><input id="cf-email" name="email" type="email" autocomplete="email" spellcheck="false" maxlength="200" required></div>
       <fieldset class="cf-reason"><legend>ABOUT&gt;</legend><div class="opts" id="cf-opts">
-        <input type="radio" name="reason" id="cf-r0" value="Hiring" checked><label for="cf-r0">Hiring</label>
+        <input type="radio" name="reason" id="cf-r0" value="Hiring"><label for="cf-r0">Hiring</label>
         <input type="radio" name="reason" id="cf-r1" value="A project"><label for="cf-r1">A project</label>
-        <input type="radio" name="reason" id="cf-r2" value="Coffee at the Harvard Club"><label for="cf-r2">Coffee at the Harvard Club</label>
+        <input type="radio" name="reason" id="cf-r2" value="Coffee"><label for="cf-r2">Coffee</label>
         <input type="radio" name="reason" id="cf-r3" value="Rescue"><label for="cf-r3">Rescue</label>
         <input type="radio" name="reason" id="cf-r4" value="Just saying hi"><label for="cf-r4">Just saying hi</label>
       </div></fieldset>
@@ -65,6 +65,7 @@
       <div class="cf-err" id="cf-err" aria-live="polite"></div>
       <button type="submit" class="send">TRANSMIT ▶</button>
       <div class="cf-out" id="cf-out" aria-live="polite"></div>
+      <p class="cf-promise">I read everything and reply within <span data-ph>two days</span>, Shanghai time. If it's about a rescue dog, faster.</p>
     </form>
 
     <aside class="reach hud" aria-label="Other ways to reach me">
@@ -73,7 +74,6 @@
         <div><dt>Email</dt><dd><a href="mailto:jessethe@alumni.harvard.edu">jessethe@alumni.harvard.edu</a></dd></div>
         <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/jesse-david-the" target="_blank" rel="noopener">linkedin.com/in/jesse-david-the</a></dd></div>
         <div><dt>CV</dt><dd><button type="button" class="btn g" data-cv>Print my CV</button></dd></div>
-        <div><dt>Coffee</dt><dd>I'm a member of the Harvard Clubs of Boston and New York. If we're in the same city at the same time, let's get a coffee there.</dd></div>
       </dl>
       <span class="wa"><img class="flag" src="../assets/img/flag-ca.png" alt="Canada" width="20" height="15"><img class="flag" src="../assets/img/flag-br.png" alt="Brazil" width="20" height="15"><img class="flag" src="../assets/img/flag-pt.png" alt="Portugal" width="20" height="15"> Authorized to work · CA · BR · PT + EU</span>
     </aside>
@@ -81,15 +81,15 @@
 
   <section class="blk" aria-labelledby="why-h">
     <div class="blk-head">
-      <span class="label">GOOD_REASONS.TXT</span>
+      <span class="label">Pick one</span>
       <h2 id="why-h">Good reasons to write</h2>
     </div>
     <ul class="reasons">
-      <li><button type="button" data-reason="0"><b>You're hiring a product leader.</b><span>I've taken six products from zero to market and sold a company. I'm ready for the next big one.</span></button></li>
+      <li><button type="button" data-reason="0"><b>You're hiring for product.</b><span>Senior PM, product lead or consultant. I care more about the product than the title: six products from zero to market, one company sold, and ready for the next one.</span></button></li>
       <li><button type="button" data-reason="1"><b>You're building something people need to trust.</b><span>Privacy, security, regulated industries, or any product where one mistake costs a customer for good.</span></button></li>
-      <li><button type="button" data-reason="2"><b>You're in Boston or New York.</b><span>Coffee at the Harvard Club. You pick the day, I'll check which continent I'm on.</span></button></li>
-      <li><button type="button" data-reason="3"><b>You want to help a rescue dog.</b><span>Adopt, foster, donate or volunteer. I'll put you in touch with the rescues I work with in China.</span></button></li>
-      <li><button type="button" data-reason="4"><b>You found all 21 achievements.</b><span>Tell me how long it took. I want to know which one was hardest.</span></button></li>
+      <li><button type="button" data-reason="2"><b>We're in the same city.</b><span>Let's get a coffee. You pick the day, I'll check which continent I'm on.</span></button></li>
+      <li><button type="button" data-reason="3"><b>You want to help a rescue dog.</b><span>Adopt, foster, donate or send supplies. The shelters only run on WeChat, so I'll pass it on for you.</span></button></li>
+      <li><button type="button" data-reason="4"><b>You found all <span class="ach-total">22</span> achievements.</b><span>Tell me how long it took. I want to know which one was hardest.</span></button></li>
     </ul>
   </section>
 
