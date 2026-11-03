@@ -15,6 +15,12 @@
   var q = new URLSearchParams(location.search), r = (q.get('reason') || '').toLowerCase(), help = (q.get('help') || '').toLowerCase();
   if (KEYS[r] != null) pick(KEYS[r]);
   if (HELP[help] && !msgEl.value) msgEl.value = HELP[help];
+  /* links from elsewhere on the site can start the message: ?msg= from About, ?city= from a Travel postcard */
+  var city = (q.get('city') || '').replace(/[^\p{L}\p{N} .'-]/gu, '').slice(0, 40), pre = (q.get('msg') || '').slice(0, 600);
+  if (!msgEl.value && city) msgEl.value = 'Hi Jesse! I\'m heading to ' + city + '. Where should I get coffee, and what should I eat? ';
+  else if (!msgEl.value && pre) msgEl.value = pre + ' ';
+  /* the achievement count follows the list, so it stays right when achievements are added */
+  [].forEach.call(document.querySelectorAll('.ach-total'), function (el) { el.textContent = JT.ACH.length; });
   [].forEach.call(document.querySelectorAll('.reasons button'), function (b) {
     b.addEventListener('click', function () { pick(+b.getAttribute('data-reason'), true); SFX.page(); });
   });
@@ -24,7 +30,7 @@
     e.preventDefault(); SFX.unlock();
     if (busy) return;
     var name = $('cf-name').value.trim(), email = $('cf-email').value.trim(), msg = msgEl.value.trim();
-    var reason = (radios.filter(function (x) { return x.checked; })[0] || radios[0]).value;
+    var picked = radios.filter(function (x) { return x.checked; })[0], reason = picked ? picked.value : '';
     if (!name) { err.textContent = '?NAME ERROR  who is this?'; SFX.error(); $('cf-name').focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = '?ADDRESS ERROR  that email looks off'; SFX.error(); $('cf-email').focus(); return; }
     if (!msg) { err.textContent = '?MESSAGE ERROR  nothing to send'; SFX.error(); msgEl.focus(); return; }
@@ -40,7 +46,7 @@
       if (!done.ok) { out.textContent = ''; err.textContent = '?' + String(done.error || 'SEND').toUpperCase() + ' ERROR  try again'; SFX.error(); return; }
       if (done.via === 'api') {
         out.textContent = 'MESSAGE DELIVERED. Thanks, ' + name + '. I\'ll write back soon.';
-        form.reset(); radios[0].checked = true;
+        form.reset();
       } else {
         out.innerHTML = 'MESSAGE READY. Your email app is opening with it, so press send there.\nIf nothing opens, <a href="' + JT.esc(done.href) + '">send it from here</a>.';
         setTimeout(function () { location.href = done.href; }, 400);

@@ -13,16 +13,21 @@
   JT.store = store; JT.esc = esc; JT.reduce = reduce; JT.inField = inField; JT.base = base;
   JT.touch = !!(window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches);
 
+  /* d: what the page holds. inv: the door, written as an invitation. teaser: the reason to go on, shown at the foot of the page before it */
   var PAGES = [
-    { id: 'about', key: 'F1', name: 'About', c: 'violet', d: 'Who I am, where I\'m from, what I\'m into' },
-    { id: 'work', key: 'F2', name: 'Work', c: 'amber', d: 'Two startups, six products, one exit' },
-    { id: 'education', key: 'F3', name: 'Education', c: 'green', d: 'Harvard, HBS Online, Berkeley Haas, MIT, Lazaridis' },
-    { id: 'travel', key: 'F4', name: 'Travel', c: 'cyan', d: '13 homes and 40+ countries on a globe' },
-    { id: 'rescue', key: 'F5', name: 'Rescue', c: 'coral', d: 'Pidan, Doufu and rescue work in China' },
-    { id: 'hobbies', key: 'F6', name: 'Hobbies', c: 'pink', d: 'Stargate, Halo, Civ, books and D&D' },
-    { id: 'contact', key: 'F7', name: 'Contact', c: 'text', d: 'Hiring, projects, or coffee in Boston or New York' }
+    { id: 'about', key: 'F1', name: 'About', c: 'violet', d: 'Who I am, where I\'m from, what I\'m into', inv: 'who\'s this?', teaser: 'The short version of me, and five things to ask me about.' },
+    { id: 'work', key: 'F2', name: 'Work', c: 'amber', d: 'Two startups, six products, one exit', inv: 'insert a disk', teaser: 'Six products, one exit, and the hard calls behind them.' },
+    { id: 'education', key: 'F3', name: 'Education', c: 'green', d: 'Harvard, HBS Online, Berkeley Haas, MIT, Lazaridis', inv: 'back to school', teaser: 'Why I went back to school after selling a company.' },
+    { id: 'travel', key: 'F4', name: 'Travel', c: 'cyan', d: '13 homes and 40+ countries on a globe', inv: 'where to next?', teaser: 'Thirteen homes, one flight path.' },
+    { id: 'rescue', key: 'F5', name: 'Rescue', c: 'coral', d: 'Pidan, Doufu and rescue work in China', inv: 'meet the dogs', teaser: 'Two very good dogs, and how to help the ones still waiting.' },
+    { id: 'hobbies', key: 'F6', name: 'Hobbies', c: 'pink', d: 'Dives, boulders, a shelf of favourites and a lot of dice', inv: 'roll for it', teaser: 'Eighteen metres down, halfway up a wall, or behind the DM\'s screen.' },
+    { id: 'contact', key: 'F7', name: 'Contact', c: 'text', d: 'Hiring, a project, or just saying hi', inv: 'say hi', teaser: 'Say hi. I read everything.' }
   ];
   JT.PAGES = PAGES;
+  /* what Jesse is up to right now (the status cards say the same): the terminal's now command and the homepages read this */
+  JT.NOW = [['Living in', 'Shanghai, China'], ['Building', 'Side projects'], ['Learning', 'Mandarin, at Shanghai Jiao Tong University'],
+    ['Rewatching', 'Stargate SG-1, with Player 2'], ['Reading', 'The Will of the Many'], ['Looking for', 'A Senior PM or product consulting role']];
+  JT.NOW_UPDATED = 'Nov 2026';
 
   /* scramble an element's text into glyphs, then reveal it left to right (the Tauria decrypt) */
   var GLYPHS = JT.GLYPHS = 'ABCDEFabcdef0123456789+/=#%$&@', scrambleToken = 0;
@@ -76,13 +81,13 @@
     '<footer class="sitefoot"><div class="b88row" id="b88"></div><span class="label">© 2026 Jesse Thé · jessethe.com · no trackers, one d20</span></footer>' +
     '<footer class="osbar" aria-label="Status bar">' +
       '<span class="left"><span class="ready">READY.</span><span>' + esc(here) + '</span><span class="tz" id="osclock"></span></span>' +
-      '<span class="right"><button type="button" class="achbtn" id="achbtn" aria-expanded="false" aria-controls="drawer"><img alt="" src="' + trophyGold + '"><span class="achlbl">Achievements</span><span><b class="ach-n">0</b>/21</span></button>' +
-      '<button type="button" id="termbtn" title="Open the terminal (~)" aria-label="Terminal">~<span class="tlbl"> Terminal</span><i class="tcur" aria-hidden="true"></i></button><button type="button" id="dcbtn" aria-pressed="false" title="Director\'s commentary: Jesse\'s notes on why things are the way they are">Notes off</button><button type="button" id="mute" aria-pressed="false">Sound on</button></span>' +
+      '<span class="right"><button type="button" class="achbtn" id="achbtn" aria-expanded="false" aria-controls="drawer"><img alt="" src="' + trophyGold + '"><span class="achlbl">Achievements</span><span><b class="ach-n">0</b>/<span class="ach-total">22</span></span></button>' +
+      '<button type="button" id="termbtn" title="Open the terminal (~)" aria-label="Terminal">~<span class="tlbl"> Terminal</span><i class="tcur" aria-hidden="true"></i></button><button type="button" id="dcbtn" aria-pressed="false" title="Director\'s commentary: my notes on how each page was made">Notes off</button><button type="button" id="mute" aria-pressed="false">Sound on</button><button type="button" id="themebtn" aria-pressed="false"></button></span>' +
     '</footer>' +
     '<div class="toast" id="toast" role="status" aria-live="polite"><img id="trophy" alt="" src="' + trophyGold + '"><div><small id="toast-k">ACHIEVEMENT UNLOCKED</small><b id="toast-t"></b><span id="toast-d"></span></div></div>' +
     '<aside class="drawer" id="drawer" hidden aria-label="Achievements">' +
       '<div class="win-bar"><i></i><span>ACHIEVEMENTS.EXE</span><button type="button" id="drawer-x" aria-label="Close achievements">✕</button></div>' +
-      '<div class="drawer-sum"><span class="label">Earned <b class="ach-n">0</b> of 21</span><div class="meter" aria-hidden="true"><b class="ach-meter"></b></div></div>' +
+      '<div class="drawer-sum"><span class="label">Earned <b class="ach-n">0</b> of <span class="ach-total">22</span></span><div class="meter" aria-hidden="true"><b class="ach-meter"></b></div></div>' +
       '<div class="drawer-list" id="ach-drawer"></div>' +
     '</aside>' +
     '<div class="overlay" id="printer-ov" hidden>' +
@@ -122,7 +127,7 @@
     [13, 17, 'Jesse is online, probably building something.', 'Probably building something', false],
     [18, 18, 'Evening walk. Doufu is demanding to be chased.', 'Walking the dogs', false],
     [19, 19, 'Dinner time in Shanghai.', 'Dinner', false],
-    [20, 22, 'Evening. On D&D nights, three demigods are in trouble.', 'Evening · maybe D&D night', false],
+    [20, 22, 'Evening. On D&D nights, three demigods somewhere in Ionia are in trouble.', 'Evening · maybe D&D night', false],
     [23, 23, 'Winding down. Sleep schedule: still not found.', 'Winding down', true]];
   function two(v) { return String(v).padStart(2, '0'); }
   JT.two = two;
@@ -142,7 +147,7 @@
     var prev = pi > 0 ? PAGES[pi - 1] : { id: 'home', key: 'ESC', name: 'Home', c: 'violet' }, next = pi < PAGES.length - 1 ? PAGES[pi + 1] : { id: 'home', key: 'HOME', name: 'Home', c: 'violet' };
     var nav = document.createElement('nav'); nav.className = 'nextprog'; nav.setAttribute('aria-label', 'Previous and next program');
     nav.innerHTML = '<a href="' + JT.url(prev.id) + '" style="--c: var(--' + prev.c + ')"><span>◀ ' + (prev.id === 'home' ? 'Back to' : 'Previous · ' + prev.key) + '</span><b>' + esc(prev.name) + '</b></a>' +
-      '<a href="' + JT.url(next.id) + '" style="--c: var(--' + next.c + ')"><span>' + (next.id === 'home' ? 'Back to' : 'Next · ' + next.key) + ' ▶</span><b>' + esc(next.name) + '</b></a>';
+      '<a href="' + JT.url(next.id) + '" style="--c: var(--' + next.c + ')"><span>' + (next.id === 'home' ? 'Back to' : 'Next · ' + next.key) + ' ▶</span><b>' + esc(next.name) + '</b>' + (next.teaser ? '<em>' + esc(next.teaser) + '</em>' : '') + '</a>';
     (mainEl.querySelector('.pg') || mainEl).appendChild(nav);
   }
 
@@ -151,6 +156,45 @@
   syncMute();
   JT.syncMute = syncMute;
   muteBtn.addEventListener('click', function () { SFX.set(!SFX.on); syncMute(); });
+
+  /* ---------- light and dark: dark is the site's look, and a visitor's pick is remembered ---------- */
+  var themeBtn = $('themebtn');
+  var SUN = '<svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges" fill="currentColor"><rect x="4" y="4" width="4" height="4"/><rect x="5" y="0" width="2" height="2"/><rect x="5" y="10" width="2" height="2"/><rect x="0" y="5" width="2" height="2"/><rect x="10" y="5" width="2" height="2"/><rect x="1" y="1" width="2" height="2"/><rect x="9" y="1" width="2" height="2"/><rect x="1" y="9" width="2" height="2"/><rect x="9" y="9" width="2" height="2"/></svg>';
+  var MOON = '<svg viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges" fill="currentColor"><rect x="4" y="0" width="5" height="2"/><rect x="2" y="2" width="4" height="2"/><rect x="1" y="4" width="4" height="4"/><rect x="2" y="8" width="5" height="2"/><rect x="4" y="10" width="6" height="2"/><rect x="9" y="8" width="3" height="2"/></svg>';
+  JT.theme = function () { return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark'; };
+  function syncTheme() {
+    var light = JT.theme() === 'light';
+    themeBtn.innerHTML = (light ? SUN : MOON) + '<span class="thlbl">' + (light ? 'Light' : 'Dark') + '</span>';
+    themeBtn.setAttribute('aria-label', light ? 'Light mode. Switch to dark mode' : 'Dark mode. Switch to light mode');
+    themeBtn.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+    var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = light ? '#f4f2f7' : '#08070c';
+  }
+  JT.setTheme = function (t) {
+    t = t === 'light' ? 'light' : 'dark';
+    root.setAttribute('data-theme', t);
+    store('jt-theme', t);
+    syncTheme();
+    document.dispatchEvent(new CustomEvent('jt:theme', { detail: t }));
+  };
+  syncTheme();
+  themeBtn.addEventListener('click', function () { JT.setTheme(JT.theme() === 'light' ? 'dark' : 'light'); });
+
+  /* a speech bubble above a status bar button (the terminal nudge, the notes hint) */
+  JT.bubble = function (btn, text, ms) {
+    var old = document.querySelector('.tnudge'); if (old) old.remove();
+    if (!btn || !btn.offsetParent) return null;
+    var r = btn.getBoundingClientRect(), d = document.createElement('div');
+    d.className = 'tnudge'; d.setAttribute('role', 'status');
+    d.innerHTML = text + '<button type="button" aria-label="Dismiss">✕</button>';
+    d.querySelector('button').addEventListener('click', function (e) { e.stopPropagation(); d.remove(); });
+    document.body.appendChild(d);
+    var w = d.offsetWidth, mid = r.left + r.width / 2, left = Math.max(16, Math.min(window.innerWidth - w - 16, mid - w + 28));
+    d.style.left = left + 'px';
+    if (r.top < 160) { d.classList.add('below'); d.style.top = (r.bottom + 12) + 'px'; } else d.style.bottom = (window.innerHeight - r.top + 12) + 'px';
+    d.style.setProperty('--tail', Math.max(8, Math.min(w - 18, mid - left - 5)) + 'px');
+    if (ms) setTimeout(function () { d.remove(); }, ms);
+    return d;
+  };
 
   /* ---------- director's commentary: Jesse's notes in the margins, switched on from the status bar ---------- */
   var NOTES = {
@@ -183,7 +227,14 @@
   }
   JT.setDC = setDC; JT.dcOn = function () { return root.hasAttribute('data-dc'); };
   setDC(store('jt-dc') === '1');
-  dcBtn.addEventListener('click', function () { setDC(!root.hasAttribute('data-dc')); });
+  dcBtn.addEventListener('click', function () {
+    var on = !root.hasAttribute('data-dc'); setDC(on);
+    if (on) {
+      JT.bubble(dcBtn, 'Director\'s commentary: my notes on how each page was made. Look for the yellow sticky notes.', 6000);
+      var first = document.querySelector('.dc');
+      if (first) first.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    }
+  });
 
   /* ---------- achievements (kept in this browser across pages and visits) ---------- */
   var ACH = [
@@ -197,6 +248,7 @@
     { id: 'paper', t: 'Required Reading', d: 'Open a paper from school.' },
     { id: 'shelf', t: 'Shelf Life', d: 'Read about a favourite show, game or book.' },
     { id: 'dogs', t: 'Good Boy, Good Girl', d: 'Say hi to Pidan and Doufu.' },
+    { id: 'tour', t: 'Ninety Seconds Flat', d: 'Finish the guided tour.' },
     { id: 'term', t: 'Terminal Velocity', d: 'Run five commands in the terminal.' },
     { id: 'mail', t: 'You\'ve Got Mail', d: 'Send Jesse a message.' },
     { id: 'gate', t: 'Chevron Seven Locked', d: 'Dial the Stargate.', secret: true, hint: 'A ring on the shelf wants to spin.' },
@@ -221,8 +273,10 @@
     var guide = ACH.filter(function (a) { return !a.secret && !a.final; }), secret = ACH.filter(function (a) { return a.secret; }), fin = ACH.filter(function (a) { return a.final; });
     return '<div class="ach-group"><span class="label">The guide · ' + guide.length + '</span>' + guide.map(achRow).join('') + '</div><div class="ach-group"><span class="label">Secrets · ' + secret.length + '</span>' + secret.map(achRow).join('') + fin.map(achRow).join('') + '</div>';
   }
+  function countFound() { return ACH.filter(function (a) { return found[a.id]; }).length; }
   function renderAch() {
-    var n = Object.keys(found).length;
+    var n = countFound();
+    document.querySelectorAll('.ach-total').forEach(function (e) { e.textContent = ACH.length; });
     document.querySelectorAll('.ach-n').forEach(function (e) { e.textContent = n; });
     document.querySelectorAll('.ach-meter').forEach(function (e) { e.style.width = (n / ACH.length * 100) + '%'; });
     if (!$('drawer').hidden) $('ach-drawer').innerHTML = achHTML();
@@ -230,7 +284,7 @@
   function showToast(item) {
     var a = item.a;
     toastBusy = true;
-    $('toast-k').textContent = (a.final ? 'FINAL ACHIEVEMENT · ' : 'ACHIEVEMENT UNLOCKED · ') + item.n + '/21';
+    $('toast-k').textContent = (a.final ? 'FINAL ACHIEVEMENT · ' : 'ACHIEVEMENT UNLOCKED · ') + item.n + '/' + ACH.length;
     $('toast-t').textContent = a.t;
     $('toast-d').textContent = a.final ? 'You found everything. Jesse is flattered and slightly concerned.' : a.d;
     $('trophy').src = a.final ? trophyPink : trophyGold;
@@ -242,13 +296,13 @@
   function achieve(id) {
     if (found[id] || !ACHBY[id]) return;
     found[id] = true;
-    var item = { a: ACHBY[id], n: Object.keys(found).length };
+    var item = { a: ACHBY[id], n: countFound() };
     if (toastBusy) toastQ.push(item); else showToast(item);
-    if (!found.stalker && ACH.every(function (x) { return x.final || found[x.id]; })) { found.stalker = true; toastQ.push({ a: ACHBY.stalker, n: 21 }); }
+    if (!found.stalker && ACH.every(function (x) { return x.final || found[x.id]; })) { found.stalker = true; toastQ.push({ a: ACHBY.stalker, n: ACH.length }); }
     store('jt-ach', JSON.stringify(found));
     renderAch();
   }
-  JT.ACH = ACH; JT.found = function () { return found; }; JT.achieve = achieve;
+  JT.ACH = ACH; JT.found = function () { return found; }; JT.countFound = countFound; JT.achieve = achieve;
   renderAch();
   var drawer = $('drawer'), achbtn = $('achbtn');
   function setDrawer(open) { drawer.hidden = !open; achbtn.setAttribute('aria-expanded', String(open)); if (open) $('ach-drawer').innerHTML = achHTML(); }
@@ -317,6 +371,8 @@
     'Senior Product Manager · Harvard alum',
     'jessethe@alumni.harvard.edu',
     'Work authorization: CA · BR · PT + EU',
+    'Open to: Senior PM roles and product consulting,',
+    '  remote or anywhere in the world',
     '',
     '== EXPERIENCE ====================',
     '2018-2023  TAURIA (ACQUIRED)',
@@ -386,10 +442,85 @@
       .catch(function () { return draft; });
   };
 
+  /* ---------- the 90-second tour: five stops across the site, kept in this tab while it runs ---------- */
+  var TOUR = [
+    { page: 'home', path: '', spot: '#main', btn: 'First stop ▶',
+      t: 'Hi, I\'m Jesse. Founder, product builder, Harvard CS \'25. Four quick stops and you\'ll know the important stuff.' },
+    { page: 'work', sub: 'tauria-connect', path: 'work/tauria-connect/', spot: '#demo-h', btn: 'Next stop ▶',
+      t: 'Tauria Connect: encrypted messaging for regulated industries, and the product I\'m proudest of. Send a message below and watch the server see nothing.' },
+    { page: 'travel', path: 'travel/', spot: '#globe-h', btn: 'Next stop ▶',
+      t: 'Thirteen homes so far. Drag the globe, then open a postcard for what I loved about each place.' },
+    { page: 'rescue', path: 'rescue/', spot: '#play-h', btn: 'Last stop ▶',
+      t: 'Pidan and Doufu, the two rescues from Huangshan who run my life. Let Doufu loose and she\'ll follow your cursor around the site.' },
+    { page: 'contact', path: 'contact/', spot: '#main', btn: 'Finish the tour ✓',
+      t: 'That\'s the tour. If any of it sparked something, write to me. And if you\'d rather earn my CV than download it, there\'s a text adventure that ends with it: type adventure in the terminal.' }
+  ];
+  function tourStep() { var v = null; try { v = sessionStorage.getItem('jt-tour'); } catch (e) {} return v === null ? -1 : (parseInt(v, 10) || 0); }
+  function setTourStep(i) { try { if (i < 0) sessionStorage.removeItem('jt-tour'); else sessionStorage.setItem('jt-tour', String(i)); } catch (e) {} }
+  function tourHere(st) { return st.page === JT.page && (st.sub || '') === (JT.sub || ''); }
+  var tourCard = null;
+  function closeTour() { if (tourCard) { tourCard.remove(); tourCard = null; } document.querySelectorAll('.tour-spot').forEach(function (x) { x.classList.remove('tour-spot'); }); }
+  function renderTour() {
+    closeTour();
+    var i = tourStep(); if (i < 0 || i >= TOUR.length) return;
+    var st = TOUR[i], here = tourHere(st);
+    tourCard = document.createElement('aside');
+    tourCard.className = 'tourcard'; tourCard.setAttribute('aria-label', 'Guided tour');
+    tourCard.innerHTML = '<div class="win-bar"><i></i><span>TOUR.EXE · ' + (i + 1) + '/' + TOUR.length + '</span><button type="button" class="tour-x" aria-label="End the tour">✕</button></div>' +
+      '<div class="tour-in"><div class="tour-pips" aria-hidden="true">' + TOUR.map(function (x, k) { return '<i' + (k < i ? ' class="done"' : (k === i ? ' class="on"' : '')) + '></i>'; }).join('') + '</div>' +
+      '<p aria-live="polite">' + esc(here ? st.t : 'The tour is paused here. Stop ' + (i + 1) + ' of ' + TOUR.length + ' is waiting.') + '</p>' +
+      '<div class="row"><button type="button" class="btn tour-go">' + esc(here ? st.btn : 'Back to the tour ▶') + '</button><button type="button" class="btn ghost tour-x">End tour</button></div></div>';
+    document.body.appendChild(tourCard);
+    tourCard.querySelectorAll('.tour-x').forEach(function (b) { b.addEventListener('click', function () { setTourStep(-1); closeTour(); }); });
+    tourCard.querySelector('.tour-go').addEventListener('click', function () {
+      if (!here) { JT.go(base + st.path); return; }
+      if (i === TOUR.length - 1) {
+        setTourStep(-1); closeTour(); achieve('tour');
+        var f = document.querySelector('#main form input:not([type="hidden"]):not([type="radio"]), #main form textarea');
+        if (f) f.focus({ preventScroll: false });
+        return;
+      }
+      setTourStep(i + 1); JT.go(base + TOUR[i + 1].path);
+    });
+    if (here) {
+      var spot = st.spot === '#main' ? null : document.querySelector(st.spot);
+      if (spot) setTimeout(function () {
+        var box = spot.closest('.blk') || spot;
+        box.classList.add('tour-spot');
+        spot.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        setTimeout(function () { box.classList.remove('tour-spot'); }, 4200);
+      }, reduce ? 0 : 650);
+    }
+  }
+  JT.tour = {
+    start: function () {
+      setTourStep(0);
+      if (JT.page === 'home') renderTour(); else JT.goPage('home');
+    },
+    stop: function () { setTourStep(-1); closeTour(); },
+    active: function () { return tourStep() >= 0; }
+  };
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-tour]');
+    if (b) { e.preventDefault(); JT.tour.start(); }
+  });
+  renderTour();
+
+  /* ---------- placeholders: ?ph=1 outlines every made-up detail on the page (for Jesse's review), ?ph=0 stops ---------- */
+  var phq = /[?&]ph=([01])(?:&|$)/.exec(location.search), phOn = false;
+  try { if (phq) { if (phq[1] === '1') sessionStorage.setItem('jt-ph', '1'); else sessionStorage.removeItem('jt-ph'); } phOn = sessionStorage.getItem('jt-ph') === '1'; } catch (e) {}
+  if (phOn) {
+    root.setAttribute('data-ph-on', '');
+    var phs = document.querySelectorAll('[data-ph]');
+    phs.forEach(function (el) { el.title = 'Placeholder: ' + (el.getAttribute('data-ph') || 'swap in the real thing'); });
+    document.body.insertAdjacentHTML('beforeend', '<div class="phchip" role="status">Placeholders on this page: <b>' + phs.length + '</b> <a href="?ph=0">Hide</a></div>');
+  }
+
   /* ---------- Escape closes overlays ---------- */
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     if (!prOv.hidden) closePrinter();
     else if (!drawer.hidden) { setDrawer(false); achbtn.focus(); }
+    else if (tourCard && tourCard.contains(document.activeElement)) { setTourStep(-1); closeTour(); }
   });
 })();

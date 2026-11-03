@@ -6,9 +6,18 @@
 <title>About · Jesse Thé</title>
 <meta name="description" content="Founder, product builder, Harvard alum and dungeon master. Two companies, six products, thirteen homes, two rescue dogs.">
 <meta name="theme-color" content="#08070c">
+<script>/* light or dark: dark is the site's look, light is the visitor's pick, set before the page paints */(function(){var h=document.documentElement,t=null;try{t=localStorage.getItem('jt-theme')}catch(e){}if(t!=='light')t='dark';h.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.content='#f4f2f7';}})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="About · Jesse Thé">
 <meta property="og:description" content="Founder, product builder, Harvard alum and dungeon master. Two companies, six products, thirteen homes, two rescue dogs.">
+<meta property="og:site_name" content="jessethe.com">
+<meta property="og:url" content="https://jessethe.com/about/">
+<meta property="og:image" content="https://jessethe.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jesse Thé in pixel art. Founder and product builder: six products, one exit, thirteen homes and two rescue dogs.">
+<meta name="twitter:image" content="https://jessethe.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,6 +45,7 @@
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
   <nav class="pnav" aria-label="Programs">
+    <a href="../" style="--c: var(--violet)"><kbd>⌂</kbd>Home</a>
     <a href="../about/" style="--c: var(--violet)" aria-current="page"><kbd>F1</kbd>About</a>
     <a href="../work/" style="--c: var(--amber)"><kbd>F2</kbd>Work</a>
     <a href="../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
@@ -52,30 +62,29 @@
   <header class="pg-head has-now">
     <span class="kicker">F1 · jessethe.com/about</span>
     <h1>Founder, product builder, forever a student.</h1>
-      <aside class="now hud" aria-label="What I'm up to right now"><div class="now-top"><span class="label">Status</span><small>Updated Oct 2026</small></div><dl><div><dt>Living in</dt><dd><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15">Shanghai, China</dd></div><div><dt>Building</dt><dd>Side projects</dd></div><div><dt>Learning</dt><dd>Mandarin, at Shanghai Jiao Tong University</dd></div><div><dt>Rewatching</dt><dd>Stargate SG-1, with Player 2</dd></div></dl><button type="button" class="now-try" data-term="whoami" hidden><span>Try it in the terminal</span><code>&gt; whoami</code></button></aside>
+      <aside class="now hud" aria-label="What I'm up to right now"><div class="now-top"><span class="label">Status</span><small>Updated Nov 2026</small></div><dl><div><dt>Living in</dt><dd><img class="flag" src="../assets/img/flag-cn.png" alt="" width="20" height="15">Shanghai, China</dd></div><div><dt>Building</dt><dd>Side projects</dd></div><div><dt>Learning</dt><dd>Mandarin, at Shanghai Jiao Tong University</dd></div><div><dt>Rewatching</dt><dd>Stargate SG-1, with Player 2</dd></div></dl><button type="button" class="now-try" data-term="whoami" hidden><span>Try it in the terminal</span><code>&gt; whoami</code></button></aside>
   </header>
 
   <section class="about" aria-label="About Jesse">
     <div class="copy">
-      <p class="big">I'm Jesse. I build things: two companies, six products, a D&amp;D campaign that's been running for two years, and a home in thirteen cities so far. I grew up playing with my parents' old tech, which is why this site boots like one. When I'm not building, I'm 18 metres underwater, halfway up a boulder, or getting outsmarted by two rescue dogs from Huangshan.</p>
-      <p>I build products people can trust. I founded two startups, shipped six products from zero to market, and sold my second company, Tauria. Tauria made zero-knowledge encrypted messaging, file storage, calendars and video calls for regulated industries, so the company itself could never read its customers' data. That idea still shapes how I think about every product: earn the trust first, then earn the attention.</p>
-      <p>After the exit I went back to school and finished a Computer Science degree at Harvard, cum laude. History is my other great love, so I made it my secondary field, and I've kept taking courses ever since, from negotiation at HBS to Egyptian civilization.</p>
-      <p>I'm a bit of a nomad. I've called 13 cities home so far, from Toronto to Shanghai, where I am now. These days I travel with Player 2, my wife, and our two rescue dogs. Pidan and Doufu came into my life through volunteering with dog rescues in China, and the rescue work hasn't stopped since.</p>
-      <p>And yes, I love retro tech. You may have noticed.</p>
+      <p class="big">I'm Jesse. I build things people can trust: two companies, six products and one exit so far. I grew up playing with my parents' old tech, which is why this site boots like one.</p>
+      <p>I've called thirteen cities home, from Toronto to Shanghai. These days I travel with Player 2 and two rescue dogs from Huangshan, who are in charge. On D&amp;D nights I'm the dungeon master of Ionia, a Greco-Roman world my players have been lost in for years.</p>
+      <p>History is my other great love. I left university to build my first startup, and after selling Tauria I went back to finish, because I'd always wanted to: Computer Science at Harvard, with History as my secondary field. I've never stopped collecting courses.</p>
       <div class="nowbox hud">
         <span class="label">NOW.TXT</span>
-        <p>After graduating I spent a year on the road with Player 2 and the dogs. Now I'm building personal projects and looking for my next big product challenge. If you're building something people need to trust, <a href="../contact/">I'd love to hear about it</a>.</p>
+        <p>Since graduating I've been doing what eight years of startups and four of school left little time for: reading, building side projects and travelling with Player 2 and the dogs. Next, I'm looking for a Senior PM or product consulting role on something cool or useful, remote or anywhere in the world. <a href="../contact/?reason=hiring">Tell me what you're building</a>.</p>
+      </div>
+      <div class="askbox" data-ph>
+        <span class="label">ASK_ME_ABOUT.TXT</span>
+        <p>Five things I could talk about for an hour. Pick one and it lands in my inbox as a question.</p>
+        <ul class="asks"><li><a href="../contact/?reason=hi&amp;msg=Hi%20Jesse%21%20Why%20is%20searching%20encrypted%20messages%20so%20hard%3F">Why searching encrypted messages is so hard</a></li><li><a href="../contact/?reason=hi&amp;msg=Hi%20Jesse%21%20What%20did%20a%20taxi%20company%20teach%20you%20about%20competing%20with%20Uber%3F">What a taxi company taught me about competing with Uber</a></li><li><a href="../contact/?reason=hi&amp;msg=Hi%20Jesse%21%20What%20was%20it%20like%20moving%20a%20company%27s%20headquarters%20to%20The%20Hague%3F">Moving a company&#x27;s headquarters to The Hague</a></li><li><a href="../contact/?reason=hi&amp;msg=Hi%20Jesse%21%20How%20do%20you%20fly%20two%20rescue%20dogs%20through%20five%20countries%3F">Flying two rescue dogs through five countries</a></li><li><a href="../contact/?reason=hi&amp;msg=Hi%20Jesse%21%20Why%20is%20your%20D%26D%20character%20a%20Changeling%20disguised%20as%20an%20astral%20elf%3F">Why my D&amp;D character is a Changeling disguised as an astral elf</a></li></ul>
       </div>
     </div>
 
     <aside class="specs hud" aria-label="System specs">
       <span class="label">System specs</span>
       <div class="idcard">
-        <div class="photo" role="img" aria-label="Jesse Thé">
-          <picture><source srcset="../assets/img/headshot.webp" type="image/webp"><img class="col" src="../assets/img/headshot.jpg" alt="" width="640" height="839" loading="lazy"></picture>
-          <picture><source srcset="../assets/img/headshot.webp" type="image/webp"><img class="duo" src="../assets/img/headshot.jpg" alt="" width="640" height="839" loading="lazy"></picture>
-          <span class="tag">USER.IMG</span>
-        </div>
+        <div class="photo px" role="img" aria-label="Jesse Thé, in pixel art"><img src="../assets/img/jesse-px.png" alt="" width="48" height="63" loading="lazy"><span class="tag">USER.IMG</span></div>
         <div class="idmeta"><i>Harvard alum</i><b>Jesse David Thé</b><span>Senior Product Manager</span><span>Founder of Tauria (acquired)</span></div>
       </div>
       <dl>
@@ -99,7 +108,7 @@
     <div class="blk-head">
       <span class="label">SLIDES.EXE · carousel projector</span>
       <h2 id="slides-h">An old slide projector of my life</h2>
-      <p>Click forward and the tray turns, the slide drops into place with a clack, and the lens pulls focus. Arrow keys work too.</p>
+      <p>Click forward and the tray turns, the slide drops into place with a clack, and the lens pulls focus. The arrow keys work as soon as the projector is on screen.</p>
     </div>
     <div class="slides">
       <div class="sl-screen" id="sl-screen" tabindex="0" role="region" aria-roledescription="slide projector" aria-label="Projector screen. Use the arrow keys to change slides.">

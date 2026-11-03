@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>C · Terminal first · Homepage lab</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Homepage concept C: the whole homepage is the terminal, with an ASCII portrait and commands you can click.">
+<meta property="og:site_name" content="jessethe.com">
+<meta property="og:url" content="https://jessethe.com/lab/terminal/">
+<meta property="og:image" content="https://jessethe.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jesse Thé in pixel art. Founder and product builder: six products, one exit, thirteen homes and two rescue dogs.">
+<meta name="twitter:image" content="https://jessethe.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08070c">
+<script>/* light or dark: dark is the site's look, light is the visitor's pick, set before the page paints */(function(){var h=document.documentElement,t=null;try{t=localStorage.getItem('jt-theme')}catch(e){}if(t!=='light')t='dark';h.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.content='#f4f2f7';}})();</script>
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/lab.css">
+<script>
+  /* Boot on the first visit of a session (or with ?boot). Returning visitors get the short boot.
+     Without JavaScript the boot never shows. */
+  (function () {
+    var h = document.documentElement;
+    try {
+      var full = /[?&]boot\b/.test(location.search);
+      if (full || !sessionStorage.getItem('jt-booted')) { h.classList.add('boot-on'); if (!full && localStorage.getItem('jt-visited')) h.classList.add('boot-back'); }
+    } catch (e) { h.classList.add('boot-on'); }
+  })();
+</script>
+<script src="../../assets/js/sfx.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/pixel.js" defer></script>
+<script src="../../assets/js/terminal.js" defer></script>
+<script src="../../assets/js/boot.js" defer></script>
+<script src="../../assets/js/lab.js" defer></script>
+<script src="../../assets/js/lab-terminal.js" defer></script>
+</head>
+<body data-page="home" data-lab="terminal">
+<a class="skiplink" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="duo-violet" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values=".3 .59 .11 0 0  .3 .59 .11 0 0  .3 .59 .11 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.07 0.55 1"/><feFuncG type="table" tableValues="0.03 0.36 0.84"/><feFuncB type="table" tableValues="0.16 0.92 0.58"/></feComponentTransfer>
+  </filter>
+</svg>
+<div class="boot" id="boot" role="dialog" aria-modal="true" aria-label="jessethe.com is booting">
+  <div class="welcome" id="welcome">
+    <button type="button" class="pw" id="pw" aria-label="Power on" data-nosfx>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffb340" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg>
+    </button>
+    <div class="logo">JESSETHE.COM</div>
+    <div class="any"><span class="kb">PRESS ANY KEY OR CLICK TO POWER ON</span><span class="touch">TAP TO POWER ON</span></div>
+    <div class="small"><span>Best with sound on</span><button type="button" id="skip">Skip intro</button><button type="button" class="cvlink" data-cv>Get my CV</button></div>
+  </div>
+  <div class="screen"><pre id="boot-text" aria-live="off"></pre></div>
+  <button type="button" class="bootctl" id="bootskip" hidden>Skip intro ⏭</button>
+  <button type="button" class="bootctl" id="bootctl" aria-pressed="false" hidden>❚❚ Pause</button>
+</div>
+<nav class="labbar" aria-label="Homepage lab"><a class="lb-home" href="../../lab/">Homepage lab</a><span class="lb-list"><a href="../../lab/desktop/"><b>A</b> Desktop</a><a href="../../lab/desktop-lite/"><b>A-lite</b> Lighter desktop</a><a href="../../lab/mission-control/"><b>B</b> Mission control</a><a href="../../lab/terminal/" aria-current="page"><b>C</b> Terminal first</a><a href="../../lab/room/"><b>D</b> Your room</a></span><span class="lb-end"><a href="../../">Today's homepage</a><a href="?boot">Replay the boot</a></span></nav>
+<div class="raster" aria-hidden="true"></div>
+<main id="main" class="tf"><section class="tf-screen screen-dark" aria-labelledby="tf-name"><div class="tf-bar"><span>JESSETHE.COM · TTY0</span><span class="tf-keys">click a command or type one · Tab completes · ↑ history</span></div><div class="tf-top"><pre class="tf-ascii" aria-hidden="true">               .             .
+        .............................
+      .:::::::::::....................:-
+     :-:::::::::::::::::::::::----==+**#*.
+    .----::::-------------=+++*+*##%%%%%%%:
+   :.------------==-===++*#%%%%@@@@@@@%%%%@:
+  +:.-=-=======-====+***#%@@@@@@@@@@@@@@@@@%.
+ =%-.-=======+:::-+++#%%@@@@@@@@%%@@@@@@%%@@*
+.%#-:=======++:-:*%*+*@@@@@@%%#++++++*#%@@@%@:
+=%*::=--====++:--*%%%%@@@%@%*+=-::....:*@%#%@*
+*%#:-=----==+=:--#%@@@@%%@@%*+-::...   .+###%%
+#%*:-=----==+=:=#%@@@@@@%@%#+=-:.....   .-+*#%
+%%*.-----==++=-+@@@@@@@@@%**++==-:..      .:-=
+%%#:--:---==+=-=%@@@@@@@%#*******##*=.   .....
+*%*.:-:-:---+=-+#@@%%@@@%+==**###*##+: :=***+=
+=@* :-:---==+==#%%@#*###*=::::-====+=. -*###*=
+.%+.--:---==+=+*#@@***#*+=-:.. ..:---. .:=++=.
+ ++.=-------+==+=*@*=*#*++=-:...:=-=:     ..
+  -:========+=++=#@%*##*++=--==-+*##+--.
+   -+=+===+=+=++*@@@@@##**+*###########-. .
+    ++++++++*=++-*@@@%%##**#*+***+++**#*+=
+    .=*+++++*=++=+%@@#%%#**+=--=++==--=++:
+      -*+++++-=-:=%%@**%%##**=:-=+*+=::.
+       .=*+++-==-+*#%**#%%%%#*++:..:..
+         .=++==-:+##*++*%@@@%%%##*+=.
+            :-===+**++++*#%@@@@%*=.
+                 =+++===+***+=:.</pre><div class="tf-hello"><p class="tf-boot">JESSETHE BIOS v2.6 · 1 user online · 0 trackers</p><h1 class="tf-name" id="tf-name">Jesse Thé</h1><p class="tf-role">founder · product builder · <span class="a">Harvard CS '25</span> · dungeon master</p><ul class="tf-bio"><li>Canadian, Brazilian, Portuguese, now in Shanghai.</li><li>Sold a company, went back to Harvard.</li><li>Builds products people can trust.</li><li>Travels with Player 2 and two rescue dogs.</li></ul><nav class="tf-rooms" aria-label="Rooms"><span class="d">rooms:</span> <a href="../../about/" style="color: var(--violet)">about/</a> <a href="../../work/" style="color: var(--amber)">work/</a> <a href="../../education/" style="color: var(--green)">education/</a> <a href="../../travel/" style="color: var(--cyan)">travel/</a> <a href="../../rescue/" style="color: var(--coral)">rescue/</a> <a href="../../hobbies/" style="color: var(--pink)">hobbies/</a> <a href="../../contact/" style="color: var(--text)">contact/</a> <a href="../../adventure/">encrypted_cv.adv</a></nav></div></div><div class="tf-host chips-on" id="term-host"><p class="noscript-note">The terminal needs JavaScript. Every room is linked above.</p></div></section><p class="tf-foot"><span>Prefer a mouse? Every room is one click away above, and <button type="button" class="tourlink" data-tour>the 90-second tour</button> walks you through.</span><span class="motto">Earn the trust. Then earn the attention.</span></p></main>
+</body>
+</html>

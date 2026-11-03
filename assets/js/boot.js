@@ -99,6 +99,8 @@
     try { sessionStorage.setItem('jt-booted', '1'); } catch (e) {}
     JT.store('jt-visited', '1');
     JT.achieve('boot');
+    JT.booted = true;
+    document.dispatchEvent(new Event('jt:booted'));
   }
   /* The screen collapses, then a scan line draws the homepage in, with the startup chime. */
   function arrive(full) {
@@ -122,9 +124,9 @@
   function fastBoot() {
     clearAll(); phase = 'back'; welcome.hidden = true;
     skipBtn.hidden = false; ctl.hidden = false; ctl.textContent = 'Full boot ▶'; skipBtn.focus({ preventScroll: true });
-    var got = Object.keys(JT.found()).length, out = '';
+    var got = JT.countFound(), out = '';
     var L = ['<span class="dim">JESSETHE BIOS v2.6 · FAST BOOT</span>', '', 'WELCOME BACK, VISITOR.', '',
-      backChk('VISITOR ID', 'ENCRYPTED'), backChk('LAST SEEN', '██████ REDACTED', 'warn'), backChk('ACHIEVEMENTS', got + ' / 21'),
+      backChk('VISITOR ID', 'ENCRYPTED'), backChk('LAST SEEN', '██████ REDACTED', 'warn'), backChk('ACHIEVEMENTS', got + ' / ' + JT.ACH.length),
       backChk('DOUFU.DOG', 'MISSED YOU'), backChk('PIDAN.DOG', 'PRETENDING HE DIDN\'T', 'warn'), ''];
     L.forEach(function (l) { seq(reduce ? 0 : 140, function () { out += l + '\n'; paint(out + '<span class="cursor"></span>'); if (l) SFX.blip(); }); });
     var n = 3;
@@ -157,4 +159,5 @@
   });
   if (phase === 'welcome') $('pw').focus({ preventScroll: true });
   else if (phase === 'back') fastBoot();
+  else JT.booted = true;
 })();

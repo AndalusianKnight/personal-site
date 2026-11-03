@@ -6,9 +6,18 @@
 <title>Education · Jesse Thé</title>
 <meta name="description" content="Harvard CS cum laude with a secondary in History, plus HBS Online, Berkeley Haas, MIT and Lazaridis. Every course, and a few papers.">
 <meta name="theme-color" content="#08070c">
+<script>/* light or dark: dark is the site's look, light is the visitor's pick, set before the page paints */(function(){var h=document.documentElement,t=null;try{t=localStorage.getItem('jt-theme')}catch(e){}if(t!=='light')t='dark';h.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.content='#f4f2f7';}})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Education · Jesse Thé">
 <meta property="og:description" content="Harvard CS cum laude with a secondary in History, plus HBS Online, Berkeley Haas, MIT and Lazaridis. Every course, and a few papers.">
+<meta property="og:site_name" content="jessethe.com">
+<meta property="og:url" content="https://jessethe.com/education/">
+<meta property="og:image" content="https://jessethe.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jesse Thé in pixel art. Founder and product builder: six products, one exit, thirteen homes and two rescue dogs.">
+<meta name="twitter:image" content="https://jessethe.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +35,7 @@
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
   <nav class="pnav" aria-label="Programs">
+    <a href="../" style="--c: var(--violet)"><kbd>⌂</kbd>Home</a>
     <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
     <a href="../work/" style="--c: var(--amber)"><kbd>F2</kbd>Work</a>
     <a href="../education/" style="--c: var(--green)" aria-current="page"><kbd>F3</kbd>Education</a>
@@ -43,20 +53,27 @@
     <span class="kicker">F3 · jessethe.com/education</span>
     <h1>Sold the company. Went back to school.</h1>
     <p class="lede">After the exit, Harvard: Computer Science first, History a close second, and a habit of collecting courses I still haven't kicked.</p>
-      <aside class="now hud" aria-label="What I'm up to right now"><div class="now-top"><span class="label">Status</span><small>Updated Oct 2026</small></div><dl><div><dt>Learning</dt><dd>Mandarin, at Shanghai Jiao Tong University <small>上海交通大学</small></dd></div></dl><button type="button" class="now-try" data-term="cat .yearbook" hidden><span>Try it in the terminal</span><code>&gt; cat .yearbook</code></button></aside>
+      <aside class="now hud" aria-label="What I'm up to right now"><div class="now-top"><span class="label">Status</span><small>Updated Nov 2026</small></div><dl><div><dt>Learning</dt><dd>Mandarin, at Shanghai Jiao Tong University <small>上海交通大学</small></dd></div></dl><button type="button" class="now-try" data-term="cat .yearbook" hidden><span>Try it in the terminal</span><code>&gt; cat .yearbook</code></button></aside>
   </header>
 
-  <section class="blk" aria-label="Highlights">
-    <div class="kpis">
-      <div><b>3.91</b><span>Harvard GPA</span></div>
-      <div><b>Cum laude</b><span>Harvard, 2025</span></div>
-      <div><b>38</b><span>Courses and counting</span></div>
-      <div><b>1st</b><span>HBS case competition</span></div>
+  <section class="blk why" aria-labelledby="why-h">
+    <div class="why-grid">
+      <div class="why-txt hud">
+        <span class="label">WHY.TXT</span>
+        <h2 id="why-h">Why go back after an exit?</h2>
+        <p>I left university to build Project Rebu, and I always meant to finish. Eight years of startups taught me by shipping. After the exit I wanted the foundations under the instincts, so I went back for Computer Science, and for History, because every product decision is a guess about how people behave, and history is the longest dataset we have.</p>
+        <p class="why-facts"><b>3.91</b> GPA <i>·</i> <b>cum laude</b> <i>·</i> <b>38</b> courses and counting <i>·</i> <b>1st</b> place, HBS case competition</p>
+      </div>
+      <div class="why-one" data-ph>
+        <span class="label">The course that changed how I build</span>
+        <h3>COMPSCI 50 · Introduction to Computer Science</h3>
+        <p>After years of reading my engineers' code reviews, I finally wrote the C myself, memory leaks and all. It made me a better partner to every engineer I've worked with since.</p>
+      </div>
     </div>
   </section>
 
   <section class="blk" aria-labelledby="schools-h">
-    <div class="blk-head"><span class="label">SCHOOLS.DAT</span><h2 id="schools-h">Where I studied</h2></div>
+    <div class="blk-head"><span class="label">Schools</span><h2 id="schools-h">Where I studied</h2></div>
     <div class="schools">
       <article class="school">
         <div class="crest" aria-hidden="true"><img src="../assets/img/schools/harvard.svg" alt="" width="64" height="64" loading="lazy"></div>
@@ -117,23 +134,18 @@
     </div>
   </section>
 
-  <section class="edu-cols" aria-label="Awards and clubs">
-    <div class="blk">
-      <div class="blk-head"><span class="label">TROPHIES.SYS</span><h2>Awards</h2></div>
-      <ul class="awards">
-        <li>Cum laude, Harvard University</li>
-        <li>Dean's Academic Achievement Award</li>
-        <li>1st place, Harvard Business School case competition at Berkeley Haas</li>
+  <section class="blk" aria-labelledby="honors-h">
+    <div class="blk-head"><span class="label">Awards and clubs</span><h2 id="honors-h">Along the way</h2></div>
+    <div class="honors">
+      <ul class="hon-strip awards">
+        <li class="aw"><b>Cum laude</b><span>Harvard University</span></li>
+        <li class="aw"><b>Dean's Academic Achievement Award</b><span>Harvard University</span></li>
+        <li class="aw"><b>1st place</b><span>HBS case competition at Berkeley Haas</span></li>
+        <li class="cl"><b>Deputy Director of Events</b><span>Harvard Extension Student Association</span></li>
+        <li class="cl"><b>Harvard Computer Society</b><span>Member</span></li>
+        <li class="cl"><b>Harvard Outing Club</b><span>Member</span></li>
+        <li class="cl"><b>Harvard Clubs of Boston and New York</b><span>Member</span></li>
         <li class="egg"><button type="button" class="redact" id="yearbook" aria-label="A redacted award. Click to decrypt.">████ ███████ ██ ███████ ██████████ ██ ███ █████</button></li>
-      </ul>
-    </div>
-    <div class="blk">
-      <div class="blk-head"><span class="label">SOCIETIES.SYS</span><h2>Clubs and societies</h2></div>
-      <ul class="clubs">
-        <li><div>Harvard Computer Society</div></li>
-        <li><div>Harvard Extension Student Association <span>· Deputy Director of Events</span></div></li>
-        <li><div>Harvard Outing Club</div></li>
-        <li><div>Harvard Clubs of Boston and New York <span>· member</span></div></li>
       </ul>
       <div class="coffee hud">
         <span class="label">Open invitation</span>
@@ -156,8 +168,8 @@
   </section>
 
   <section class="blk" aria-labelledby="papers-h">
-    <div class="blk-head"><span class="label">PAPERS/</span><h2 id="papers-h">Papers and projects</h2><p>A few things I wrote and built along the way. Open one in the reader.</p></div>
-    <ul class="papers" id="papers"><li><a href="#cold-war-crypto" data-paper="cold-war-crypto"><svg viewBox="0 0 22 26" fill="none" stroke="#59ff95" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">COLDWAR.PDF</span><span class="pt">Munitions of the Mind: Encryption, Export Controls and the End of the Cold War<small>HIST E-1960 · History of the Cold War</small></span><span class="sz">12 pp</span></a></li><li><a href="#dm-screen" data-paper="dm-screen"><svg viewBox="0 0 22 26" fill="none" stroke="#59ff95" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">CS50_FINAL.ZIP</span><span class="pt">DM Screen: a web app for running D&amp;D at the table<small>COMPSCI 50 · Introduction to Computer Science</small></span><span class="sz">Flask · SQL · JS</span></a></li><li><a href="#song-paper-money" data-paper="song-paper-money"><svg viewBox="0 0 22 26" fill="none" stroke="#59ff95" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">SONG_MONEY.PDF</span><span class="pt">Paper Promises: The Song Dynasty and the First Government Paper Money<small>HIST E-1825 · Power and Civilization of China</small></span><span class="sz">9 pp</span></a></li></ul>
+    <div class="blk-head" data-ph><span class="label">PAPERS/</span><h2 id="papers-h">Papers and projects</h2><p>A few things I wrote and built along the way. Open one in the reader.</p></div>
+    <ul class="papers" id="papers"><li><a href="#cold-war-crypto" data-paper="cold-war-crypto"><svg viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">COLDWAR.PDF</span><span class="pt">Munitions of the Mind: Encryption, Export Controls and the End of the Cold War<small>HIST E-1960 · History of the Cold War</small></span><span class="sz">12 pp</span></a></li><li><a href="#dm-screen" data-paper="dm-screen"><svg viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">CS50_FINAL.ZIP</span><span class="pt">DM Screen: a web app for running D&amp;D at the table<small>COMPSCI 50 · Introduction to Computer Science</small></span><span class="sz">Flask · SQL · JS</span></a></li><li><a href="#song-paper-money" data-paper="song-paper-money"><svg viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 1h12l6 6v18H2z"/><path d="M14 1v6h6M6 13h10M6 17h10M6 21h6"/></svg><span class="fn">SONG_MONEY.PDF</span><span class="pt">Paper Promises: The Song Dynasty and the First Government Paper Money<small>HIST E-1825 · Power and Civilization of China</small></span><span class="sz">9 pp</span></a></li></ul>
     <div class="paper-texts" id="paper-texts"><article class="paper-src" id="cold-war-crypto" data-fn="COLDWAR.PDF"><span class="label">HIST E-1960 · History of the Cold War · 12 pp</span><h3>Munitions of the Mind: Encryption, Export Controls and the End of the Cold War</h3><p>For most of the Cold War, the United States treated strong encryption the way it treated missiles: as a munition, licensed for export and kept away from the Soviet bloc through CoCom, the Western export-control regime. This paper follows that logic from wartime codebreaking to the personal computer, when cryptography stopped being a state secret and started shipping inside ordinary software.</p><p>When the Soviet Union collapsed, the controls lost their enemy but kept their rules. What followed was the crypto wars of the 1990s, which decided whether ordinary people could own unbreakable encryption at all. I argue those fights were the Cold War&#x27;s last policy argument, and the reason a company like Tauria could exist twenty years later.</p><p class="more">The full text is available on request. <a href="../contact/?reason=hi">Ask me for a copy</a>.</p></article><article class="paper-src" id="dm-screen" data-fn="CS50_FINAL.ZIP"><span class="label">COMPSCI 50 · Introduction to Computer Science · Flask · SQL · JS</span><h3>DM Screen: a web app for running D&amp;D at the table</h3><p>My CS50 final project: everything a dungeon master juggles mid-session, in one browser tab. An initiative tracker, a dice roller with a full log, monster stat blocks, and session notes the players can&#x27;t peek at.</p><p>Built with Python, Flask, SQL and JavaScript. The players&#x27; view and the DM&#x27;s view are separate pages that share one game state, which taught me more about permissions than any lecture did. My players still say the dice roller is rigged. It isn&#x27;t. Probably.</p><p class="more">The full text is available on request. <a href="../contact/?reason=hi">Ask me for a copy</a>.</p></article><article class="paper-src" id="song-paper-money" data-fn="SONG_MONEY.PDF"><span class="label">HIST E-1825 · Power and Civilization of China · 9 pp</span><h3>Paper Promises: The Song Dynasty and the First Government Paper Money</h3><p>In eleventh-century Sichuan, merchants were tired of hauling strings of heavy iron coins, so they started trading paper receipts called jiaozi. The Song state took the idea over and issued the world&#x27;s first government paper money.</p><p>This paper looks at how the Song persuaded people to trust a piece of paper, and how later governments lost that trust by printing too much of it. Nine hundred years on, it&#x27;s still the best case study I know of what happens when you spend trust faster than you earn it.</p><p class="more">The full text is available on request. <a href="../contact/?reason=hi">Ask me for a copy</a>.</p></article></div>
     <article class="win reader" id="reader" hidden aria-live="polite">
       <div class="win-bar"><i></i><span id="reader-title">READER.EXE</span><button type="button" id="reader-x" aria-label="Close the reader">✕</button></div>

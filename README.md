@@ -18,14 +18,16 @@ The contact form needs the `api/contact` function, so locally it falls back to o
 ```
 index.html              Home: boot intro overlay, headshot, programs list
 about/                  Story, system specs, slide projector
-work/                   Career, the disk box, side projects
-work/<product>/         Project Rebu, Zebu, Tauria Connect, Lockbox, Cal and Calls (each with its own tabs and demo)
+work/                   Career, the disk box, NEXT.EXE (what Jesse wants next), side projects
+work/<product>/         Project Rebu, Zebu, Tauria Connect, Lockbox, Cal and Calls (each a five-part story with a demo)
 education/              Schools, awards, clubs, the course list and the paper reader
 travel/                 Dot-matrix globe with a postcard per home, every place visited, party, departures board
 rescue/                 Pidan and Doufu, the playground (DOUFU.EXE, CHASE.EXE, TREATS.EXE), rescue work
 hobbies/                The shelf (with a Stargate to dial), D&D table and Ajax's sheet, dive gauge, boulder, retro consoles
 contact/                Contact form, other ways to reach Jesse, Shanghai clock
 adventure/              The Encrypted CV, a text adventure (open it from the terminal: adventure)
+lab/                    Homepage lab: every proposed homepage, built, for picking one (unlinked, noindex)
+lab/<concept>/          desktop, desktop-lite, mission-control, terminal and room (lab.css, lab-*.js)
 404.html                "Chevron seven will not lock" (uses root-absolute paths)
 api/contact.js          Vercel function that emails contact-form messages to Jesse (see below)
 assets/css/site.css     All styles. Colour tokens on :root; each page sets its own --c neon
@@ -40,6 +42,10 @@ assets/img/             Headshot, dog photos, flags, favicon
 ```
 
 Each page opens with a Status card (what Jesse is up to right now, plus a terminal command to try). Its lines live in that page's HTML: edit them there and change the "Updated" month.
+
+Light and dark: the site starts dark. The switch in the status bar (or the window in the room concept) saves the visitor's choice in localStorage (`jt-theme`). Light colours live in `:root[data-theme="light"]`; anything that is a screen (terminal, forms, canvases) stays dark in both.
+
+Placeholders: anything Jesse still needs to confirm carries a `data-ph` attribute. Add `?ph=1` to any URL to outline them all.
 
 Pages use relative paths (`data-root` on `<html>` tells the scripts how deep they are), so the site works from any host or subfolder.
 

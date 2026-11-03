@@ -6,9 +6,18 @@
 <title>Tauria Calls · Work · Jesse Thé</title>
 <meta name="description" content="Zero-knowledge encrypted video calls for regulated industries, built to stand next to Zoom feature for feature.">
 <meta name="theme-color" content="#08070c">
+<script>/* light or dark: dark is the site's look, light is the visitor's pick, set before the page paints */(function(){var h=document.documentElement,t=null;try{t=localStorage.getItem('jt-theme')}catch(e){}if(t!=='light')t='dark';h.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.content='#f4f2f7';}})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tauria Calls · Work · Jesse Thé">
 <meta property="og:description" content="Zero-knowledge encrypted video calls for regulated industries, built to stand next to Zoom feature for feature.">
+<meta property="og:site_name" content="jessethe.com">
+<meta property="og:url" content="https://jessethe.com/work/tauria-calls/">
+<meta property="og:image" content="https://jessethe.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jesse Thé in pixel art. Founder and product builder: six products, one exit, thirteen homes and two rescue dogs.">
+<meta name="twitter:image" content="https://jessethe.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +36,7 @@
 <header class="menubar">
   <a class="logo" href="../../">JESSETHE.COM</a>
   <nav class="pnav" aria-label="Programs">
+    <a href="../../" style="--c: var(--violet)"><kbd>⌂</kbd>Home</a>
     <a href="../../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
     <a href="../../work/" style="--c: var(--amber)" aria-current="true"><kbd>F2</kbd>Work</a>
     <a href="../../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
@@ -39,7 +49,7 @@
 </header>
 
 <main id="main">
-<div class="pg prod" style="--pc: #ff5fa8">
+<div class="pg prod" style="--pc: var(--pink)">
   <a class="back" href="../../work/">◀ All products</a>
   <article class="win pwin enc" id="pwin" aria-labelledby="pw-name">
     <div class="win-bar"><i></i><span>TAURIA_CALLS.APP · ENCRYPTED</span><i></i></div>
@@ -48,19 +58,46 @@
       <div class="pd-content" id="pw-content">
         <header class="pd-head"><span class="label">Tauria · 2018–2023</span><h1 id="pw-name">Tauria Calls</h1><p>Zero-knowledge encrypted video calls for regulated industries, built to stand next to Zoom feature for feature.</p></header>
         <dl class="pmeta"><div><dt>Role</dt><dd>Founder, CEO &amp; Head of Product</dd></div><div><dt>Platforms</dt><dd>Web, desktop, iOS, Android</dd></div><div><dt>Benchmark</dt><dd>Zoom</dd></div><div><dt>Outcome</dt><dd>Acquired with Tauria</dd></div></dl>
-        <div class="ptabs" role="tablist" aria-label="Tauria Calls sections" hidden><button type="button" role="tab" id="ptab-overview" aria-controls="p-overview" aria-selected="true">Overview</button><button type="button" role="tab" id="ptab-capabilities" aria-controls="p-capabilities" aria-selected="false" tabindex="-1">Capabilities</button><button type="button" role="tab" id="ptab-design-decisions" aria-controls="p-design-decisions" aria-selected="false" tabindex="-1">Design decisions</button><button type="button" role="tab" id="ptab-challenges" aria-controls="p-challenges" aria-selected="false" tabindex="-1">Challenges</button><button type="button" role="tab" id="ptab-wins-losses" aria-controls="p-wins-losses" aria-selected="false" tabindex="-1">Wins &amp; losses</button></div>
-        <div class="pbody" id="pw-body"><section class="ppanel" id="p-overview" role="tabpanel" aria-labelledby="ptab-overview" tabindex="0"><h2 class="ph">Overview</h2><p>Regulated teams needed video calls they could trust. Tauria Calls completed a four-product suite built so the company itself could never read customer data.</p><p>Calls was the last piece, and the one that tied the suite together: start a meeting from a Connect thread, book it in Cal, share a file from Lockbox, all without leaving the encryption behind.</p></section><section class="ppanel" id="p-capabilities" role="tabpanel" aria-labelledby="ptab-capabilities" tabindex="0"><h2 class="ph">Capabilities</h2><ul><li class=""><span>End-to-end encrypted meetings</span></li><li class=""><span>Jump from a Connect thread straight into a call</span></li><li class=""><span>Meetings scheduled from Tauria Cal</span></li><li class=""><span>Share files from Lockbox during a call</span></li><li class=""><span>Admin security: geo-IP login monitoring, suspicious activity alerts, device and location blocklists</span></li></ul></section><section class="ppanel" id="p-design-decisions" role="tabpanel" aria-labelledby="ptab-design-decisions" tabindex="0"><h2 class="ph">Design decisions</h2><ul><li class=""><span>The integrated suite is the moat. Calls, Connect, Lockbox and Cal hook into each other in ways single-product rivals can&#x27;t copy.</span></li><li class=""><span>Encryption is explained inside the product, with guided onboarding and in-app explainers.</span></li><li class=""><span>Guardrails on every irreversible action, iterated until account loss reached zero.</span></li></ul></section><section class="ppanel" id="p-challenges" role="tabpanel" aria-labelledby="ptab-challenges" tabindex="0"><h2 class="ph">Challenges</h2><ul><li class=""><span>Account recovery when the company never holds your keys: biometrics plus admin-assisted reset.</span></li><li class=""><span>Encrypted search, retention and password changes with no standard playbook.</span></li><li class=""><span>Learning what users need under strict privacy limits, with a privacy-constrained experimentation engine.</span></li></ul></section><section class="ppanel" id="p-wins-losses" role="tabpanel" aria-labelledby="ptab-wins-losses" tabindex="0"><h2 class="ph">Wins &amp; losses</h2><ul><li class="win-item"><span>Near Zoom parity under zero-knowledge encryption</span></li><li class="win-item"><span>Zero account-loss incidents</span></li><li class="win-item"><span>Tauria was acquired, with the whole suite</span></li><li class="loss-item"><span>Big meetings are where end-to-end encryption costs the most. We kept Calls focused on the meetings that needed privacy, not on webinars</span></li><li class="call-item"><span>Finished the suite with Calls instead of polishing the first three products forever</span></li></ul></section></div>
+        <div class="pstory" id="pw-body">
+          <section class="st-part"><h2><span>01</span>The bet</h2><div class="st-body"><p>Regulated teams needed video calls they could trust, and we bet the suite was the moat: start a meeting from a Connect thread, book it in Cal, share a file from Lockbox, all without leaving the encryption behind. No single-product rival could copy that.</p></div></section>
+          <section class="st-part"><h2><span>02</span>My part</h2><div class="st-body"><p>I led product on the last piece of the suite, and on the admin security every customer&#x27;s IT team asked for: geo-IP login monitoring, suspicious activity alerts, device and location blocklists, and an org-wide security dashboard.</p></div></section>
+          <section class="st-part"><h2><span>03</span>The hard call</h2><div class="st-body"><p>Big meetings. End-to-end encryption costs the most when a call gets big, because every person who joins or leaves means new keys for everyone. We could chase Zoom&#x27;s webinars, or keep Calls focused on the meetings that needed privacy most. We kept it focused: client calls, board meetings and case reviews.</p></div></section>
+        </div>
       </div>
     </div>
   </article>
 
+  <section class="blk demo" aria-labelledby="demo-h">
+    <div class="win">
+      <div class="win-bar"><i></i><span>REKEY.EXE</span><i></i></div>
+      <div class="win-in">
+        <div class="blk-head"><h2 id="demo-h">Someone joins. The keys change.</h2><p>In an encrypted call every frame is locked with a key only the people on the call hold. When someone joins or leaves, every device gets a new key, so a newcomer can't decrypt what was said before they arrived and a leaver can't listen in after they've gone. The keys here are real AES-256, made in your browser.</p></div>
+        <div class="rk">
+          <div class="rk-call" id="rk-call" aria-label="People on the call"></div>
+          <div class="rk-side">
+            <div class="zk-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M15 12v2"/></svg><code id="rk-key">generating…</code><small id="rk-epoch">Key #1</small></div>
+            <span class="label">Frames on the wire</span>
+            <div class="rk-frames" id="rk-frames" aria-hidden="true"></div>
+            <div class="zk-acts"><button type="button" class="btn" id="rk-join">Someone joins</button><button type="button" class="btn ghost" id="rk-leave">Someone leaves</button></div>
+            <div class="zk-acts"><button type="button" class="btn ghost" id="rk-spy" disabled>Listen in with the old key</button></div>
+            <p class="zk-log" id="rk-log" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="blk pstory pstory-end" aria-label="How it ended">
+    <section class="st-part"><h2><span>04</span>What happened</h2><div class="st-body"><p>Calls completed the suite and brought it close to Zoom parity under zero-knowledge encryption. Across all four products we iterated our guardrails until account loss hit zero, and then Tauria was acquired.</p><ul class="byn" aria-label="By the numbers"><li><b><span data-ph>3,000</span></b><span>encrypted calls a week</span></li><li><b>4</b><span>products in one suite</span></li><li><b>0</b><span>account-loss incidents</span></li></ul></div></section>
+    <section class="st-part"><h2><span>05</span>What I&#x27;d do differently</h2><div class="st-body"><p>Ship a smaller Calls sooner. I&#x27;d have launched calling inside Connect a year earlier and let customers tell us what a standalone app needed, instead of building the full app first.</p></div></section>
+    <div class="caps-row"><details class="caps"><summary>Everything it could do</summary><ul><li><span>End-to-end encrypted meetings</span></li><li><span>Jump from a Connect thread straight into a call</span></li><li><span>Meetings scheduled from Tauria Cal</span></li><li><span>Share files from Lockbox during a call</span></li><li><span>Admin security: geo-IP login monitoring, suspicious activity alerts, device and location blocklists</span></li></ul></details><details class="caps"><summary>The design rules we kept</summary><ul><li><span>The integrated suite is the moat. Calls, Connect, Lockbox and Cal hook into each other in ways single-product rivals can&#x27;t copy.</span></li><li><span>Encryption is explained inside the product, with guided onboarding and in-app explainers.</span></li><li><span>Guardrails on every irreversible action, iterated until account loss reached zero.</span></li></ul></details></div>
+  </section>
   <section class="blk" aria-label="All six products">
     <span class="label">The disk box · 6 products</span>
-    <div class="disks sm"><a class="disk sm" href="../../work/project-rebu/" style="--c: #ffb340" data-disk="project-rebu" aria-label="Project Rebu: Taxi ride-hailing"><span class="lbl"><b>Project Rebu</b><span>Taxi ride-hailing</span></span></a><a class="disk sm" href="../../work/zebu/" style="--c: #ffb340" data-disk="zebu" aria-label="Zebu: ERP for small firms"><span class="lbl"><b>Zebu</b><span>ERP for small firms</span></span></a><a class="disk sm" href="../../work/tauria-connect/" style="--c: #a77bff" data-disk="tauria-connect" aria-label="Tauria Connect: Encrypted messaging (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Connect</b><span>Encrypted messaging</span></span></a><a class="disk sm" href="../../work/tauria-lockbox/" style="--c: #5fe3e8" data-disk="tauria-lockbox" aria-label="Tauria Lockbox: Encrypted files (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Lockbox</b><span>Encrypted files</span></span></a><a class="disk sm" href="../../work/tauria-cal/" style="--c: #59ff95" data-disk="tauria-cal" aria-label="Tauria Cal: Encrypted calendar (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Cal</b><span>Encrypted calendar</span></span></a><a class="disk sm" href="../../work/tauria-calls/" style="--c: #ff5fa8" data-disk="tauria-calls" aria-label="Tauria Calls: Encrypted video calls (encrypted)" aria-current="page"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Calls</b><span>Encrypted video calls</span></span></a></div>
+    <div class="disks sm"><a class="disk sm" href="../../work/project-rebu/" style="--c: var(--amber)" data-disk="project-rebu" aria-label="Project Rebu: Taxi ride-hailing"><span class="lbl"><b>Project Rebu</b><span>Taxi ride-hailing</span></span></a><a class="disk sm" href="../../work/zebu/" style="--c: var(--amber)" data-disk="zebu" aria-label="Zebu: ERP for small firms"><span class="lbl"><b>Zebu</b><span>ERP for small firms</span></span></a><a class="disk sm" href="../../work/tauria-connect/" style="--c: var(--violet)" data-disk="tauria-connect" aria-label="Tauria Connect: Encrypted messaging (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Connect</b><span>Encrypted messaging</span></span></a><a class="disk sm" href="../../work/tauria-lockbox/" style="--c: var(--cyan)" data-disk="tauria-lockbox" aria-label="Tauria Lockbox: Encrypted files (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Lockbox</b><span>Encrypted files</span></span></a><a class="disk sm" href="../../work/tauria-cal/" style="--c: var(--green)" data-disk="tauria-cal" aria-label="Tauria Cal: Encrypted calendar (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Cal</b><span>Encrypted calendar</span></span></a><a class="disk sm" href="../../work/tauria-calls/" style="--c: var(--pink)" data-disk="tauria-calls" aria-label="Tauria Calls: Encrypted video calls (encrypted)" aria-current="page"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Calls</b><span>Encrypted video calls</span></span></a></div>
   </section>
   <nav class="nextprog" aria-label="Previous and next product">
-    <a href="../../work/tauria-cal/" style="--c: #59ff95"><span>◀ Previous disk</span><b>Tauria Cal</b></a>
-    <a href="../../work/project-rebu/" style="--c: #ffb340"><span>Next disk ▶</span><b>Project Rebu</b></a>
+    <a href="../../work/tauria-cal/" style="--c: var(--green)"><span>◀ Previous disk</span><b>Tauria Cal</b></a>
+    <a href="../../work/project-rebu/" style="--c: var(--amber)"><span>Next disk ▶</span><b>Project Rebu</b></a>
   </nav>
 </div>
 </main>

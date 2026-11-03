@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>A-lite · Lighter desktop · Homepage lab</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Homepage concept A-lite: today's hero, plus a live terminal, NOW.TXT and a row of room icons.">
+<meta property="og:site_name" content="jessethe.com">
+<meta property="og:url" content="https://jessethe.com/lab/desktop-lite/">
+<meta property="og:image" content="https://jessethe.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jesse Thé in pixel art. Founder and product builder: six products, one exit, thirteen homes and two rescue dogs.">
+<meta name="twitter:image" content="https://jessethe.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#08070c">
+<script>/* light or dark: dark is the site's look, light is the visitor's pick, set before the page paints */(function(){var h=document.documentElement,t=null;try{t=localStorage.getItem('jt-theme')}catch(e){}if(t!=='light')t='dark';h.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.content='#f4f2f7';}})();</script>
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/lab.css">
+<script>
+  /* Boot on the first visit of a session (or with ?boot). Returning visitors get the short boot.
+     Without JavaScript the boot never shows. */
+  (function () {
+    var h = document.documentElement;
+    try {
+      var full = /[?&]boot\b/.test(location.search);
+      if (full || !sessionStorage.getItem('jt-booted')) { h.classList.add('boot-on'); if (!full && localStorage.getItem('jt-visited')) h.classList.add('boot-back'); }
+    } catch (e) { h.classList.add('boot-on'); }
+  })();
+</script>
+<script src="../../assets/js/sfx.js" defer></script>
+<script src="../../assets/js/site.js" defer></script>
+<script src="../../assets/js/pixel.js" defer></script>
+<script src="../../assets/js/terminal.js" defer></script>
+<script src="../../assets/js/boot.js" defer></script>
+<script src="../../assets/js/lab.js" defer></script>
+<script src="../../assets/js/lab-lite.js" defer></script>
+</head>
+<body data-page="home" data-lab="desktop-lite">
+<a class="skiplink" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="duo-violet" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values=".3 .59 .11 0 0  .3 .59 .11 0 0  .3 .59 .11 0 0  0 0 0 1 0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.07 0.55 1"/><feFuncG type="table" tableValues="0.03 0.36 0.84"/><feFuncB type="table" tableValues="0.16 0.92 0.58"/></feComponentTransfer>
+  </filter>
+</svg>
+<div class="boot" id="boot" role="dialog" aria-modal="true" aria-label="jessethe.com is booting">
+  <div class="welcome" id="welcome">
+    <button type="button" class="pw" id="pw" aria-label="Power on" data-nosfx>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffb340" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v9"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/></svg>
+    </button>
+    <div class="logo">JESSETHE.COM</div>
+    <div class="any"><span class="kb">PRESS ANY KEY OR CLICK TO POWER ON</span><span class="touch">TAP TO POWER ON</span></div>
+    <div class="small"><span>Best with sound on</span><button type="button" id="skip">Skip intro</button><button type="button" class="cvlink" data-cv>Get my CV</button></div>
+  </div>
+  <div class="screen"><pre id="boot-text" aria-live="off"></pre></div>
+  <button type="button" class="bootctl" id="bootskip" hidden>Skip intro ⏭</button>
+  <button type="button" class="bootctl" id="bootctl" aria-pressed="false" hidden>❚❚ Pause</button>
+</div>
+<nav class="labbar" aria-label="Homepage lab"><a class="lb-home" href="../../lab/">Homepage lab</a><span class="lb-list"><a href="../../lab/desktop/"><b>A</b> Desktop</a><a href="../../lab/desktop-lite/" aria-current="page"><b>A-lite</b> Lighter desktop</a><a href="../../lab/mission-control/"><b>B</b> Mission control</a><a href="../../lab/terminal/"><b>C</b> Terminal first</a><a href="../../lab/room/"><b>D</b> Your room</a></span><span class="lb-end"><a href="../../">Today's homepage</a><a href="?boot">Replay the boot</a></span></nav>
+<div class="raster" aria-hidden="true"></div>
+<header class="menubar"><a class="logo" href="../../lab/desktop-lite/">JESSETHE.COM</a><span class="hint">F1–F7 navigate · ~ terminal</span><span class="live">Online</span></header><main id="main" class="lite"><section class="hero" aria-label="Introduction"><figure class="shot hud"><div class="photo" id="headshot" role="img" aria-label="Jesse Thé, arms crossed, in front of a tiled wall" tabindex="0">
+  <picture><source srcset="../../assets/img/headshot.webp" type="image/webp"><img class="col" src="../../assets/img/headshot.jpg" alt="" width="640" height="839"></picture>
+  <picture><source srcset="../../assets/img/headshot.webp" type="image/webp"><img class="duo" src="../../assets/img/headshot.jpg" alt="" width="640" height="839"></picture>
+  <span class="tag">IMG_0001</span>
+</div><figcaption class="label">Subject: <b>Jesse Thé</b></figcaption></figure><div class="hero-copy"><span class="prompt">&gt; whoami</span><h1 class="name">Jesse Thé</h1><p class="tagline"><span>Founder.</span> <span>Product builder.</span> <span>Harvard alum.</span></p><ul class="bio4"><li>Canadian, Brazilian, Portuguese, now in Shanghai.</li><li>Sold a company, went back to Harvard.</li><li>Builds products people can trust.</li><li>Travels with Player 2 and two rescue dogs.</li></ul><span class="wa"><img class="flag" src="../../assets/img/flag-ca.png" alt="Canada"><img class="flag" src="../../assets/img/flag-br.png" alt="Brazil"><img class="flag" src="../../assets/img/flag-pt.png" alt="Portugal"> Authorized to work · CA · BR · PT + EU</span><p class="hintline">(press <kbd>~</kbd> anywhere for the terminal, or <button type="button" class="tourlink" data-tour>take the 90-second tour</button>)</p></div></section><section class="lite-panels" aria-label="Live panels"><div class="win lite-term"><div class="win-bar"><i></i><span>TERMINAL · TTY1</span><i></i></div><div class="lite-host" id="term-host"><p class="noscript-note">The terminal needs JavaScript. Every room is below.</p></div></div><div class="win lite-now"><div class="win-bar"><i></i><span>NOW.TXT</span><i></i></div><div class="win-in"><dl class="nowlist"><div><dt>Living in</dt><dd><img class="flag" src="../../assets/img/flag-cn.png" alt="" width="20" height="15">Shanghai, China</dd></div><div><dt>Building</dt><dd>Side projects</dd></div><div><dt>Learning</dt><dd>Mandarin, at Shanghai Jiao Tong University</dd></div><div><dt>Rewatching</dt><dd>Stargate SG-1, with Player 2</dd></div><div><dt>Reading</dt><dd>The Will of the Many</dd></div><div><dt>Looking for</dt><dd>A Senior PM or product consulting role</dd></div></dl><small class="label">Updated Nov 2026</small></div></div></section><nav aria-label="Rooms"><ul class="lite-rooms"><li><a class="lr" href="../../about/" style="--c: var(--violet)"><span class="ico-img" data-icon="id"></span><span class="lr-name"><kbd>F1</kbd>About</span><span class="lr-inv">who's this?</span></a></li><li><a class="lr" href="../../work/" style="--c: var(--amber)"><span class="ico-img" data-icon="disk"></span><span class="lr-name"><kbd>F2</kbd>Work</span><span class="lr-inv">insert a disk</span></a></li><li><a class="lr" href="../../education/" style="--c: var(--green)"><span class="ico-img" data-icon="cap"></span><span class="lr-name"><kbd>F3</kbd>Education</span><span class="lr-inv">back to school</span></a></li><li><a class="lr" href="../../travel/" style="--c: var(--cyan)"><span class="ico-img" data-icon="globe"></span><span class="lr-name"><kbd>F4</kbd>Travel</span><span class="lr-inv">where to next?</span></a></li><li><a class="lr" href="../../rescue/" style="--c: var(--coral)"><span class="ico-img" data-icon="bowl"></span><span class="lr-name"><kbd>F5</kbd>Rescue</span><span class="lr-inv">meet the dogs</span></a></li><li><a class="lr" href="../../hobbies/" style="--c: var(--pink)"><span class="ico-img" data-icon="d20"></span><span class="lr-name"><kbd>F6</kbd>Hobbies</span><span class="lr-inv">roll for it</span></a></li><li><a class="lr" href="../../contact/" style="--c: var(--text)"><span class="ico-img" data-icon="mail"></span><span class="lr-name"><kbd>F7</kbd>Contact</span><span class="lr-inv">say hi</span></a></li><li><a class="lr" href="../../adventure/" style="--c: var(--green)"><span class="ico-img" data-icon="adv"></span><span class="lr-name">Adventure</span><span class="lr-inv">play the adventure</span></a></li></ul></nav><p class="motto lite-motto">Earn the trust. Then earn the attention.</p></main>
+</body>
+</html>

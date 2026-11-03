@@ -6,9 +6,18 @@
 <title>Tauria Lockbox · Work · Jesse Thé</title>
 <meta name="description" content="Zero-knowledge file storage and sharing, close to feature parity with Dropbox.">
 <meta name="theme-color" content="#08070c">
+<script>/* light or dark: dark is the site's look, light is the visitor's pick, set before the page paints */(function(){var h=document.documentElement,t=null;try{t=localStorage.getItem('jt-theme')}catch(e){}if(t!=='light')t='dark';h.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.content='#f4f2f7';}})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tauria Lockbox · Work · Jesse Thé">
 <meta property="og:description" content="Zero-knowledge file storage and sharing, close to feature parity with Dropbox.">
+<meta property="og:site_name" content="jessethe.com">
+<meta property="og:url" content="https://jessethe.com/work/tauria-lockbox/">
+<meta property="og:image" content="https://jessethe.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jesse Thé in pixel art. Founder and product builder: six products, one exit, thirteen homes and two rescue dogs.">
+<meta name="twitter:image" content="https://jessethe.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +36,7 @@
 <header class="menubar">
   <a class="logo" href="../../">JESSETHE.COM</a>
   <nav class="pnav" aria-label="Programs">
+    <a href="../../" style="--c: var(--violet)"><kbd>⌂</kbd>Home</a>
     <a href="../../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
     <a href="../../work/" style="--c: var(--amber)" aria-current="true"><kbd>F2</kbd>Work</a>
     <a href="../../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
@@ -39,7 +49,7 @@
 </header>
 
 <main id="main">
-<div class="pg prod" style="--pc: #5fe3e8">
+<div class="pg prod" style="--pc: var(--cyan)">
   <a class="back" href="../../work/">◀ All products</a>
   <article class="win pwin enc" id="pwin" aria-labelledby="pw-name">
     <div class="win-bar"><i></i><span>TAURIA_LOCKBOX.APP · ENCRYPTED</span><i></i></div>
@@ -48,19 +58,50 @@
       <div class="pd-content" id="pw-content">
         <header class="pd-head"><span class="label">Tauria · 2018–2023</span><h1 id="pw-name">Tauria Lockbox</h1><p>Zero-knowledge file storage and sharing, close to feature parity with Dropbox.</p></header>
         <dl class="pmeta"><div><dt>Role</dt><dd>Founder, CEO &amp; Head of Product</dd></div><div><dt>Platforms</dt><dd>Web, desktop, iOS, Android</dd></div><div><dt>Benchmark</dt><dd>Dropbox</dd></div><div><dt>Outcome</dt><dd>Acquired with Tauria</dd></div></dl>
-        <div class="ptabs" role="tablist" aria-label="Tauria Lockbox sections" hidden><button type="button" role="tab" id="ptab-overview" aria-controls="p-overview" aria-selected="true">Overview</button><button type="button" role="tab" id="ptab-capabilities" aria-controls="p-capabilities" aria-selected="false" tabindex="-1">Capabilities</button><button type="button" role="tab" id="ptab-design-decisions" aria-controls="p-design-decisions" aria-selected="false" tabindex="-1">Design decisions</button><button type="button" role="tab" id="ptab-challenges" aria-controls="p-challenges" aria-selected="false" tabindex="-1">Challenges</button><button type="button" role="tab" id="ptab-wins-losses" aria-controls="p-wins-losses" aria-selected="false" tabindex="-1">Wins &amp; losses</button></div>
-        <div class="pbody" id="pw-body"><section class="ppanel" id="p-overview" role="tabpanel" aria-labelledby="ptab-overview" tabindex="0"><h2 class="ph">Overview</h2><p>Lockbox was where Tauria customers kept the files they couldn&#x27;t afford to leak: contracts, records, case files. Every file was encrypted on the device before upload, so the storage behind Lockbox only ever held scrambled data.</p><p>The benchmark was Dropbox: drag, drop, share, sync everywhere. We wanted all of that without anyone at Tauria being able to open a single file.</p></section><section class="ppanel" id="p-capabilities" role="tabpanel" aria-labelledby="ptab-capabilities" tabindex="0"><h2 class="ph">Capabilities</h2><ul><li class=""><span>Encryption on your device before a file ever leaves it</span></li><li class=""><span>Folders and sync across web, desktop and mobile</span></li><li class=""><span>Secure sharing with teammates and outside clients</span></li><li class=""><span>Version history, for when someone saves over the wrong file</span></li><li class=""><span>Files attached in Connect threads and presented in Calls</span></li></ul></section><section class="ppanel" id="p-design-decisions" role="tabpanel" aria-labelledby="ptab-design-decisions" tabindex="0"><h2 class="ph">Design decisions</h2><ul><li class=""><span>Make the secure way the easy way. Encryption happens automatically, with no extra clicks.</span></li><li class=""><span>Sharing outside the company is where leaks happen, so external shares got the most guardrails.</span></li><li class=""><span>One storage layer for the whole suite, so a file shared in Connect is the same file in Lockbox.</span></li></ul></section><section class="ppanel" id="p-challenges" role="tabpanel" aria-labelledby="ptab-challenges" tabindex="0"><h2 class="ph">Challenges</h2><ul><li class=""><span>Sharing an encrypted file with someone outside the company, without the server ever seeing the key.</span></li><li class=""><span>Previews and thumbnails, when the server isn&#x27;t allowed to look inside the file.</span></li><li class=""><span>Keeping big files fast when every byte is encrypted and decrypted on the device.</span></li></ul></section><section class="ppanel" id="p-wins-losses" role="tabpanel" aria-labelledby="ptab-wins-losses" tabindex="0"><h2 class="ph">Wins &amp; losses</h2><ul><li class="win-item"><span>Close to feature parity with Dropbox, under zero-knowledge encryption</span></li><li class="win-item"><span>One storage layer behind files across the whole suite</span></li><li class="loss-item"><span>Features the server normally does, like previews and search inside files, had to be rebuilt to run on the device</span></li><li class="call-item"><span>Shipped Lockbox inside the suite rather than as a standalone app</span></li></ul></section></div>
+        <div class="pstory" id="pw-body">
+          <section class="st-part"><h2><span>01</span>The bet</h2><div class="st-body"><p>Firms in regulated industries kept their most sensitive files (contracts, records, case files) in storage their vendor could open. We bet they&#x27;d move them to a Dropbox-grade app where nobody at Tauria could open a single file.</p></div></section>
+          <section class="st-part"><h2><span>02</span>My part</h2><div class="st-body"><p>I owned the product: the sharing model, the guardrails on links that leave the company, and the call to build one storage layer for the whole suite.</p></div></section>
+          <section class="st-part"><h2><span>03</span>The hard call</h2><div class="st-body"><p>Previews. Everyone expects a thumbnail before they open a file, and every storage service makes them on its servers. Ours weren&#x27;t allowed to look inside. We could make previews on the server and quietly weaken the promise, or make them on the device after decryption and pay for it in engineering time and battery. We made them on the device. Nobody noticed the difference, which was the point.</p></div></section>
+        </div>
       </div>
     </div>
   </article>
 
+  <section class="blk demo" aria-labelledby="demo-h">
+    <div class="win">
+      <div class="win-bar"><i></i><span>LOCKBOX.EXE</span><i></i></div>
+      <div class="win-in">
+        <div class="blk-head"><h2 id="demo-h">Drop a file. Watch it lock.</h2><p>This is how Lockbox stored files, with real AES-256 running in your browser. Your file is cut into chunks, and each chunk is encrypted on your device before it would upload. Storage only ever holds noise, and the key never leaves this page. Nothing is sent anywhere.</p></div>
+        <div class="lbx">
+          <div class="lbx-in">
+            <label class="lbx-drop" id="lbx-drop"><input type="file" id="lbx-file"><b>Drop a file here</b><span>or click to pick one. It stays in your browser.</span></label>
+            <button type="button" class="btn ghost" id="lbx-sample">Or use a sample file</button>
+            <div class="zk-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M15 12v2"/></svg><code id="lbx-key">no key yet</code><small>The key never leaves this page</small></div>
+            <p class="lbx-name" id="lbx-name">No file yet.</p>
+          </div>
+          <div class="lbx-out srv">
+            <span class="label">What Lockbox stores</span>
+            <div class="lbx-chunks" id="lbx-chunks"><p class="lbx-empty">Nothing yet. Drop a file.</p></div>
+            <div class="zk-acts"><button type="button" class="btn ghost" id="lbx-peek" disabled>Open it as Lockbox</button><button type="button" class="btn" id="lbx-open" disabled>Open it on your device</button></div>
+            <p class="zk-log" id="lbx-log" aria-live="polite"></p>
+            <pre class="lbx-view" id="lbx-view" hidden></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="blk pstory pstory-end" aria-label="How it ended">
+    <section class="st-part"><h2><span>04</span>What happened</h2><div class="st-body"><p>Close to feature parity with Dropbox under zero-knowledge encryption, and one storage layer behind every file in the suite: share it in Connect, present it in Calls, and it&#x27;s the same encrypted file. <span data-ph>The moment I remember: a client moving their whole archive into Lockbox the week a competitor&#x27;s breach made the news.</span></p><ul class="byn" aria-label="By the numbers"><li><b><span data-ph>2.4M</span></b><span>files encrypted</span></li><li><b><span data-ph>38 TB</span></b><span>stored</span></li><li><b>0</b><span>files Tauria could open</span></li></ul></div></section>
+    <section class="st-part"><h2><span>05</span>What I&#x27;d do differently</h2><div class="st-body"><p>Treat sharing outside the company as its own product. That&#x27;s where leaks happen, and we kept adding guardrails one at a time. I&#x27;d have designed external sharing from scratch, with its own onboarding, instead of growing it out of internal sharing.</p></div></section>
+    <div class="caps-row"><details class="caps"><summary>Everything it could do</summary><ul><li><span>Encryption on your device before a file ever leaves it</span></li><li><span>Folders and sync across web, desktop and mobile</span></li><li><span>Secure sharing with teammates and outside clients</span></li><li><span>Version history, for when someone saves over the wrong file</span></li><li><span>Files attached in Connect threads and presented in Calls</span></li></ul></details><details class="caps"><summary>The design rules we kept</summary><ul><li><span>Make the secure way the easy way. Encryption happens automatically, with no extra clicks.</span></li><li><span>Sharing outside the company is where leaks happen, so external shares got the most guardrails.</span></li><li><span>One storage layer for the whole suite, so a file shared in Connect is the same file in Lockbox.</span></li></ul></details></div>
+  </section>
   <section class="blk" aria-label="All six products">
     <span class="label">The disk box · 6 products</span>
-    <div class="disks sm"><a class="disk sm" href="../../work/project-rebu/" style="--c: #ffb340" data-disk="project-rebu" aria-label="Project Rebu: Taxi ride-hailing"><span class="lbl"><b>Project Rebu</b><span>Taxi ride-hailing</span></span></a><a class="disk sm" href="../../work/zebu/" style="--c: #ffb340" data-disk="zebu" aria-label="Zebu: ERP for small firms"><span class="lbl"><b>Zebu</b><span>ERP for small firms</span></span></a><a class="disk sm" href="../../work/tauria-connect/" style="--c: #a77bff" data-disk="tauria-connect" aria-label="Tauria Connect: Encrypted messaging (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Connect</b><span>Encrypted messaging</span></span></a><a class="disk sm" href="../../work/tauria-lockbox/" style="--c: #5fe3e8" data-disk="tauria-lockbox" aria-label="Tauria Lockbox: Encrypted files (encrypted)" aria-current="page"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Lockbox</b><span>Encrypted files</span></span></a><a class="disk sm" href="../../work/tauria-cal/" style="--c: #59ff95" data-disk="tauria-cal" aria-label="Tauria Cal: Encrypted calendar (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Cal</b><span>Encrypted calendar</span></span></a><a class="disk sm" href="../../work/tauria-calls/" style="--c: #ff5fa8" data-disk="tauria-calls" aria-label="Tauria Calls: Encrypted video calls (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Calls</b><span>Encrypted video calls</span></span></a></div>
+    <div class="disks sm"><a class="disk sm" href="../../work/project-rebu/" style="--c: var(--amber)" data-disk="project-rebu" aria-label="Project Rebu: Taxi ride-hailing"><span class="lbl"><b>Project Rebu</b><span>Taxi ride-hailing</span></span></a><a class="disk sm" href="../../work/zebu/" style="--c: var(--amber)" data-disk="zebu" aria-label="Zebu: ERP for small firms"><span class="lbl"><b>Zebu</b><span>ERP for small firms</span></span></a><a class="disk sm" href="../../work/tauria-connect/" style="--c: var(--violet)" data-disk="tauria-connect" aria-label="Tauria Connect: Encrypted messaging (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Connect</b><span>Encrypted messaging</span></span></a><a class="disk sm" href="../../work/tauria-lockbox/" style="--c: var(--cyan)" data-disk="tauria-lockbox" aria-label="Tauria Lockbox: Encrypted files (encrypted)" aria-current="page"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Lockbox</b><span>Encrypted files</span></span></a><a class="disk sm" href="../../work/tauria-cal/" style="--c: var(--green)" data-disk="tauria-cal" aria-label="Tauria Cal: Encrypted calendar (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Cal</b><span>Encrypted calendar</span></span></a><a class="disk sm" href="../../work/tauria-calls/" style="--c: var(--pink)" data-disk="tauria-calls" aria-label="Tauria Calls: Encrypted video calls (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Calls</b><span>Encrypted video calls</span></span></a></div>
   </section>
   <nav class="nextprog" aria-label="Previous and next product">
-    <a href="../../work/tauria-connect/" style="--c: #a77bff"><span>◀ Previous disk</span><b>Tauria Connect</b></a>
-    <a href="../../work/tauria-cal/" style="--c: #59ff95"><span>Next disk ▶</span><b>Tauria Cal</b></a>
+    <a href="../../work/tauria-connect/" style="--c: var(--violet)"><span>◀ Previous disk</span><b>Tauria Connect</b></a>
+    <a href="../../work/tauria-cal/" style="--c: var(--green)"><span>Next disk ▶</span><b>Tauria Cal</b></a>
   </nav>
 </div>
 </main>

@@ -6,9 +6,18 @@
 <title>Work · Jesse Thé</title>
 <meta name="description" content="Two startups, six products from zero to market, one exit. Project Rebu, Zebu, and the zero-knowledge Tauria suite.">
 <meta name="theme-color" content="#08070c">
+<script>/* light or dark: dark is the site's look, light is the visitor's pick, set before the page paints */(function(){var h=document.documentElement,t=null;try{t=localStorage.getItem('jt-theme')}catch(e){}if(t!=='light')t='dark';h.setAttribute('data-theme',t);if(t==='light'){var m=document.querySelector('meta[name="theme-color"]');if(m)m.content='#f4f2f7';}})();</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Work · Jesse Thé">
 <meta property="og:description" content="Two startups, six products from zero to market, one exit. Project Rebu, Zebu, and the zero-knowledge Tauria suite.">
+<meta property="og:site_name" content="jessethe.com">
+<meta property="og:url" content="https://jessethe.com/work/">
+<meta property="og:image" content="https://jessethe.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jesse Thé in pixel art. Founder and product builder: six products, one exit, thirteen homes and two rescue dogs.">
+<meta name="twitter:image" content="https://jessethe.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +35,7 @@
 <header class="menubar">
   <a class="logo" href="../">JESSETHE.COM</a>
   <nav class="pnav" aria-label="Programs">
+    <a href="../" style="--c: var(--violet)"><kbd>⌂</kbd>Home</a>
     <a href="../about/" style="--c: var(--violet)"><kbd>F1</kbd>About</a>
     <a href="../work/" style="--c: var(--amber)" aria-current="page"><kbd>F2</kbd>Work</a>
     <a href="../education/" style="--c: var(--green)"><kbd>F3</kbd>Education</a>
@@ -43,11 +53,33 @@
     <span class="kicker">F2 · jessethe.com/work</span>
     <h1>Six products from zero to market. One exit.</h1>
     <p class="lede">Two startups, a lot of late nights, and one big idea that stuck: build software people can trust with the things they can't afford to lose.</p>
-      <aside class="now hud" aria-label="What I'm up to right now"><div class="now-top"><span class="label">Status</span><small>Updated Oct 2026</small></div><dl><div><dt>Building</dt><dd>Side projects</dd></div><div><dt>Looking for</dt><dd>My next big product challenge</dd></div></dl><button type="button" class="now-try" data-term="ls work" hidden><span>Try it in the terminal</span><code>&gt; ls work</code></button></aside>
+      <aside class="now hud" aria-label="What I'm up to right now"><div class="now-top"><span class="label">Status</span><small>Updated Nov 2026</small></div><dl><div><dt>Building</dt><dd>Side projects</dd></div><div><dt>Looking for</dt><dd>A Senior PM or product consulting role</dd></div></dl><button type="button" class="now-try" data-term="ls work" hidden><span>Try it in the terminal</span><code>&gt; ls work</code></button></aside>
   </header>
 
+  <section class="blk" aria-labelledby="disks-h">
+    <div class="blk-head">
+      <span class="label">The disk box</span>
+      <h2 id="disks-h">Insert a disk</h2>
+      <p>Each product has its own page and its own story: the bet, my part, the hard call, what happened and what I'd do differently. The four Tauria disks are locked: open one and it arrives as ciphertext, then decrypts on your device, which is exactly how Tauria worked.</p>
+    </div>
+    <div class="disks"><a class="disk" href="../work/project-rebu/" style="--c: var(--amber)" data-disk="project-rebu" aria-label="Project Rebu: Taxi ride-hailing"><span class="lbl"><b>Project Rebu</b><span>Taxi ride-hailing</span></span></a><a class="disk" href="../work/zebu/" style="--c: var(--amber)" data-disk="zebu" aria-label="Zebu: ERP for small firms"><span class="lbl"><b>Zebu</b><span>ERP for small firms</span></span></a><a class="disk" href="../work/tauria-connect/" style="--c: var(--violet)" data-disk="tauria-connect" aria-label="Tauria Connect: Encrypted messaging (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Connect</b><span>Encrypted messaging</span></span></a><a class="disk" href="../work/tauria-lockbox/" style="--c: var(--cyan)" data-disk="tauria-lockbox" aria-label="Tauria Lockbox: Encrypted files (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Lockbox</b><span>Encrypted files</span></span></a><a class="disk" href="../work/tauria-cal/" style="--c: var(--green)" data-disk="tauria-cal" aria-label="Tauria Cal: Encrypted calendar (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Cal</b><span>Encrypted calendar</span></span></a><a class="disk" href="../work/tauria-calls/" style="--c: var(--pink)" data-disk="tauria-calls" aria-label="Tauria Calls: Encrypted video calls (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Calls</b><span>Encrypted video calls</span></span></a></div>
+  </section>
+
+  <section class="blk next-exe" aria-labelledby="next-h">
+    <div class="win">
+      <div class="win-bar"><i></i><span>NEXT.EXE</span><i></i></div>
+      <div class="win-in">
+        <span class="label">What I want to build next</span>
+        <h2 id="next-h">Something genuinely useful, or just plain cool</h2>
+        <p>I'm looking for a Senior Product Manager role or product consulting work, and I care more about what we're building than what my title says. Remote is great, and so is anywhere in the world. Thirteen homes in, moving is the easy part.</p>
+        <p class="next-meanwhile">Meanwhile I'm doing what eight years of startups and four of school left little time for: reading, building side projects, and travelling with Player 2 and the dogs.</p>
+        <div class="row"><a class="btn" href="../contact/?reason=hiring">Talk to me about a role</a><button type="button" class="btn ghost" data-cv>Get my CV</button></div>
+      </div>
+    </div>
+  </section>
+
   <section class="blk" aria-label="By the numbers">
-    <div class="kpis">
+    <div class="kpis k5">
       <div><b>2</b><span>Startups founded</span></div>
       <div><b>6</b><span>Products shipped</span></div>
       <div><b>$5M</b><span>Raised</span></div>
@@ -56,31 +88,22 @@
     </div>
   </section>
 
-  <section class="blk" aria-labelledby="disks-h">
-    <div class="blk-head">
-      <span class="label">The disk box</span>
-      <h2 id="disks-h">Insert a disk</h2>
-      <p>Each product has its own page. The four Tauria disks are locked: open one and it arrives as ciphertext, then decrypts on your device, which is exactly how Tauria worked.</p>
-    </div>
-    <div class="disks"><a class="disk" href="../work/project-rebu/" style="--c: #ffb340" data-disk="project-rebu" aria-label="Project Rebu: Taxi ride-hailing"><span class="lbl"><b>Project Rebu</b><span>Taxi ride-hailing</span></span></a><a class="disk" href="../work/zebu/" style="--c: #ffb340" data-disk="zebu" aria-label="Zebu: ERP for small firms"><span class="lbl"><b>Zebu</b><span>ERP for small firms</span></span></a><a class="disk" href="../work/tauria-connect/" style="--c: #a77bff" data-disk="tauria-connect" aria-label="Tauria Connect: Encrypted messaging (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Connect</b><span>Encrypted messaging</span></span></a><a class="disk" href="../work/tauria-lockbox/" style="--c: #5fe3e8" data-disk="tauria-lockbox" aria-label="Tauria Lockbox: Encrypted files (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Lockbox</b><span>Encrypted files</span></span></a><a class="disk" href="../work/tauria-cal/" style="--c: #59ff95" data-disk="tauria-cal" aria-label="Tauria Cal: Encrypted calendar (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Cal</b><span>Encrypted calendar</span></span></a><a class="disk" href="../work/tauria-calls/" style="--c: #ff5fa8" data-disk="tauria-calls" aria-label="Tauria Calls: Encrypted video calls (encrypted)"><svg class="lock" viewBox="0 0 14 14" fill="none" stroke="#ff5fa8" stroke-width="1.6" aria-hidden="true"><path d="M4 6V4.5a3 3 0 0 1 6 0V6"/><rect x="2.5" y="6" width="9" height="6.5" fill="#ff5fa8" fill-opacity=".25"/></svg><span class="lbl"><b>Tauria Calls</b><span>Encrypted video calls</span></span></a></div>
-  </section>
-
   <section class="blk" aria-labelledby="log-h">
     <div class="blk-head">
-      <span class="label">CAREER.LOG</span>
+      <span class="label">Career</span>
       <h2 id="log-h">The short version</h2>
     </div>
     <ul class="log">
-      <li><span class="yr">2015–2018</span><span class="co">Zebu<small>Founder, CEO &amp; Product Lead</small></span><p>Started with <a href="project-rebu/">Project Rebu</a>, ride-hailing that let taxi companies fight back against Uber. It went live with a taxi company and a limo company, then we pivoted to <a href="zebu/">Zebu</a>, an ERP for small service firms, and that led to Tauria.</p></li>
-      <li><span class="yr">2018–2023</span><span class="co">Tauria<span class="tagx">ACQUIRED</span><small>Founder, CEO &amp; Head of Product</small></span><p>Zero-knowledge encrypted <a href="tauria-connect/">Connect</a>, <a href="tauria-lockbox/">Lockbox</a>, <a href="tauria-cal/">Cal</a> and <a href="tauria-calls/">Calls</a> for regulated industries, close to feature parity with Slack, Dropbox, Google Calendar and Zoom. Raised $5M and grew the team from 4 to more than 50. HQ in Toronto, then The Hague, with an office in Belgrade and a team in Lisbon.</p></li>
-      <li><span class="yr">2022–2025</span><span class="co">Harvard<small>Back to school after the exit</small></span><p>Sold the company, went back to school. Finished a <a href="../education/">CS degree</a> cum laude, and stayed part-time at Tauria for a year to support the transition.</p></li>
-      <li><span class="yr">2025–now</span><span class="co">Next<small>Personal projects</small></span><p>A year on the road with Player 2 and the dogs, then back to building. Now I'm working on personal projects and looking for my next big product challenge.</p></li>
+      <li><span class="yr">2015–2018</span><span class="co">Zebu<small>Founder, CEO &amp; Product Lead</small></span><p>I left university to start it. First came <a href="project-rebu/">Project Rebu</a>, ride-hailing that let taxi companies fight back against Uber. It went live with a taxi company and a limo company, then we pivoted to <a href="zebu/">Zebu</a>, an ERP for small service firms, and that led to Tauria.</p></li>
+      <li><span class="yr">2018–2023</span><span class="co">Tauria<span class="tagx">ACQUIRED</span><small>Founder, CEO &amp; Head of Product</small></span><p>Zero-knowledge encrypted <a href="tauria-connect/">Connect</a>, <a href="tauria-lockbox/">Lockbox</a>, <a href="tauria-cal/">Cal</a> and <a href="tauria-calls/">Calls</a> for regulated industries, close to feature parity with Slack, Dropbox, Google Calendar and Zoom. Raised $5M and grew the team from 4 to more than 50, with HQ in Toronto, then The Hague, an office in Belgrade and a team in Lisbon. Tauria's IP was acquired in a private deal, and I stayed on part-time for a year to hand it over.</p></li>
+      <li><span class="yr">2022–2025</span><span class="co">Harvard<small>Back to finish what I started</small></span><p>Sold the company and went back to finish college, which I'd always wanted to do: a <a href="../education/">Computer Science</a> degree, cum laude.</p></li>
+      <li><span class="yr">2025–now</span><span class="co">Next<small>Reading, building, travelling</small></span><p>Side projects, a lot of books and a year on the road with Player 2 and the dogs. Next: a Senior PM or product consulting role on something cool or useful.</p></li>
     </ul>
   </section>
 
   <section class="blk" aria-labelledby="how-h">
     <div class="blk-head">
-      <span class="label">README.MD</span>
+      <span class="label">Principles</span>
       <h2 id="how-h">How I build</h2>
     </div>
     <ol class="how">
@@ -93,14 +116,13 @@
 
   <section class="blk side-proj hud" aria-labelledby="side-h">
     <div class="blk-head">
-      <span class="label">SIDE_PROJECTS/</span>
+      <span class="label">In the lab</span>
       <h2 id="side-h">What I'm building now</h2>
     </div>
-    <ul class="slots3">
-      <li><b>01 · jessethe.com</b><span>This site. Hand-coded, no framework, boots like my parents' old computer. You're in it.</span></li>
-      <li><b>02 · [LOADING]</b><span>In the lab. Ships when it's ready<span class="cursor" aria-hidden="true"></span></span></li>
-      <li><b>03 · [RESERVED]</b><span>Slot reserved. Check back soon.</span></li>
-    </ul>
+    <div class="lab-card">
+      <p><b>jessethe.com</b>, the site you're in: hand-coded, no framework, with a terminal, a text adventure and two dogs loose in it. Alongside it, a couple of side projects that will get their own disks once they're ready to show.</p>
+      <p class="lab-meta"><span class="cursor" aria-hidden="true"></span>Want a sneak peek? <a href="../contact/?reason=project">Ask me what's on the bench</a>.</p>
+    </div>
   </section>
 </div>
 </main>
