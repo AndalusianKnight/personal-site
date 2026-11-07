@@ -28,6 +28,7 @@ contact/                Contact form, other ways to reach Jesse, Shanghai clock
 adventure/              The Encrypted CV, a text adventure (open it from the terminal: adventure)
 lab/                    Homepage lab: every proposed homepage, built, for picking one (unlinked, noindex)
 lab/<concept>/          desktop, desktop-lite, mission-control, terminal and room (lab.css, lab-*.js)
+lab/images/             Image library: every logo, product shot, cover and photo gathered for the site (unlinked, noindex)
 404.html                "Chevron seven will not lock" (uses root-absolute paths)
 api/contact.js          Vercel function that emails contact-form messages to Jesse (see below)
 assets/css/site.css     All styles. Colour tokens on :root; each page sets its own --c neon
@@ -38,7 +39,9 @@ assets/js/pixel.js      Pixel Pidan and Doufu, canvas helpers, the screensaver, 
 assets/js/terminal.js   Drop-down terminal (~ on any page)
 assets/js/boot.js       Welcome screen, BIOS, countdown, short boot for returning visitors (home only)
 assets/js/<page>.js     One script per page for its widgets
-assets/img/             Headshot, dog photos, flags, favicon
+assets/img/             Headshot, dog photos, flags, favicon, plus the image library:
+                        work/ (Zebu, Tauria), hobbies/ (covers, consoles), schools/ (and clubs/),
+                        travel/cities/, flags/. Credits and rights for each file: assets/img/SOURCES.md
 ```
 
 Each page opens with a Status card (what Jesse is up to right now, plus a terminal command to try). Its lines live in that page's HTML: edit them there and change the "Updated" month.
